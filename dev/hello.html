@@ -1,0 +1,1013 @@
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>http-file-upload</title>
+<style>
+      html,body {
+            height            : calc(100%-60px);
+      }
+      body {
+            font-family       : arial;
+            font-size         : 18px;
+            margin            : 30px;
+      }
+      .box {
+            display           : flex;
+            flex-flow         : column;
+            height            : 100%;
+      }
+      .box>div:first-of-type {
+            flex              : 0 1 auto;
+      }
+      .box>div:nth-of-type(2) {
+            flex              : 1 1 auto;
+      }
+      
+      h3 {
+            margin-top        : 0;
+      }
+      h3>div:first-of-type {
+            margin-bottom     : 10px;
+      }
+      h3>div:nth-of-type(2) {
+            color             : blue;
+      }
+      .zone {
+            position          : relative;
+            margin            : 20px auto;
+            padding           : 20px;
+            border            : 1px dashed lightblue;
+            border-radius     : 5px;
+            height            : 150px;
+      }
+      .zone>* {
+            margin            : 10px;
+      }
+      #output {
+            line-height       : 24px;
+            flex              : 1;
+            border            : 1px solid lightgray;
+            overflow          : auto;
+            padding           : 20px;
+      }
+      input {
+            font-size         : 18px;
+      }
+</style>
+<div class=box>
+      <div>
+            <h3>
+                  <div>http-file-upload - upload</div>
+            </h3>
+            <div class=zone ondrop='upload.drop()' ondragover='event.preventDefault()' ondragenter='event.preventDefault()' >
+                  <span>drag files here</span>
+                  <span>or</span>
+                  <input value='select files' type=button onclick='upload.fileinput(event)' />
+                  <span>or</span>
+                  <input value='download' type=button onclick='download.read()' />
+            </div>
+            <input value=clear type=button onclick='log.clear()' />
+            <br>
+            <br>
+      </div>
+      <div id=output></div>
+</div>
+
+<script>
+
+        console.clear();
+        log('ready');
+        log();
+        var websocketurl   = 'ws'+(self.location.protocol==='https:'?'s':'')+'://'+self.location.host;
+        log('websocket url :',websocketurl);
+        log();
+        
+        
+        var upload      = uploadmod();
+        var download    = downloadmod();
+        
+  //:
+  
+  
+  
+function uploadmod(){
+
+  var obj   = {};
+  
+  
+        var chunksize   = 1024*1024;
+        
+        
+        var create    = {};
+        
+        
+  //:
+  
+        obj.files=function(files,callback){
+        }//files
+        
+        obj.fileinput=function(event){
+        
+              var input         = document.createElement('input');
+              input.type        = 'file';
+              input.multiple    = true;
+              input.onchange    = onchange;
+              input.click();
+              
+              function onchange(){
+              
+                    var files   = input.files;
+                    upload(files,complete);
+                    
+              }//onchange
+              
+              function complete(){
+              
+                    console.log('--- complete ---');
+                    
+              }//complete
+              
+        }//fileinput
+        
+        
+  //:
+  
+        function upload(files,callback){
+                                                                                console.log('upload',files.length,'files');
+              var process   = create.process(files,callback);
+              
+              var n   = files.length;
+              for(var i=0;i<n;i++){
+              
+                    create.progress(process,files,i);
+                    
+              }//for
+              
+              process.upload();
+              
+        }//upload
+        
+        create.process=function(files,callback){
+        
+              var rec       = {};
+              var send      = {};
+              var worker    = create.worker(rec);
+              
+              var file;
+              var ct;
+              var num;
+              
+              var process   = {files,callback,cur:0,send};
+              
+              var root                                = Tuploadprocess.content.firstElementChild.cloneNode(true);
+              $(root,'#num').textContent              = files.length;
+              $(root,'[value="abort all"]').onclick   = abortall;
+              attachshadow(root);
+              
+              process.upload=function(){
+              
+                    file        = files[process.cur];
+                    var size    = file.size;
+                    num         = Math.ceil(size/chunksize);
+                                                                                console.log(file.name,size,num);
+                    worker.postMessage({type:'upload',name:file.name,num});
+                    ct          = 0;
+                    
+              }//upload
+              
+              rec.open=function(){
+                                                                                console.log('rec.open');
+                    send.blob();
+                    
+              }//open
+              
+              rec.progress=function(){
+              
+                    if(file.status==='abort'){
+                          next();
+                          return;
+                    }
+                    
+                    ct++;
+                    var value   = Math.ceil(ct/num*100)+'%';
+                    var root    = file.progress;
+                    $(root,'#bar').style.width    = value;
+                    $(root,'#value').textContent   = value;
+                    
+                    if(ct<num){
+                          send.blob();
+                          return;
+                    }
+                    
+                    file.status                     = 'done';
+                    $(root,'#value').textContent    = 'done';
+                    next();
+                    
+              }//progress
+              
+              send.blob=function(){
+              
+                    var start   = ct*chunksize;
+                    var end     = start+chunksize;
+                    var blob    = file.slice(start,end);
+                    worker.postMessage(blob);
+                    
+              }//blob
+              
+              send.abort=function(){
+              
+                    worker.postMessage({type:'abort'});
+                    
+              }//abort
+              
+              rec.error=function(json){
+              
+                    var root                        = file.progress;
+                    $(root,'#value').textContent    = 'error';
+                    log('error');
+                    log(json.msg);
+                    log.spc();
+                    next();
+                    
+              }//error
+              
+              function next(){
+              
+                    var cur   = process.cur+1;
+                    for(cur;cur<files.length;cur++){
+                    
+                          if(files[cur].status==='pending'){
+                                process.cur   = cur;
+                                process.upload();
+                                return;
+                          }
+                          
+                    }//for
+                    
+                    complete();
+                    
+              }//next
+              
+              function abortall(){
+              
+                    if(process.cur===null){
+                          return;
+                    }
+                    
+                    send.abort();
+                    
+                    var i   = process.cur;
+                    for(i;i<files.length;i++){
+                    
+                          var file    = files[i];
+                          var root    = file.progress;
+                          $(root,'#value').textContent    = 'abort';
+                          file.status   = 'abort';
+                          
+                    }//for
+                    
+              }//abortall
+              
+              function complete(){
+              
+                    process.cur   = null;
+                    worker.terminate();
+                    
+                    if(typeof callback==='function'){
+                          callback();
+                          return;
+                    }
+                    
+              }//complete
+              
+              return process;
+              
+        }//process
+        
+        create.worker=function(rec){
+        
+              var worker                        = new Worker('worker.js');
+              worker.onmessage                  = onmsg;
+              worker.onerror                    = werror;
+              worker.postMessage({type:'init',url:websocketurl});
+              return worker;
+              
+              function onmsg(event){
+              
+                    var data    = event.data;
+                    var type    = datatype(data);
+                    switch(type){
+                    
+                      case 'string'   : var json    = JSON.parse(data);
+                                        rec[json.type](json);
+                                        break;
+                                        
+                    }//switch
+                    
+              }//onmsg
+              
+        }//worker
+        
+        create.progress=function(process,files,i){
+        
+              var file                          = files[i];
+              var root                          = Tuploadprogress.content.firstElementChild.cloneNode(true);
+              $(root,'#name').textContent       = file.name;
+              $(root,'#size').textContent       = hs(file.size);
+              $(root,'[value=abort]').onclick   = click;
+              attachshadow(root);
+              file.progress   = root;
+              file.status     = 'pending';
+              
+              function click(){
+              
+                    if(file.status!=='pending'){
+                          return;
+                    }
+                    $(root,'#value').textContent    = 'abort';
+                    file.status                     = 'abort';
+                    if(process.cur===i){
+                          process.send.abort();
+                    }
+                    
+              }//click
+              
+        }//progress
+        
+  //:
+  
+  
+  return obj;
+  
+//uploadmod:-
+}
+
+  //:
+  
+function downloadmod(){
+
+  var obj   = {};
+  
+        var create    = {};
+        
+  //:
+  
+        obj.files=function(files,callback){
+        
+              download(files,callback);
+              
+        }//files
+        
+        obj.list=function(){
+        
+              var files   = ['testX.tmp','test2.tmp'];
+              download(files,complete);
+              
+        }//list
+        
+        obj.prompt=function(){
+        
+              var filename    = getfilename();
+              var files       = [filename];
+              download(files,complete);
+              
+        }//prompt
+        
+        obj.read=function(){
+        
+              var hldr                            = document.createElement('div');
+              var root                            = Tdownloadlist.content.firstElementChild.cloneNode(true);
+              $(root,'[value=ok]').onclick        = ok;
+              $(root,'[value=cancel]').onclick    = cancel;
+              var list    = $(root,'#list');
+              var item    = $(root,'.item');
+              item.remove();
+              hldr.attachShadow({mode:'open'}).append(root);
+              document.body.append(hldr);
+              
+              var worker                        = new Worker('worker.js');
+              worker.onmessage                  = onmsg;
+              worker.onerror                    = werror;
+              worker.postMessage({type:'init',url:websocketurl});
+              worker.postMessage({type:'download-list'});
+              return worker;
+              
+              function onmsg(event){
+                                                                                //console.log('onmsg',event.data);
+                    var json    = JSON.parse(event.data);
+                    
+                    if(json.type==='error'){
+                          hldr.remove();
+                          log('directory read error');
+                          log(json.msg);
+                          log.spc();
+                          return;
+                    }
+                    
+                    var files   = json.files;
+                    files.forEach(name=>{
+                    
+                          var nitem   = item.cloneNode(true);
+                          var input   = $(nitem,'input');
+                          nitem.onclick   = e=>{if(e.target!==input)input.checked    = !input.checked;};
+                          $(nitem,'.name').textContent   = name;
+                          list.append(nitem);
+                          
+                    });
+                    
+              }//onmsg
+              
+              function cancel(){
+              
+                    hldr.remove();
+                    
+              }//cancel
+              
+              function ok(){
+              
+                    var files   = [];
+                    var items   = list.querySelectorAll('.item');
+                    items.forEach(item=>{
+                    
+                          var input   = $(item,'input');
+                          if(input.checked){
+                                var name    = $(item,'.name').textContent;
+                                files.push(name);
+                          }
+                          
+                    });
+                    hldr.remove();
+                    
+                    download(files,complete);
+                    
+              }//ok
+              
+        }//list
+        
+        
+        function complete(){
+        
+              console.log('--- complete ---');
+              
+        }//complete
+        
+        
+        
+        
+  //:
+  
+        function download(files,callback){
+        
+              var process   = create.process(callback,files);
+              
+              var n           = files.length;
+              for(var i=0;i<n;i++){
+              
+                    create.progress(process,files,i);
+                    
+              }//for
+              
+              process.download();
+              
+        }//download
+        
+        create.process=function(callback,files){
+        
+              var root                      = Tdownloadprocess.content.firstElementChild.cloneNode(true);
+              var n                         = files.length;
+              $(root,'#num').textContent    = n;
+              $(root,'[value="abort all"]').onclick   = abortall;
+              attachshadow(root);
+              
+              var cur                       = 0;
+              var ct                        = 0;
+              var num;
+              var rec                       = {};
+              var send                      = {};
+              var worker                    = create.worker(rec);
+              
+              send.download     = function(file){
+              
+                    process.list[cur].status    = 'downloading';
+                    var file    = files[cur];
+                    worker.postMessage({type:'download',file});
+                    
+              };
+              send.progress     = function(){worker.postMessage({type:'progress'})}
+              send.abort        = function(){worker.postMessage({type:'abort'})}
+              
+              var process   = {
+                    download    : send.download,
+                    abort       : send.abort,
+                    list        : [],
+                    cur         : 0,
+              };
+              
+              
+              rec.start=function(json){
+              
+                    num         = json.num;
+                    var size    = json.size;
+                    var root    = process.list[cur].root;
+                    $(root,'#size').textContent   = hs(size);
+                                                                                //console.log('start',num,size);
+              }//start
+              
+              rec.blob=function(blob){
+                                                                                //console.log('rec.blob');
+                    if(process.list[cur].status==='abort'){
+                          next();
+                          return;
+                    }
+                    
+                    ct++;
+                    process.list[cur].blob.push(blob);
+                    
+                    var root    = process.list[cur].root;
+                    var value   = Math.ceil(ct/num*100)+'%';
+                    $(root,'#bar').style.width    = value;
+                    $(root,'#value').textContent   = value;
+                    
+                    if(ct<num){
+                          send.progress();
+                    }else{
+                          process.list[cur].status    = 'done';
+                          process.list[cur].blob      = new Blob(process.list[cur].blob);
+                          
+                          var root    = process.list[cur].root;
+                          $(root,'#value').textContent   = 'done';
+                          $(root,'input').value   = 'download';
+                          next();
+                    }
+                    
+              }//blob
+              
+              rec.error=function(json){
+              
+                    var msg         = json.msg;
+                    var filename    = files[cur];
+                    var root        = process.list[cur].root;
+                    $(root,'#value').textContent   = 'error';
+                    log('error',filename);
+                    log(msg);
+                    log.spc();
+                    next();
+                    
+              }//error
+              
+              function next(){
+              
+                    for(cur++;cur<files.length;cur++){
+                    
+                          if(process.list[cur].status==='pending'){
+                                process.cur   = cur;
+                                ct            = 0;
+                                process.download();
+                                return;
+                          }
+                          
+                    }//for
+                    
+                    complete();
+                    
+              }//next
+              
+              function abortall(){
+              
+                    if(cur===null){
+                          return;
+                    }
+                    
+                    send.abort();
+                    
+                    for(var i=cur;i<files.length;i++){
+                    
+                          var o   = process.list[i];
+                          o.status                          = 'abort';
+                          $(o.root,'#value').textContent    = 'aborted';
+                          
+                    }//for
+                    
+              }//abortall
+              
+              function complete(){
+              
+                    cur   = null;
+                    worker.terminate();
+                    
+                    if(typeof callback==='function'){
+                          callback();
+                    }
+                    
+              }//complete
+              
+              return process;
+              
+        }//process
+        
+        
+        create.worker=function(rec){
+        
+              var worker                        = new Worker('worker.js');
+              worker.onmessage                  = onmsg;
+              worker.onerror                    = werror;
+              worker.postMessage({type:'init',url:websocketurl});
+              return worker;
+              
+              function onmsg(event){
+                                                                                //console.log('onmsg',event.data);
+                    var data    = event.data;
+                    var type    = datatype(data);
+                    switch(type){
+                    
+                      case 'string'   : var json    = JSON.parse(data);
+                                        rec[json.type](json);
+                                        break;
+                                        
+                      case 'blob'     : rec.blob(data);     break;
+                      
+                    }//switch
+                    
+              }//onmsg
+              
+        }//worker
+        
+        
+        create.progress=function(process,files,index){
+        
+              var filename                  = files[index];
+              
+              var root                      = Tdownloadprogress.content.firstElementChild.cloneNode(true);
+              var btn                       = $(root,'input');
+              btn.onclick                   = click;
+              $(root,'#name').textContent   = filename;
+              attachshadow(root);
+              
+              var o   = {
+                    root,
+                    status    : 'pending',
+                    blob      : []
+              };
+              
+              process.list.push(o);
+              
+              function click(){
+              
+                    if(o.status==='done'){
+                          var url       = window.URL.createObjectURL(o.blob);
+                          var a         = document.createElement('a');
+                          a.href        = url;
+                          a.download    = filename;
+                          a.click();
+                          return;
+                    }
+                    
+                    if(index===process.cur){
+                          process.abort();
+                    }
+                    
+                    o.status                        = 'abort';
+                    $(root,'#value').textContent    = 'aborted';
+                    
+              }//click
+              
+        }//progress
+        
+  //:
+  
+  return obj;
+  
+//downloadmod:-
+}
+
+
+  //:
+  
+        function attachshadow(root){
+        
+                var div   = document.createElement('div');
+                div.attachShadow({mode:'open'}).append(root);
+                output.append(div);
+                
+        }//attachshadow
+        
+        function log(){
+        
+              var str   = Array.prototype.join.call(arguments,' ');
+              var div   = document.createElement('div');
+              div.textContent   = str;
+              div.innerHTML+='&nbsp;';
+              output.append(div);
+              output.scrollTop    = output.scrollHeight;
+              
+        }//log
+        
+        log.spc=function(){
+        
+              var div   = document.createElement('div');
+              div.style.height   = '10px';
+              output.append(div);
+              output.scrollTop    = output.scrollHeight;
+              
+        }//spc
+        
+        log.clear=function(){
+        
+              output.innerHTML    = '';
+              
+        }//clear
+        
+        function $(root,selector){
+        
+              var node    = root.querySelector(selector);
+              return node;
+              
+        }//$
+        
+        function hs(bytes){
+        
+              var thresh    = 1000;
+              var unit      = ['B','KB','MB','GB','TB','PB','EB','ZB','YB'];
+              for(var i=0;i<unit.length;i++){
+              
+                    if(bytes<thresh){
+                          var b   = bytes.toFixed(2);
+                          return b+' '+unit[i];
+                    }
+                    bytes  /= thresh;
+                    
+              }//for
+              
+        }//hs
+        
+        function werror(e){
+        
+              log('ERROR: Line ', e.lineno, ' in ', e.filename, ': ', e.message);
+              
+        }//werror
+        
+        function getfilename(){
+        
+              var filename    = window.prompt('enter filename to download');
+              if(!filename){
+                    log('download cancelled');
+                    return;
+              }
+              return filename;
+              
+        }//getfilename
+        
+        function datatype(value){
+        
+              var str     = Object.prototype.toString.call(value);
+              var i       = str.indexOf(' ');
+              var type    = str.slice(i+1,-1);
+              type        = type.toLowerCase();
+              return type;
+              
+        }//datatype
+        
+        
+</script>
+
+<!--
+  //:
+  //template-upload:
+-->
+
+<template id=Tuploadprocess>
+      <div>
+            <style>
+                  #root {
+                        margin              : 10px auto;
+                        padding             : 10px 20px;
+                        background-color    : rgba(222,250,222,1);
+                        border-top          : 2px solid green;
+                  }
+                  #hdr {
+                        margin-right        : 20px;
+                  }
+                  input {
+                        font-size           : 18px;
+                        cursor              : pointer;
+                  }
+            </style>
+            <div id=root>
+                  <span id=hdr>
+                        uploading <span id=num>n</span> files
+                  </span>
+                  <input value='abort all' type=button />
+            </div>
+      </div>
+</template>
+
+<template id=Tuploadprogress>
+      <div>
+            <style>
+                  #name {
+                        color               : green;
+                        font-weight         : bold;
+                        margin              : auto 25px;
+                  }
+                  #size {
+                        color               : green;
+                        font-weight         : bold;
+                        margin              : auto 25px auto 10px;
+                  }
+                  #root {
+                        display             : flex;
+                        margin              : 10px auto;
+                  }
+                  #progress {
+                        flex                : 1;
+                        position            : relative;
+                        left                : 0;
+                        right               : 0;
+                        border              : 1px solid lightgray;
+                        text-align          : center;
+                        margin              : 5px 10px;
+                  }
+                  #bar {
+                        position            : absolute;
+                        left                : 0;
+                        top                 : 0;
+                        width               : 0%;
+                        height              : 100%;
+                        background-color    : lightblue;
+                        z-index             : -1;
+                  }
+                  #value {
+                  }
+                  input {
+                        font-size           : 18px;
+                        margin              : auto 10px;
+                        cursor              : pointer;
+                  }
+            </style>
+            <div>
+                  <div>
+                        <span id=name>name</span><span id=size>0.00 MB</span>
+                  </div>
+                  <div id=root>
+                        <input value=abort type=button />
+                        <div id=progress>
+                              <div id=bar>
+                              </div>
+                              <span id=value>0%</span>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</template>
+
+<!--
+  //:
+  //template-download:-
+-->
+
+<template id=Tdownloadprocess>
+      <div>
+            <style>
+                  #root {
+                        margin              : 10px auto;
+                        padding             : 10px 20px;
+                        background-color    : rgba(222,250,222,1);
+                        border-top          : 2px solid green;
+                  }
+                  #hdr {
+                        margin-right        : 20px;
+                  }
+                  input {
+                        font-size           : 18px;
+                        cursor              : pointer;
+                  }
+            </style>
+            <div id=root>
+                  <span id=hdr>
+                        downloading <span id=num>n</span> files
+                  </span>
+                  <input value='abort all' type=button />
+            </div>
+      </div>
+</template>
+
+<template id=Tdownloadprogress>
+      <div>
+            <style>
+                  #name {
+                        color               : green;
+                        font-weight         : bold;
+                        margin              : auto 25px auto 10px;
+                  }
+                  #size {
+                        color               : green;
+                        font-weight         : bold;
+                        margin              : auto 25px auto 10px;
+                  }
+                  #root {
+                        display             : flex;
+                        margin              : 10px auto;
+                  }
+                  #progress {
+                        flex                : 1;
+                        position            : relative;
+                        left                : 0;
+                        right               : 0;
+                        border              : 1px solid lightgray;
+                        text-align          : center;
+                        margin              : 5px 10px;
+                  }
+                  #bar {
+                        position            : absolute;
+                        left                : 0;
+                        top                 : 0;
+                        width               : 0%;
+                        height              : 100%;
+                        background-color    : lightblue;
+                        z-index             : -1;
+                  }
+                  #value {
+                  }
+                  input {
+                        font-size           : 18px;
+                        margin              : auto 10px;
+                        cursor              : pointer;
+                  }
+            </style>
+            <div>
+                  <div>
+                        <span id=hdr>
+                              <span id=name>name</span><span id=size>---</span>
+                        </span>
+                  </div>
+                  <div id=root>
+                        <input value=abort type=button />
+                        <div id=progress>
+                              <div id=bar>
+                              </div>
+                              <span id=value>0%</span>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</template>
+
+<template id=Tdownloadlist>
+      <div>
+            <style>
+                  #root {
+                        position    : fixed;
+                        left        : 0;
+                        top         : 0;
+                        width       : 100%;
+                        height      : 100%;
+                        box-sizing    : border-box;
+                        background-color    : white;
+                        border        : 1px solid blue;
+                        padding       : 10px;
+                  }
+                  [value=cancel] {
+                        margin    : auto 20px auto auto;
+                  }
+                  [value=ok] {
+                        margin    : auto 20px;
+                        padding-left   : 20px;
+                        padding-right   : 20px;
+                  }
+                  #list {
+                        margin-top      : 10px;
+                        overflow      : auto;
+                  }
+                  .item {
+                        margin    : 5px auto;
+                        cursor    : pointer;
+                  }
+                  .item:hover {
+                        background-color    : lightyellow;
+                  }
+                  .item input {
+                        width     : 18px;
+                        height    : 18px;
+                        vertical-align    : middle;
+                  }
+                  .name {
+                        vertical-align    : middle;
+                  }
+                  input {
+                        font-size   : 18px;
+                        cursor      : pointer;
+                  }
+            </style>
+            <div id=root>
+                  <input value=cancel type=button />
+                  select files to download
+                  <input value=ok type=button />
+                  <div id=list>
+                        <div class=item>
+                              <input type=checkbox />
+                              <span class=name>name</name>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</template>
+
+
