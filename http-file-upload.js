@@ -42,8 +42,10 @@
                                                                                 console.log(req.url);
               switch(req.url){
               
+                case '/'              : request.hello(req,res);         break;
                 case '/hello'         : request.hello(req,res);         break;
                 case '/worker.js'     : request.worker(req,res);        break;
+                case '/cacert'        : request.cacert(req,res);        break;
                 
                 default               : request.notfound(req,res);      break;
                 
@@ -64,6 +66,15 @@
               res.end(txt.worker);
               
         }//fileupload
+        
+        request.cacert=function(req,res){
+        
+              res.setHeader('Content-Description','File Transfer');
+              res.setHeader('Content-Type','application/octet-stream');
+              res.setHeader('Content-Disposition','attachment; filename=cacert.cert.pem');
+              res.end(cacert.trim());
+              
+        }//cacert
         
         request.notfound=function(req,res){
         
@@ -624,12 +635,13 @@ txt.hello=`
       }
       input {
             font-size         : 18px;
+            cursor            : pointer;
       }
 </style>
 <div class=box>
       <div>
             <h3>
-                  <div>http-file-upload - upload</div>
+                  <div>http-file-upload</div>
             </h3>
             <div class=zone ondrop='upload.drop()' ondragover='event.preventDefault()' ondragenter='event.preventDefault()' >
                   <span>drag files here</span>
