@@ -158,10 +158,10 @@ and then run using the command from that directory
 if you would then like http-file-upload to be accessible from anywhere on the file system, http-file-upload directory should be added to the system path variable, http-file-upload comes with the appropriate shell scripts :
 
    windows ..... `http-file-upload.bat ` 
+   
   mac ............... ` http-file-upload.sh `
+  
   linux .............. ` http-file-upload.sh `
-
-
 
 
 
