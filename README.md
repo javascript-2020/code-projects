@@ -28,13 +28,8 @@ after global installation
      npm uninstall http-file-upload -g 
 
 <br>
-
-
 <br>
 <br>
-
-
-
 
 the server listens on all network interfaces, the default port is 3000
 
@@ -143,7 +138,16 @@ to upload a file from the browser
           
     }//onchange    
 <br>
+download with curl
+
+    curl --insecure https://localhost:3000/download?a.txt
 <br>
+
+run http-file-upload from another directory 
+serving the files in the directory ` /work/tmp/ `
+
+    node http-file-upload.js -cwd /work/tmp/
+
 
 ### alternative installation methods
 
@@ -151,17 +155,33 @@ to upload a file from the browser
 
     npm install http-file-upload
 
-and then run using the command from that directory
+this will download http-file-upload to ` ./node_modules/http-file-upload `
+
+http-file-upload can then be run using the command
 
     npx http-file-upload
 
-if you would then like http-file-upload to be accessible from anywhere on the file system, http-file-upload directory should be added to the system path variable, http-file-upload comes with the appropriate shell scripts :
+### install from github
+
+simply download the repository as a zip file
+
+    https://github.com/javascript-2020/http-file-upload/zipball/main/
+    
+download the single file **http-file-upload.js** from github
+
+    https://raw.githubusercontent.com/user/javascript/main/http-file-upload.js
+
+clone the repository 
+https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
+
+    git clone https://github.com/javascript-2020/http-file-upload.git
+
+<br>
+
+if you would then like http-file-upload to be accessible from anywhere on the file system, the http-file-upload directory should be added to the system path, http-file-upload comes with the following shell scripts to launch the process :
 
    windows ..... `http-file-upload.bat ` 
    
   mac ............... ` http-file-upload.sh `
   
   linux .............. ` http-file-upload.sh `
-
-
-
