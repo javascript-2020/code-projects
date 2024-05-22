@@ -1,35 +1,97 @@
 
 
-        var port          = 3002;
-        var userdir       = 'upload/';
+        var port          = 3000;
+        var userdir       = '';
         var chunksize     = 1024*1024;
+        var cwd           = '';
+        var mode          = 'https';
         
+        
+        var https         = require('https');
+        var http          = require('http');
+        var fs            = require('fs');
+        var fsp           = fs.promises;
+        var path          = require('path');
+        var dns           = require('dns');
+        var os            = require('os');
+        
+        
+        cwd     = cwd||process.cwd();
+        
+        var n   = process.argv.length;
+        for(var i=0;i<n;i++){
+        
+              var arg   = process.argv[i];
+              
+              if(arg==='-p'){
+                    var uport   = Number(process.argv[i+1]);
+                    if(Number.isInteger(uport)){
+                          port    = uport;
+                    }
+              }
+              if(arg==='-d'){
+                    var udir    = process.argv[i+1];
+                    userdir     = udir;
+              }
+              if(arg==='-cwd'){
+                    var ucwd    = process.argv[i+1];
+                    cwd         = ucwd;
+              }
+              if(arg==='https' || arg==='http'){
+                    mode    = arg;
+              }
+              
+        }//for
+        
+        var i   = cwd.length-1;
+        var c   = cwd[i];
+        var sep   = (cwd.indexOf('/')!==-1) ? '/' : '\\';
+        if(!(c==='/' || c==='\\')){
+              cwd  += sep;
+        }
+        
+        if(userdir){
+              var c   = userdir.slice(-1);
+              if(c!=='/' && c!=='\\'){
+                    userdir  += '/';
+              }
+        }
         
         console.clear();
         title('http-file-upload');
-        console.log('http-file-upload');
+        console.log('http-file-upload v2.0');
         console.log();
-        require('dns').lookup(require('os').hostname(),{family:4},listen);
+        
+        dns.lookup(os.hostname(),{family:4},listen);
         
         
         var ws            = wsmod();
         
-        var https         = require('https');
-        var fs            = require('fs');
-        var fsp           = fs.promises;
         
+        if(!createdir()){
+              process.exit();
+        }
         
-        createdir();
         
         var key,cert,cacert;
         setup();
         
-        var server    = https.createServer({key,cert});
+        var server;
+        if(mode==='https'){
+              server    = https.createServer({key,cert});
+        }else{
+              server    = http.createServer();
+        }
         
         server.on('request',request);
         server.on('upgrade',upgrade);
-        server.on('listening',()=>console.log('http server listening - all interfaces, port '+port));
         server.on('error',console.error);
+        server.on('listening',()=>{
+              console.log('server listening - ',mode+' ,','all interfaces , port '+port);
+              console.log(`${mode}://localhost:${port}/`);
+              console.log('serving directory : ',cwd);
+              console.log();
+        });
         
         
         var txt   = {};
@@ -40,14 +102,24 @@
   
         function request(req,res){
                                                                                 console.log(req.url);
+              if(req.url.startsWith('/download')){
+                    request.download(req,res);
+                    return;
+              }
+              if(req.url.startsWith('/upload')){
+                    request.upload(req,res);
+                    return;
+              }
+              
               switch(req.url){
               
-                case '/'              : request.hello(req,res);         break;
-                case '/hello'         : request.hello(req,res);         break;
-                case '/worker.js'     : request.worker(req,res);        break;
-                case '/cacert'        : request.cacert(req,res);        break;
-                
-                default               : request.notfound(req,res);      break;
+                case '/'                    : request.hello(req,res);               break;
+                case '/hello'               : request.hello(req,res);               break;
+                case '/worker.js'           : request.worker(req,res);              break;
+                case '/cacert'              : request.cacert(req,res);              break;
+                case '/favicon.ico'         : request.favicon(req,res);             break;
+                case '/download-list'       : request.download.list(req,res);       break;
+                default                     : request.notfound(req,res);            break;
                 
               }//switch
               
@@ -76,12 +148,80 @@
               
         }//cacert
         
-        request.notfound=function(req,res){
+        request.favicon=function(req,res){
         
+              var buf   = Buffer.from(img.favicon,'base64');
+              res.writeHead(200,{'content-type':'image/png'});
+              res.end(buf);
+              
+        }//favicon
+        
+        request.notfound=function(req,res,txt){
+        
+              var str   = 'not found';
+              if(txt)str   += ' : '+txt;
               res.writeHead(404,{'Content-Type':'text/html'})
-              res.end('not found');
+              res.end(str);
               
         }//notfound
+        
+        request.download=function(req,res){
+        
+              var filename    = req.url.slice(10);
+              if(!chk.file(filename)){
+                    request.notfound(req,res,filename);
+                    return;
+              }
+              var fd    = fs.createReadStream(userdir+filename);
+              fd.on('error',()=>{
+                    request.notfound(req,res);
+                    return;
+              });
+              
+              res.setHeader('Content-Description','File Transfer');
+              res.setHeader('Content-Type','application/octet-stream');
+              res.setHeader('Content-Disposition',`attachment; filename=${filename}`);
+              fd.pipe(res);
+              
+        }//download
+        
+        request.download.list=async function(req,res){
+        
+              try{
+                    var list    = await fsp.readdir(cwd+userdir,{withFileTypes:true});
+              }
+              
+              catch(err){
+                    var result    = false;
+                    var msg       = err.toString();
+              }
+              
+              if(result===false){
+                    res.end(JSON.stringify({error:msg}));
+                    return;
+              }
+              
+              var files   = [];
+              list.forEach(file=>file.isFile() && files.push(file.name));
+              res.end(JSON.stringify({files}));
+              
+        }//download.list
+        
+        request.upload=function(req,res){
+        
+              var filename    = req.url.slice(8);console.log(filename);
+              if(!filename){
+                    res.writeHead(500);
+                    res.end('no filename');
+                    return;
+              }
+              
+              var fd          = fs.createWriteStream(filename);
+              req.pipe(fd);
+              res.writeHead(200);
+              res.end('ok');
+              
+        }//upload
         
         
   //:
@@ -123,6 +263,10 @@
               async function upload(json){
               
                     ({name,num}   = json);
+                    
+                    var result    = chk(con,name);
+                    if(result===false)return;
+                    
                     ct            = 0;
                                                                                 console.log('upload',name,num);
                     fh    = await open(con,name,'w');
@@ -198,6 +342,9 @@
                     fn.send         = send;
                     fn.abort        = abort;
                     var file        = json.file;
+                    
+                    var result      = chk(con,file);
+                    if(result===false)return;
                                                                                 console.log('start',file);
                     var size        = await filesize(con,file);
                     if(size===false)return;
@@ -256,19 +403,21 @@
         
         download.list=async function(con,json){
                                                                                 console.log('list');
-              var files   = [];
               try{
-                    var list    = await fsp.readdir(userdir,{withFileTypes:true});
+                    var list    = await fsp.readdir(cwd+userdir,{withFileTypes:true});
               }
+              
               catch(err){
                     var result    = false;
                     var msg       = err.toString();
               }
+              
               if(result===false){
                     con.send.json({type:'error',msg});
                     return;
               }
               
+              var files   = [];
               list.forEach(file=>{if(file.isFile())files.push(file.name)});
               con.send.json({type:'list',files});
               
@@ -276,6 +425,27 @@
         
         
   //:
+  
+        function chk(con,file){
+        
+              if(chk.file(file)===false){
+                    con.send.json({type:'error',msg:'invalid filename'});
+                    return false;
+              }
+              
+        }//chk
+        
+        chk.file=function(file){
+        
+              var p1    = path.resolve(userdir);
+              var p2    = path.resolve(userdir,file).substring(0,p1.length);
+              if(p1!==p2){
+                    return false;
+              }
+              return true;
+              
+        }//chk.file
+        
         async function open(con,file,mode){
         
               try{
@@ -401,8 +571,8 @@
                     
               }//for
               console.log();
-              console.log('local ip : '+ip);
-              console.log();
+              //console.log('local ip : '+ip);
+              //console.log();
               
         }//listen
         
@@ -418,17 +588,29 @@
         
         function createdir(){
         
+              if(!userdir)return true;
+              
               var stat    = fs.statSync(userdir,{throwIfNoEntry:false});
               if(!stat){
-                    fs.mkdirSync(userdir);
+                    try{
+                          fs.mkdirSync(userdir);
+                    }
+                    catch(err2){
+                          err   = err2;
+                    }
+                    if(err){
+                          console.log('unable to create upload directory');
+                          console.log(cwd+userdir);
+                          console.error(err);
+                    }
                     return;
               }
               if(!stat.isDirectory()){
                     console.error('invalid upload directory');
-                    console.log(userdir);
-                    console.log(__dirname);
-                    process.exit();
+                    console.log(cwd+userdir);
+                    return;
               }
+              return true;
               
         }//createdir
         
@@ -619,7 +801,7 @@ txt.hello=`
             position          : relative;
             margin            : 20px auto;
             padding           : 20px;
-            border            : 1px dashed lightblue;
+            border            : 3px dashed lightblue;
             border-radius     : 5px;
             height            : 150px;
       }
@@ -641,9 +823,9 @@ txt.hello=`
 <div class=box>
       <div>
             <h3>
-                  <div>http-file-upload</div>
+                  <div>http-file-upload v2.0</div>
             </h3>
-            <div class=zone ondrop='upload.drop()' ondragover='event.preventDefault()' ondragenter='event.preventDefault()' >
+            <div class=zone ondrop='upload.drop(event)' ondragenter='upload.drop.enter(event)' ondragover='upload.drop.enter(event)' ondragleave='upload.drop.leave(event)'>
                   <span>drag files here</span>
                   <span>or</span>
                   <input value='select files' type=button onclick='upload.fileinput(event)' />
@@ -660,15 +842,23 @@ txt.hello=`
 <script>
 
         console.clear();
-        log('ready');
+        console.log('http-file-upload v2.0');
+        console.log();
+        
+        var websocketurl    = 'ws'+(self.location.protocol==='https:'?'s':'')+'://'+self.location.host;
+        console.log('websocket url :',websocketurl);
+        var remote_dir      = '${cwd.replaceAll('\\',' \\\\ ')}';
+        
+        log('remote dir : '+remote_dir);
         log();
-        var websocketurl   = 'ws'+(self.location.protocol==='https:'?'s':'')+'://'+self.location.host;
-        log('websocket url :',websocketurl);
+        log('ready');
         log();
         
         
         var upload      = uploadmod();
         var download    = downloadmod();
+        
+        
         
   //:
   
@@ -687,8 +877,42 @@ function uploadmod(){
         
   //:
   
+        obj.drop=function(e){console.log('drop');
+        
+              e.preventDefault();
+              e.target.style.borderColor    = '';
+              
+              var files   = e.dataTransfer.files;console.log(files);
+              upload(files,complete);
+              
+              function complete(){
+              
+                    console.log('done');
+                    
+              }//complete
+              
+        }//drop
+        
+        
+        obj.drop.enter=function(e){
+        
+              e.preventDefault();
+              e.target.style.borderColor    = 'cyan';
+              
+        }//drop.enter
+        
+        
+        obj.drop.leave=function(e){
+        
+              e.preventDefault();
+              e.target.style.borderColor    = '';
+              
+        }//drop.leave
+        
+        
         obj.files=function(files,callback){
         }//files
+        
         
         obj.fileinput=function(event){
         
@@ -2668,6 +2892,22 @@ function wsmod(){
 }
 
 
+
+  //img:
+  
+        var img       = {};
+        img.favicon   =
+'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAmNJREFUSEvt1j'+
+'9oE1EYAPDv3V+Tu0Sbu+QUiroVnRRBEXTo4qqrHewgSLu6aIZqSR0sooMO7ejqJAodVLCgiIvgIBQEkaakSEk5L8mFy/Uu78lTrl'+
+'ySu+Rdmi7SrHnf9/ve9/4dgiF++fmTR22uWiQY6xrk7mzOb1aSpkFJAyjagK3HLWhN0VgZySs60WaS4olgita5X0su3rkWLlhG8m'+
+'pe0m9VipUfrBNhhuNQCiFAbQlJH5LgTHA/dNiZD4RZ0aAA1rb3hZOiSfBYeFiUFY+E94qy4D3wqNAwrhPtRvc574VL+bN10ljAQL'+
+'K7O5bg4x74J1jOqAhCGRC3EYzlAPkKl35ozplvw/GRrb74ZDwVHvTNtqZt3FxigVNc+ukZdexueOzn2xWnO3bgcaIBakmdYYbRoU'+
+'XnvtMBRxV8AEcu40Gr++3u1H+xuTIPjkw3/NpzpnPMOmN6RbpCbZIjpHlKUd9FHfbcQu6K1a69xIDTg3CVU2bte/Zy1Diax0P42G'+
+'Fe/YSCpDxw1QIULkV9O00sTmTKzsZy8J0Vh4tI+lgg+lRUDnobfmlU33hk5zItjgmmEO2Mw5mzNBADVjpx5ApI+KqJY8/ivrto8T'+
+'9b6yuJ4QCilZueIoThnNj0o5YoPGbP8KA1jvu/p9VaybjwG2+/pwFZPnPdkIzVYZP3i9t2rdN1bL7woT2uCtmbiLZgvVV+5RJ38t'+
+'9birb2AwZCDPqmiyCtGXL+6t/Xic66TqxHbeKfI0DkfYEBQADxu8Knitac9Xr3WaS71uOt8xihrh07mjLoPaEK6lqw65ne49HQnV'+
+'n+AP19gPx3AUdHAAAAAElFTkSuQmCC'
+;
 
 
 

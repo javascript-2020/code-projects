@@ -1,0 +1,43 @@
+
+
+
+        {
+        
+        
+              "name"            : "http-file-upload",
+              "version"         : "1.0.10",
+              "description"     : "upload/download large files over http",
+              "author"          : "matt richards",
+              "license"         : "ISC",
+              
+              
+              "main"            : "http-file-upload.js",
+              
+              "scripts": {
+                    "start"     : "node ./http-file-upload.js"
+              },
+              
+              "bin"             : "./bin.js",
+              
+              
+              "homepage"        : "https://github.com/javascript-2020/http-file-upload#readme",
+              "repository": {
+                    "type"      : "git",
+                    "url"       : "git+https://github.com/javascript-2020/http-file-upload.git"
+              },
+              "bugs": {
+                    "url"       : "https://github.com/javascript-2020/http-file-upload/issues"
+              },
+              
+              
+              "keywords"        : ["upload","download","nodejs","http","server","websocket"]
+              
+              
+        }
+        
+        
+        
+        
+        
+        
+        
