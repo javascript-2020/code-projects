@@ -26,7 +26,10 @@ running powershell scripts are disabled by default
 to get the script to run normally in powershell users will have to delete ` http-file-upload.ps1 ` file from the default npm script installation directory
 
 this is usually ` c:/users/<user_name>/AppData/Roaming/npm/ `
+
 <br>
+<br>
+
 see also alternative installation methods below
 
 <br>
