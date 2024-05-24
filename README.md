@@ -21,8 +21,11 @@ http-file-upload can then be run from anywhere on the file system by typing on t
       http-file-upload
       
 note : **windows powershell users**
-running powershell scripts are disabled by default, to get the script to run normally
-in powershell users will have to delete ` http-file-upload.ps1 ` file from the default npm script installation directory, this is usually ` c:/users/<user_name>/AppData/Roaming/npm/ `
+running powershell scripts are disabled by default
+
+to get the script to run normally in powershell users will have to delete ` http-file-upload.ps1 ` file from the default npm script installation directory
+
+this is usually ` c:/users/<user_name>/AppData/Roaming/npm/ `
 <br>
 see also alternative installation methods below
 
