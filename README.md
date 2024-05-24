@@ -62,6 +62,8 @@ https://127.0.0.1:3000/ or https://127.0.0.1:3000/hello
 <br>
 
 http-file-upload supports the following command line parameters
+
+ the parameters can be specified with or without the dash or with a double dash
 <br>
 <br>
 
