@@ -106,7 +106,8 @@ specify a public certificate to use, pem format
 
 specify a private key to use, pem format
 <br>
-note: generate https certificates https://codepen.io/matt-2016/pen/KKYvOxp
+<br>
+note: [generate https certificates](https://codepen.io/matt-2016/pen/KKYvOxp)
 <br>
 <br>
 
@@ -123,7 +124,7 @@ https://127.0.0.1:3000/download-list
 
 <br>
 
-to upload a file to this url using a http request
+upload a file to this url using a http request
 
 https://127.0.0.1:3000/upload?filename
 
