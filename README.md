@@ -68,7 +68,7 @@ sets the port the server listens on
 
 -d dir
 
-sets a directory to put new uploads or where to find files for download, its relative to the directory the script was started from, if the directory does not exist it is created
+sets a directory to put new uploads or where to find files for download, its relative to the serving directory, if the directory does not exist it is created
 
 -cwd
 
@@ -109,11 +109,14 @@ upload/download files in the current directory
 
 `http-file-upload`
 
+<br>
 upload/download files in the current directory using port 4000
 
 ( requires global installation or the launch script on the system path )
 
 `http-file-upload -p 4000`
+
+<br>
 
 if http-file-upload has been installed globally, and you have some files you want to access over http in a directory ` /work/tmp/ ` 
 1. change to directory ` /work/tmp/ `
