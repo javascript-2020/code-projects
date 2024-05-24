@@ -21,7 +21,7 @@ npm global installation is the recommended way to install
 
 http-file-upload can then be run from anywhere on the file system by typing on the command line
 
-      http-file-upload -v
+      http-file-upload -version
       
 <br>
       
