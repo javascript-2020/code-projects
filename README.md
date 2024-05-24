@@ -71,7 +71,7 @@ if you need the ca cert you can download it from ` /cacert `
 <br>
 <br>
 downloading a file using a http request 
-https://127.0.0.1:3000/download?\<filename>
+https://127.0.0.1:3000/download?<filename>
 
 a list of all files available to download is available from, an array in JSON format is returned 
 https://127.0.0.1:3000/download-list
