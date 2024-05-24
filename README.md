@@ -247,7 +247,12 @@ http-file-upload comes with the following shell scripts to launch the process :
   
   linux .............. ` http-file-upload.sh `
 
+<br>
+<br>
 
+https://github.com/javascript-2020/http-file-upload
+
+https://www.npmjs.com/package/http-file-upload
 
 
 
