@@ -11,8 +11,11 @@ files can be uploaded and downloaded
 
 <br>
 
+***
+
 ### install
-global installation is the recommended way to install
+
+npm global installation is the recommended way to install
 
     npm install http-file-upload -g
 
@@ -36,14 +39,16 @@ see also alternative installation methods below
 
 <br>
 
+***
+
 ### uninstall
-after global installation
+after global npm installation
 
      npm uninstall http-file-upload -g 
 
 <br>
-<br>
-<br>
+
+***
 
 the server listens on all network interfaces, the default port is 3000
 <br>
@@ -71,7 +76,7 @@ if you need the ca cert you can download it from ` /cacert `
 <br>
 <br>
 downloading a file using a http request 
-https://127.0.0.1:3000/download?<filename>
+https://127.0.0.1:3000/download?\<filename>
 
 a list of all files available to download is available from, an array in JSON format is returned 
 https://127.0.0.1:3000/download-list
@@ -80,6 +85,8 @@ to upload a file using a http request
 https://127.0.0.1:3000/upload?&lt;filename>
 
 <br>
+
+***
 
 ### example useage
 
@@ -217,6 +224,8 @@ node http-file-upload.js -cwd /work/tmp/
 
 <br>
 
+***
+
 ### alternative installation methods
 
 ### install locally :
@@ -257,6 +266,8 @@ http-file-upload comes with the following shell scripts to launch the process :
 
 <br>
 <br>
+
+***
 
 https://github.com/javascript-2020/http-file-upload
 
