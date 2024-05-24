@@ -76,11 +76,13 @@ https://127.0.0.1:3000/upload?&lt;filename>
 ### example useage
 
 upload/download files in the current directory 
+
 ( requires global installation or the launch script on the system path )
 
 `http-file-upload`
 
 upload/download files in the current directory using port 4000
+
 ( requires global installation or the launch script on the system path )
 
 `http-file-upload -p 4000`
