@@ -61,18 +61,22 @@ https://127.0.0.1:3000/ or https://127.0.0.1:3000/hello
 <br>
 
 http-file-upload supports the following command line parameters
+<br>
 
 -p port
 
 sets the port the server listens on 
+<br>
 
 -d dir
 
 sets a directory to put new uploads or where to find files for download, its relative to the serving directory, if the directory does not exist it is created
+<br>
 
 -cwd
 
 sets the current working directory for the script
+<br>
 
 https | http
 
