@@ -90,19 +90,40 @@ if you need the ca cert you can download it from ` /cacert `
 <br>
 <br>
 
-downloading a file using a http request 
+-v
+
+prints the current version of the program
+<br>
+<br>
+
+-cert filename
+
+specify a public certificate to use, pem format
+<br>
+<br>
+
+-key filename
+
+specify a private key to use, pem format
+<br>
+note: generate https certificates https://codepen.io/matt-2016/pen/KKYvOxp
+<br>
+<br>
+
+
+download a file using a http request at url
 
 https://127.0.0.1:3000/download?filename
 
 <br>
 
-a list of all files available to download is available from, an array in JSON format is returned 
+a list of all files available to download is available from the following url, an array in JSON format is returned 
 
 https://127.0.0.1:3000/download-list
 
 <br>
 
-to upload a file using a http request
+to upload a file to this url using a http request
 
 https://127.0.0.1:3000/upload?filename
 
