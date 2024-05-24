@@ -59,30 +59,35 @@ the built in user interface is accessible at ( on all network interfaces )
 https://127.0.0.1:3000/ or https://127.0.0.1:3000/hello
 
 <br>
+<br>
 
 http-file-upload supports the following command line parameters
+<br>
 <br>
 
 -p port
 
 sets the port the server listens on 
 <br>
+<br>
 
 -d dir
 
 sets a directory to put new uploads or where to find files for download, its relative to the serving directory, if the directory does not exist it is created
+<br>
 <br>
 
 -cwd
 
 sets the current working directory for the script
 <br>
+<br>
 
 https | http
 
 set whether the server uses https ( default ) or http
 if you need the ca cert you can download it from ` /cacert `
-
+<br>
 <br>
 
 downloading a file using a http request 
