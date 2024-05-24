@@ -91,8 +91,7 @@ https://127.0.0.1:3000/download-list
 <br>
 to upload a file using a http request
 
-https://127.0.0.1:3000/upload?&lt;filename>
-
+https://127.0.0.1:3000/upload?filename
 <br>
 
 ***
