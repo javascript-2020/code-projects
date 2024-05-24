@@ -86,11 +86,13 @@ downloading a file using a http request
 https://127.0.0.1:3000/download?filename
 
 <br>
+
 a list of all files available to download is available from, an array in JSON format is returned 
 
 https://127.0.0.1:3000/download-list
 
 <br>
+
 to upload a file using a http request
 
 https://127.0.0.1:3000/upload?filename
