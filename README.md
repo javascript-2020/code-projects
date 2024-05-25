@@ -109,7 +109,7 @@ specify a public certificate to use, pem format
 specify a private key to use, pem format
 <br>
 <br>
-note: [generate https certificates](https://codepen.io/matt-2016/pen/KKYvOxp)
+note: [generate https certificates](https://javascript-2020.github.io/generate-https-certificate.html)
 <br>
 <br>
 
