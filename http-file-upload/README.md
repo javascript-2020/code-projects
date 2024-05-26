@@ -1,5 +1,5 @@
+[![NPM](https://nodei.co/npm/http-file-upload.png)](https://nodei.co/npm/http-file-upload/)
 
-<br>
 <h3>http-file-upload</h3>
 
 http-file-upload is a http server whose only function is to upload and download files ( of any size )
