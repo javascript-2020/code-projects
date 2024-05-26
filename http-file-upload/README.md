@@ -295,7 +295,7 @@ download the repository as a zip file
     
 download the single file `http-file-upload.js` from github
 
-    https://raw.githubusercontent.com/user/javascript-2020/main/http-file-upload.js
+    https://raw.githubusercontent.com/javascript-2020/code-projects/main/http-file-upload/http-file-upload.js
 
 clone the repository 
 
