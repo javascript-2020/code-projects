@@ -1,4 +1,6 @@
-[![NPM](https://nodei.co/npm/http-file-upload.png)](https://nodei.co/npm/http-file-upload/)
+<br>
+
+(npm : http-file-upload)](https://www.npmjs.com/package/http-file-upload)
 
 <h3>http-file-upload</h3>
 
@@ -11,6 +13,7 @@ https://javascript-2020.github.io/code-projects/http-file-upload/http-file-uploa
 <br>
 
 http-file-upload is a http server whose only function is to upload and download files ( of any size )
+
 the http server has been designed as a single, no dependency, file for ease of use and portability
 
 files can be uploaded and downloaded
@@ -34,11 +37,16 @@ http-file-upload can then be run from anywhere on the file system by typing on t
 <br>
 
 note : **windows powershell users**
+
 running powershell scripts are disabled by default
 
-to get the script to run normally in powershell users will have to delete ` http-file-upload.ps1 ` file from the default npm script installation directory
+to get the script to run normally in powershell users will have to delete
 
-this is usually ` c:/users/<user_name>/AppData/Roaming/npm/ `
+` http-file-upload.ps1 `
+
+file from the default npm script installation directory, this is usually
+
+` c:/users/<user_name>/AppData/Roaming/npm/ `
 
 <br>
 <br>
@@ -75,6 +83,8 @@ http-file-upload supports the following command line parameters
 <br>
 <br>
 
+```
+
 -p port
 
 sets the port the server listens on
@@ -93,10 +103,9 @@ sets the current working directory for the script
 <br>
 <br>
 
-https | http
+-https | -http
 
 set whether the server uses https ( default ) or http
-if you need the ca cert you can download it from ` /cacert `
 <br>
 <br>
 
@@ -115,8 +124,7 @@ specify a public certificate to use, pem format
 -key filename
 
 specify a private key to use, pem format
-<br>
-<br>
+
 note: [generate https certificates](https://javascript-2020.github.io/generate-https-certificate.html)
 <br>
 <br>
@@ -146,14 +154,14 @@ https://127.0.0.1:3000/upload?filename
 
 upload/download files in the current directory
 
-( requires global installation or the launch script on the system path )
+requires global installation or the launch script on the system path
 
 `http-file-upload`
 
 <br>
 upload/download files in the current directory using port 4000
 
-( requires global installation or the launch script on the system path )
+requires global installation or the launch script on the system path
 
 `http-file-upload -p 4000`
 
@@ -297,19 +305,15 @@ http-file-upload can then be run using the command
     
 ### install from github
 
-download the repository as a zip file
+download the project as a zip file
 
-    https://github.com/javascript-2020/http-file-upload/zipball/main/
+    [download a directory from a github repository](https://javascript-2020.github.io/utils/download-a-directory-from-a-github-repository/download-a-directory-from-a-github-repository.html?owner=javascript-2020&repo=code-projects&branch=main&path=http-file-upload&download)
     
 download the single file `http-file-upload.js` from github
 
     https://raw.githubusercontent.com/javascript-2020/code-projects/main/http-file-upload/http-file-upload.js
     
-clone the repository
-
-    git clone https://github.com/javascript-2020/http-file-upload.git
-https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
-
+    
 <br>
 
 if you would then like http-file-upload to be accessible from anywhere on the file system, the http-file-upload directory should be added to the system path,
