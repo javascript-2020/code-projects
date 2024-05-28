@@ -22,6 +22,10 @@ td {
       vertical-align:top;
 }
 
+.inline-code {
+  background:rgba(237,237,237,1);
+}
+
 code {
   background:rgba(237,237,237,1);
   white-space:pre;
@@ -40,6 +44,38 @@ table {
 td {
   padding-bottom:10px;
 }
+
+
+/*
+  page-hdr
+*/
+
+      #hdr {
+        font-family:arial;
+        position:relative;
+        margin-bottom:20px;
+      }
+      #home {
+        display:inline-block;
+        text-align:center;
+        background:whitesmoke;
+        border-radius:5px;
+        border:1px solid lightgray;
+        width:40px;
+        padding:5px 3px 0px;
+        cursor:pointer;
+      }
+      #home-label {
+        margin:2px 0 0;
+      }
+      #title {
+        text-align:center;
+        position:absolute;
+        left:0;
+        right:0;
+        top:5px;
+        z-index:-1;
+      }
         </style>
         <script style="display: none;">
 window.download       = {};
@@ -131,53 +167,22 @@ import jszip from 'https://cdn.jsdelivr.net/npm/jszip/+esm';
         </script>
     </head>
     <body>
-        
-<page-hdr>
-  <template shadowrootmode=open>
-    <style>
-      #hdr {
-        font-family:arial;
-        position:relative;
-        margin-bottom:20px;
-      }
-      #home {
-        display:inline-block;
-        text-align:center;
-        background:whitesmoke;
-        border-radius:5px;
-        border:1px solid lightgray;
-        width:40px;
-        padding:5px 3px 0px;
-        cursor:pointer;
-      }
-      #home-label {
-        margin:2px 0 0;
-        cursor:pointer;
-      }
-      #title {
-        text-align:center;
-        position:absolute;
-        left:0;
-        right:0;
-        top:5px;
-        z-index:-1;
-      }
-    </style>
-    <section id=hdr>
-      <div id=home onclick='window.location="https://javascript-2020.github.io/"'>
-            <img id=home-icon src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAABA5JREFUOE+lkVtsVEUYx//fnDnn7KW73XZ7peVSWtvSC5duGrXGkBLFUH1AfdD0DWNMn3zwwURJZA2++CKJvtCoSBMkaoLEBDEYpBQCldRSUnq11La4lF7YstfuntuM2cIjKLGTTDLJN//f9/1mCE+womdP+Ae+u1V/99Ls8IHZ49l/i9AT8JA+czx06du5nxam459t8fg/b78Yth+X+09gODyqdW3ua5mfSLQOXkrEa3Tt5PqA3yx3FmXvvMiFzRY8G/vDB0qPrkv542NLB+Pp1GEpBAV8viOH3ip9b13Aj75cOBhLxg8LIagoUHAk/HbZ/wNeGZNvKhyha8MxNRhQ3yUiWloxjz2zI3BXEmbanqKvHzXpYz/l6qT8ghG6LEcmGENh7qJty5imMo8ATrXVUucjgVJKdusW1EgEjs8HcrtBo6NwCqozrddGFrozhrMdkA+zBE1lU60NJV2puby+xkYomQxkMglZWQmlpgYWXR6XtZyjUzgYAUMeAUVk48K5y3cnLMJpAHsXlhfhOAIVZWUgQr8lsvv2P7+1WnLskcA9CKSYgibbxknqH5MtNomfpZRuAIyIDEHijd6+5d+hKaelkHvHpqYghIOG2joojPVnLHVfx25fiEn2vZRSByCIKMMle5l6zieCI5ORU5msuTvn5dKVyYYtJR2BAk9qas74wTDFbkA8VGY55cHKDZ79mWRCnZxd/iVrOXW5otul9TXVVb5O73TPewoc+0eAXsoVfB7FeHpn8Sd5bt5sOeLVmb9X1fISV04VkYUsqio9tsbpt9Ws82v/jXuHU6u250E3ee6+wl+j8ImonyznrBDiOSEEdE2Bx21mGZMKAFVKrMHWIgIgljvAEZLM1YzmNkwHjLHcviJVpYM+6IkEdaGdvxeN7lyJx1BfXY2Az4KSCxIgpIRh2CAiqJzl3nAN7gggnlQxPj2NwvwAioLBGwYzX6APu2fLdc17wTSNesu2EfDnobU5kFNHxrQw8ucSlu+n4XVpcOkcVRsLUFLoRTLtYOBmDLFECirn0DR9wjDTe+hQz8omJuxeIcRWKSU0jSPUmA+vm2E2ch9/jM5DVRn8XhdSqybKi33YUV8G0wIGR+MwzQfTM8b+Eoy3U/irpRri1Dtze64ylkhge/02tDYXQkoLt+djWFpJQ1EYvG4NGcOCW+fYUOKHz+vFwM0VDE+MI+D3o2rT5oi0ZTuFj841kO4+MzQyUhxLxvHsrhBam0ugKBZiySySaRMKI+g6X5uGc2UN6nZ5MTC8hP6hQQR8+djV1LQsjcwr9P6nEz5P0L9rcGKcx2NxtIVa0NJQilQ2jTuLMUSjaXDOkefVkU0b4C4FwXwXKipKcX14EVcHryM/kI9Q/TZ7NZoY+gdEZNOa/2ZSPwAAAABJRU5ErkJggg=='>
-            <div id=home-label>home</div>
-      </div>
-            <h3 id=title style="color: blue; font-weight: bold;">
+        <page-hdr>
+            <section id="hdr" style="margin-top: 0px;">
+                <div id="home" onclick="window.location='https://javascript-2020.github.io/'">
+                    <img id="home-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAABA5JREFUOE+lkVtsVEUYx//fnDnn7KW73XZ7peVSWtvSC5duGrXGkBLFUH1AfdD0DWNMn3zwwURJZA2++CKJvtCoSBMkaoLEBDEYpBQCldRSUnq11La4lF7YstfuntuM2cIjKLGTTDLJN//f9/1mCE+womdP+Ae+u1V/99Ls8IHZ49l/i9AT8JA+czx06du5nxam459t8fg/b78Yth+X+09gODyqdW3ua5mfSLQOXkrEa3Tt5PqA3yx3FmXvvMiFzRY8G/vDB0qPrkv542NLB+Pp1GEpBAV8viOH3ip9b13Aj75cOBhLxg8LIagoUHAk/HbZ/wNeGZNvKhyha8MxNRhQ3yUiWloxjz2zI3BXEmbanqKvHzXpYz/l6qT8ghG6LEcmGENh7qJty5imMo8ATrXVUucjgVJKdusW1EgEjs8HcrtBo6NwCqozrddGFrozhrMdkA+zBE1lU60NJV2puby+xkYomQxkMglZWQmlpgYWXR6XtZyjUzgYAUMeAUVk48K5y3cnLMJpAHsXlhfhOAIVZWUgQr8lsvv2P7+1WnLskcA9CKSYgibbxknqH5MtNomfpZRuAIyIDEHijd6+5d+hKaelkHvHpqYghIOG2joojPVnLHVfx25fiEn2vZRSByCIKMMle5l6zieCI5ORU5msuTvn5dKVyYYtJR2BAk9qas74wTDFbkA8VGY55cHKDZ79mWRCnZxd/iVrOXW5otul9TXVVb5O73TPewoc+0eAXsoVfB7FeHpn8Sd5bt5sOeLVmb9X1fISV04VkYUsqio9tsbpt9Ws82v/jXuHU6u250E3ee6+wl+j8ImonyznrBDiOSEEdE2Bx21mGZMKAFVKrMHWIgIgljvAEZLM1YzmNkwHjLHcviJVpYM+6IkEdaGdvxeN7lyJx1BfXY2Az4KSCxIgpIRh2CAiqJzl3nAN7gggnlQxPj2NwvwAioLBGwYzX6APu2fLdc17wTSNesu2EfDnobU5kFNHxrQw8ucSlu+n4XVpcOkcVRsLUFLoRTLtYOBmDLFECirn0DR9wjDTe+hQz8omJuxeIcRWKSU0jSPUmA+vm2E2ch9/jM5DVRn8XhdSqybKi33YUV8G0wIGR+MwzQfTM8b+Eoy3U/irpRri1Dtze64ylkhge/02tDYXQkoLt+djWFpJQ1EYvG4NGcOCW+fYUOKHz+vFwM0VDE+MI+D3o2rT5oi0ZTuFj841kO4+MzQyUhxLxvHsrhBam0ugKBZiySySaRMKI+g6X5uGc2UN6nZ5MTC8hP6hQQR8+djV1LQsjcwr9P6nEz5P0L9rcGKcx2NxtIVa0NJQilQ2jTuLMUSjaXDOkefVkU0b4C4FwXwXKipKcX14EVcHryM/kI9Q/TZ7NZoY+gdEZNOa/2ZSPwAAAABJRU5ErkJggg==" />
+                    <div id="home-label">
+home
+                    </div>
+                </div>
+                <h3 style="color: blue; font-weight: bold;" id="title">
 http-file-upload
-                <span style="float: right; color: black; font-size: 16px; font-weight: normal;">
+                    <span style="float: right; color: black; font-size: 16px; font-weight: normal;">
 28 &#x2F; 05 &#x2F; 2024
-                </span>
-            </h3>
-    </section>
-  </template>
-</page-hdr>
-
+                    </span>
+                </h3>
+            </section>
+        </page-hdr>
         <div id="center" style="margin: auto; max-width: 1000px;">
             <a href="https://www.npmjs.com/package/http-file-upload">
                 <img src="https://nodei.co/npm/http-file-upload.png" />
@@ -234,11 +239,15 @@ windows powershell users
 running powershell scripts are disabled by default
                     </div>
                     <div>
-to get the script to run normally in powershell users will have to delete ` http-file-upload.ps1 ` file from the default npm script installation directory this is usually
+to get the script to run normally in powershell users will have to delete
+                        <span class="inline-code">
+http-file-upload.ps1
+                        </span>
+file from the default npm script installation directory this is usually
                     </div>
                 </div>
                 <code class="code">
-c:&#x2F;users&#x2F;AppData&#x2F;Roaming&#x2F;npm&#x2F;
+c:&#x2F;users&#x2F;&lt;user&gt;&#x2F;AppData&#x2F;Roaming&#x2F;npm&#x2F;
                 </code>
                 <div>
 see also
@@ -287,58 +296,60 @@ http-file-upload supports the following command line parameters
 the parameters can be specified with or without the dash or with a double dash
                 </div>
                 <table style="">
-                    <tr>
-                        <td style="width: 250px;">
+                    <tbody>
+                        <tr>
+                            <td style="width: 250px;">
 -p port
-                        </td>
-                        <td>
+                            </td>
+                            <td>
 sets the port the server listens on
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
 -d dir
-                        </td>
-                        <td>
+                            </td>
+                            <td>
 sets a directory to put new uploads or where to find files for download, its relative to the serving directory, if the directory does not exist it is created
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
 -cwd &lt;directory&gt;
-                        </td>
-                        <td>
+                            </td>
+                            <td>
 sets the current working directory for the script
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
 https | http
-                        </td>
-                        <td>
+                            </td>
+                            <td>
 set whether the server uses https ( default ) or http
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
 -v
-                        </td>
-                        <td>
+                            </td>
+                            <td>
 prints the current version of the program
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
 -cert &lt;cert-file&gt; &lt;key-file&gt;
-                        </td>
-                        <td>
+                            </td>
+                            <td>
 specify a public certificate to use, pem format, will write to file
-                            <br />
-                            <a href="https://javascript-2020.github.io/utils/generate-https-certificate/generate-https-certificate.html">
+                                <br />
+                                <a href="https://javascript-2020.github.io/utils/generate-https-certificate/generate-https-certificate.html">
 generate https certificates
-                            </a>
-                        </td>
-                    </tr>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
                 <div>
 download a file using a http request at url
@@ -371,7 +382,7 @@ example useage
 upload&#x2F;download files in the current directory
                 </div>
                 <div>
-( requires global installation or the launch script on the system path )
+requires global installation or the launch script on the system path
                 </div>
                 <code class="code">
 http-file-upload
@@ -380,7 +391,7 @@ http-file-upload
 upload&#x2F;download files in the current directory using port 4000
                 </div>
                 <div>
-( requires global installation or the launch script on the system path )
+requires global installation or the launch script on the system path
                 </div>
                 <code class="code">
 http-file-upload -p 4000
@@ -395,15 +406,15 @@ if http-file-upload has been installed globally, and you have some files you wan
                     <ol>
                         <li>
 change to directory
-                            <code>
+                            <span class="inline-code">
 &#x2F;work&#x2F;tmp&#x2F;
-                            </code>
+                            </span>
                         </li>
                         <li>
 type
-                            <code>
+                            <span class="inline-code">
 http-file-upload
-                            </code>
+                            </span>
 press
                             <kbd>
 enter
@@ -510,30 +521,30 @@ serving files from an alternate directory
                 </div>
                 <div>
 if you installed http-file-upload locally at
-                    <code>
+                    <span class="inline-code">
 &#x2F;work&#x2F;http-file-upload&#x2F;
-                    </code>
+                    </span>
                 </div>
                 <div>
 and wish to access files at
-                    <code>
+                    <span class="inline-code">
 &#x2F;work&#x2F;tmp&#x2F;
-                    </code>
+                    </span>
                 </div>
                 <code class="code">
 npx http-file-upload.js -cwd &#x2F;work&#x2F;tmp&#x2F;
                 </code>
                 <div>
 if you downloaded the single file http-file-upload.js to
-                    <code>
+                    <span class="inline-code">
 &#x2F;work&#x2F;http-file-upload&#x2F;
-                    </code>
+                    </span>
                 </div>
                 <div>
 and wish to access files at
-                    <code>
+                    <span class="inline-code">
 &#x2F;work&#x2F;tmp&#x2F;
-                    </code>
+                    </span>
                 </div>
                 <code class="code">
 node http-file-upload.js -cwd &#x2F;work&#x2F;tmp&#x2F;
@@ -553,9 +564,9 @@ npm install http-file-upload
                 </code>
                 <div>
 this will download http-file-upload to
-                    <code>
+                    <span class="inline-code">
 .&#x2F;node_modules&#x2F;http-file-upload
-                    </code>
+                    </span>
                 </div>
                 <div>
 http-file-upload can then be run using the command
