@@ -34,7 +34,7 @@ code {
 .code {
   display:block;
   margin:20px;
-  padding:20px;
+  padding:0 20px;
 }
 
 table {
@@ -606,7 +606,7 @@ npx http-file-upload -version
                 <h3>
 install from github
                 </h3>
-                <div>
+                <div id="zip-file">
 download the project files as a zip file
                     <a href="#" id="http-file-upload-zip" style="display: inline-flex; align-items: center; border: 1px solid lightgray; padding: 0px 5px; border-radius: 3px; cursor: pointer;">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAcRJREFUOE/tkz9IQlEUxr+r0pRBROHg8J6LQUNBQxBYQ6S4VCC9iAh0sblaioZsiFrKOZeCiOiFUC3yjIYSBAchhyAJ9A0OUkSQTeF7t96zP768YUVL0N3Od8753fPdwyWUUoo6h4SIXkFDdUtBvgRcegEu/gMZb/8H33DrfAsWkwVCh4AGc4NuinzY8qPyCPFCRFktw9/lNxg3WD7LnaF/ux8mYkKPrQfJYJIJ7I30IlVMQaUqTidP0efoe4MagIqqoHujG5nrjF7g5tyIjkdhXbHqcWm+BN+uD3E5rsedbZ1IT6VhNpnZQE0t3hch7AtIFBLPXwPwODyQ8pLe4OE9kHISQACX3QVxVIStyfa55ddM9iaLkb0RXN5eMj9le0s7DsYO4Gx11uTJ1e0VXU4sY3N405CU72QEj4I4lo8N+iA3iMhQBFwzZ9ADhwEsuBaehw9pxgC+kUduNlcD9e543ybVJotNxGpgjjUH8g/5ygJfgZyVQ36mIlYfzf7cyZwurQ6sMm3y6zzkkvw1oFalUEUvNpP3bVZf+m0gczNVIhNoIRbYG+31epn5wkMBZVo2Wv4RidFEwskwnY5P/wov7A7jCRah4mR5BNdrAAAAAElFTkSuQmCC" style="border-radius: 3px; border: 1px solid lightgray; box-sizing: border-box; width: 12px; height: 12px; margin-right: 3px;" />
@@ -616,20 +616,35 @@ http-file-upload.zip
 unzip the file, then either run locally or add the launch script to the system path
                     </div>
                 </div>
-                <div style="margin-top: 10px;">
+                <div style="margin-top: 10px;" id="single-file">
 download the single file
                     <a href="#" id="http-file-upload-js" style="display: inline-flex; align-items: center; border: 1px solid lightgray; padding: 0px 5px; border-radius: 3px; cursor: pointer;">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAcRJREFUOE/tkz9IQlEUxr+r0pRBROHg8J6LQUNBQxBYQ6S4VCC9iAh0sblaioZsiFrKOZeCiOiFUC3yjIYSBAchhyAJ9A0OUkSQTeF7t96zP768YUVL0N3Od8753fPdwyWUUoo6h4SIXkFDdUtBvgRcegEu/gMZb/8H33DrfAsWkwVCh4AGc4NuinzY8qPyCPFCRFktw9/lNxg3WD7LnaF/ux8mYkKPrQfJYJIJ7I30IlVMQaUqTidP0efoe4MagIqqoHujG5nrjF7g5tyIjkdhXbHqcWm+BN+uD3E5rsedbZ1IT6VhNpnZQE0t3hch7AtIFBLPXwPwODyQ8pLe4OE9kHISQACX3QVxVIStyfa55ddM9iaLkb0RXN5eMj9le0s7DsYO4Gx11uTJ1e0VXU4sY3N405CU72QEj4I4lo8N+iA3iMhQBFwzZ9ADhwEsuBaehw9pxgC+kUduNlcD9e543ybVJotNxGpgjjUH8g/5ygJfgZyVQ36mIlYfzf7cyZwurQ6sMm3y6zzkkvw1oFalUEUvNpP3bVZf+m0gczNVIhNoIRbYG+31epn5wkMBZVo2Wv4RidFEwskwnY5P/wov7A7jCRah4mR5BNdrAAAAAElFTkSuQmCC" style="border-radius: 3px; border: 1px solid lightgray; box-sizing: border-box; width: 12px; height: 12px; margin-right: 3px;" />
 http-file-upload.js
                     </a>
+                    <div>
+http-file-upload can then be run by either
+                    </div>
+                    <code class="code">
+node http-file-upload -version
+                    </code>
+                    <div>
+see also another utility for running node.js scripts :
+                        <a href="#" title="no yet implemented">
+node-x
+                        </a>
+                        <div title="coming soon" style="height: 50px; border: 1px solid lightgray; width: 150px; display: flex; justify-content: center; align-items: center; cursor: pointer; margin-top: 10px;">
+npm : node-x
+                        </div>
+                    </div>
                 </div>
                 <div style="margin-top: 20px;">
 if you would like http-file-upload to be accessible from anywhere on the file system, the http-file-upload directory should be added to the system path, http-file-upload comes with the following shell scripts to launch the process :
                 </div>
                 <code class="code">
 windows ............ http-file-upload.bat
-   mac ................ http-file-upload.sh
-   linux .............. http-file-upload.sh
+mac ................ http-file-upload.sh
+linux .............. http-file-upload.sh
                 </code>
             </section>
             <section id="links" style="margin-top: 50px;">
