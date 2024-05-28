@@ -2,7 +2,9 @@
 
 <h3>http-file-upload</h3>
 
-for complete help please visit https://javascript-2020.github.io/code-projects/http-file-upload/http-file-upload.html
+this markdown document is a quick start guide
+
+complete help in html format is available at https://javascript-2020.github.io/code-projects/http-file-upload/http-file-upload.html
 
 <br>
 
