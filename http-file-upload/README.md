@@ -88,7 +88,7 @@ http-file-upload supports the following command line parameters
 
 -p port
 
-sets the port the server listens on
+sets the port the server listens on, default 3000
 <br>
 <br>
 
@@ -100,13 +100,13 @@ sets a directory to put new uploads or where to find files for download, its rel
 
 -cwd
 
-sets the current working directory for the script
+sets the current working directory for the script, default current directory
 <br>
 <br>
 
 -https | -http
 
-set whether the server uses https ( default ) or http
+set whether the server uses https or http, default https
 <br>
 <br>
 
@@ -116,15 +116,9 @@ prints the current version of the program
 <br>
 <br>
 
--cert filename
+-cert cert-file key-file
 
-specify a public certificate to use, pem format
-<br>
-<br>
-
--key filename
-
-specify a private key to use, pem format
+specify a public certificate and private key to use, any order, pem format
 
 note: [generate https certificates](https://javascript-2020.github.io/generate-https-certificate.html)
 <br>
@@ -133,6 +127,7 @@ note: [generate https certificates](https://javascript-2020.github.io/generate-h
 -help
 
 bring up quick help on the command line
+
 <br>
 <br>
 <br>
