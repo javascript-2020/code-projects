@@ -54,7 +54,7 @@ window.download       = {};
               $('#http-file-upload-zip').onclick    = e=>{
               
                                                             e.preventDefault();
-                                                            download.zip(owner,repo,branch,path);
+                                                            zip(owner,repo,branch,path);
                                                             
                                                       };
               $('#http-file-upload-js').onclick     = e=>{
@@ -93,7 +93,7 @@ window.download       = {};
 import jszip from 'https://cdn.jsdelivr.net/npm/jszip/+esm';
         var $   = sel=>document.querySelector(`.${sel}`).value;
         
-        window.download.zip=async function(owner,repo,branch,path){
+        window.zip=async function(owner,repo,branch,path){
         
               if(path.slice(-1)!='/')path+='/';
               var file    = `${path.split('/').filter(Boolean).at(-1)||repo}.zip`;
@@ -527,14 +527,14 @@ install from github
                 </h3>
                 <div>
 download the project files as a zip file
-                    <a href="http-file-upload.zip" id="http-file-upload-zip" style="display: inline-flex; align-items: center; border: 1px solid lightgray; padding: 0px 5px; border-radius: 3px; cursor: pointer;">
+                    <a href="#" id="http-file-upload-zip" style="display: inline-flex; align-items: center; border: 1px solid lightgray; padding: 0px 5px; border-radius: 3px; cursor: pointer;">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAcRJREFUOE/tkz9IQlEUxr+r0pRBROHg8J6LQUNBQxBYQ6S4VCC9iAh0sblaioZsiFrKOZeCiOiFUC3yjIYSBAchhyAJ9A0OUkSQTeF7t96zP768YUVL0N3Od8753fPdwyWUUoo6h4SIXkFDdUtBvgRcegEu/gMZb/8H33DrfAsWkwVCh4AGc4NuinzY8qPyCPFCRFktw9/lNxg3WD7LnaF/ux8mYkKPrQfJYJIJ7I30IlVMQaUqTidP0efoe4MagIqqoHujG5nrjF7g5tyIjkdhXbHqcWm+BN+uD3E5rsedbZ1IT6VhNpnZQE0t3hch7AtIFBLPXwPwODyQ8pLe4OE9kHISQACX3QVxVIStyfa55ddM9iaLkb0RXN5eMj9le0s7DsYO4Gx11uTJ1e0VXU4sY3N405CU72QEj4I4lo8N+iA3iMhQBFwzZ9ADhwEsuBaehw9pxgC+kUduNlcD9e543ybVJotNxGpgjjUH8g/5ygJfgZyVQ36mIlYfzf7cyZwurQ6sMm3y6zzkkvw1oFalUEUvNpP3bVZf+m0gczNVIhNoIRbYG+31epn5wkMBZVo2Wv4RidFEwskwnY5P/wov7A7jCRah4mR5BNdrAAAAAElFTkSuQmCC" style="border-radius: 3px; border: 1px solid lightgray; box-sizing: border-box; width: 12px; height: 12px; margin-right: 3px;" />
 http-file-upload.zip
                     </a>
                 </div>
                 <div style="margin-top: 10px;">
 download the single file
-                    <a href="http-file-upload.js" id="http-file-upload-js" style="display: inline-flex; align-items: center; border: 1px solid lightgray; padding: 0px 5px; border-radius: 3px; cursor: pointer;">
+                    <a href="#" id="http-file-upload-js" style="display: inline-flex; align-items: center; border: 1px solid lightgray; padding: 0px 5px; border-radius: 3px; cursor: pointer;">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAcRJREFUOE/tkz9IQlEUxr+r0pRBROHg8J6LQUNBQxBYQ6S4VCC9iAh0sblaioZsiFrKOZeCiOiFUC3yjIYSBAchhyAJ9A0OUkSQTeF7t96zP768YUVL0N3Od8753fPdwyWUUoo6h4SIXkFDdUtBvgRcegEu/gMZb/8H33DrfAsWkwVCh4AGc4NuinzY8qPyCPFCRFktw9/lNxg3WD7LnaF/ux8mYkKPrQfJYJIJ7I30IlVMQaUqTidP0efoe4MagIqqoHujG5nrjF7g5tyIjkdhXbHqcWm+BN+uD3E5rsedbZ1IT6VhNpnZQE0t3hch7AtIFBLPXwPwODyQ8pLe4OE9kHISQACX3QVxVIStyfa55ddM9iaLkb0RXN5eMj9le0s7DsYO4Gx11uTJ1e0VXU4sY3N405CU72QEj4I4lo8N+iA3iMhQBFwzZ9ADhwEsuBaehw9pxgC+kUduNlcD9e543ybVJotNxGpgjjUH8g/5ygJfgZyVQ36mIlYfzf7cyZwurQ6sMm3y6zzkkvw1oFalUEUvNpP3bVZf+m0gczNVIhNoIRbYG+31epn5wkMBZVo2Wv4RidFEwskwnY5P/wov7A7jCRah4mR5BNdrAAAAAElFTkSuQmCC" style="border-radius: 3px; border: 1px solid lightgray; box-sizing: border-box; width: 12px; height: 12px; margin-right: 3px;" />
 http-file-upload.js
                     </a>
