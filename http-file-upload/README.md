@@ -2,9 +2,11 @@
 
 <h3>http-file-upload</h3>
 
-this markdown document is a quick start guide
+this markdown document is essentially a quick start guide
 
-complete help in html format is available at https://javascript-2020.github.io/code-projects/http-file-upload/http-file-upload.html
+the complete guide, in html format, is available at
+
+https://javascript-2020.github.io/code-projects/http-file-upload/http-file-upload.html
 
 <br>
 
