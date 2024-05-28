@@ -5,7 +5,7 @@
         
         
               "name"            : "http-file-upload",
-              "version"         : "1.0.10",
+              "version"         : "2.0.0",
               "description"     : "upload/download large files over http",
               "author"          : "matt richards",
               "license"         : "ISC",
@@ -30,7 +30,7 @@
               },
               
               
-              "keywords"        : ["upload","download","nodejs","http","server","websocket"]
+              "keywords"        : ["upload","download","nodejs","http","server","websocket","files","https"]
               
               
         }
