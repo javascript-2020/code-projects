@@ -84,7 +84,6 @@ http-file-upload supports the following command line parameters
 <br>
 <br>
 
-```
 
 -p port
 
