@@ -105,7 +105,8 @@ window.download       = {};
         
         download.file=async function(){
         
-              var blob      = await fetch('https://raw.githubusercontent.com/user/javascript-2020/main/http-file-upload.js').then(res=>res.blob());
+              var url       = 'https://raw.githubusercontent.com/javascript-2020/code-projects/main/http-file-upload/http-file-upload.js';
+              var blob      = await fetch(url).then(res=>res.blob());
               var url       = window.createObjectURL(blob);
               var a         = document.createElement('a');
               a.href        = 'url';
@@ -323,7 +324,7 @@ sets the current working directory for the script
                         </tr>
                         <tr>
                             <td>
-https | http
+-https | -http
                             </td>
                             <td>
 set whether the server uses https ( default ) or http
@@ -398,7 +399,7 @@ http-file-upload -p 4000
                 </code>
                 <div>
                     <div>
-if http-file-upload has been installed globally, and you have some files you want to access over http in a directory
+if http-file-upload is accessible globally, and you have some files you want to access over http in a directory
                         <code>
 &#x2F;work&#x2F;tmp&#x2F;
                         </code>
@@ -428,6 +429,9 @@ https:&#x2F;&#x2F;localhost:3000&#x2F;
 or perform a http request
                         </li>
                     </ol>
+                    <div>
+perform a http request in node.js
+                    </div>
                     <code class="code">
 var url     = &#39;https:&#x2F;&#x2F;localhost:3000&#x2F;download?myfile.js&#39;;
 var opts    = {rejectUnauthorized:false};
@@ -532,7 +536,7 @@ and wish to access files at
                     </span>
                 </div>
                 <code class="code">
-npx http-file-upload.js -cwd &#x2F;work&#x2F;tmp&#x2F;
+npx http-file-upload -cwd &#x2F;work&#x2F;tmp&#x2F;
                 </code>
                 <div>
 if you downloaded the single file http-file-upload.js to
@@ -549,6 +553,31 @@ and wish to access files at
                 <code class="code">
 node http-file-upload.js -cwd &#x2F;work&#x2F;tmp&#x2F;
                 </code>
+                <div id="update-cert">
+                    <div>
+to update the https certificate that the server uses
+                    </div>
+                    <div>
+you can download certificates from
+                        <a href="https://javascript-2020.github.io/utils/generate-https-certificate/generate-https-certificate.html" style="color: blue;">
+generate https certificates
+                        </a>
+                    </div>
+                    <div>
+the files can be in either order and the key and cert must be pem encoded
+                    </div>
+                    <code class="code">
+http-file-upload -cert server-cert.pem private-key.pem
+                    </code>
+                </div>
+                <div id="http-server">
+                    <div>
+to run the server using http instead of the default https
+                    </div>
+                    <code class="code">
+http-file-upload -http
+                    </code>
+                </div>
             </section>
             <section id="alternate-install">
                 <h3 class="heading">
@@ -557,7 +586,7 @@ alternative installation methods
                 <div>
                 </div>
                 <h3>
-install locally :
+install with npm locally :
                 </h3>
                 <code class="code">
 npm install http-file-upload
@@ -583,6 +612,9 @@ download the project files as a zip file
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAcRJREFUOE/tkz9IQlEUxr+r0pRBROHg8J6LQUNBQxBYQ6S4VCC9iAh0sblaioZsiFrKOZeCiOiFUC3yjIYSBAchhyAJ9A0OUkSQTeF7t96zP768YUVL0N3Od8753fPdwyWUUoo6h4SIXkFDdUtBvgRcegEu/gMZb/8H33DrfAsWkwVCh4AGc4NuinzY8qPyCPFCRFktw9/lNxg3WD7LnaF/ux8mYkKPrQfJYJIJ7I30IlVMQaUqTidP0efoe4MagIqqoHujG5nrjF7g5tyIjkdhXbHqcWm+BN+uD3E5rsedbZ1IT6VhNpnZQE0t3hch7AtIFBLPXwPwODyQ8pLe4OE9kHISQACX3QVxVIStyfa55ddM9iaLkb0RXN5eMj9le0s7DsYO4Gx11uTJ1e0VXU4sY3N405CU72QEj4I4lo8N+iA3iMhQBFwzZ9ADhwEsuBaehw9pxgC+kUduNlcD9e543ybVJotNxGpgjjUH8g/5ygJfgZyVQ36mIlYfzf7cyZwurQ6sMm3y6zzkkvw1oFalUEUvNpP3bVZf+m0gczNVIhNoIRbYG+31epn5wkMBZVo2Wv4RidFEwskwnY5P/wov7A7jCRah4mR5BNdrAAAAAElFTkSuQmCC" style="border-radius: 3px; border: 1px solid lightgray; box-sizing: border-box; width: 12px; height: 12px; margin-right: 3px;" />
 http-file-upload.zip
                     </a>
+                    <div>
+unzip the file, then either run locally or add the launch script to the system path
+                    </div>
                 </div>
                 <div style="margin-top: 10px;">
 download the single file
@@ -605,7 +637,7 @@ windows ............ http-file-upload.bat
                     <a href="https://github.com/javascript-2020/code-projects/tree/main/http-file-upload" style="border: 1px solid lightgray; padding: 7px; display: inline-flex; border-radius: 5px;">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAbFJREFUOE/l1E2IT2EUx/HPIFI2lJfGwmYsxFZKEUWjKWM3pZSpKcqeBcpLZsNeUeNlZWdBSVFmkAXbmRWbWRCRjYW8jv+pc/V4utff3q3bvfc5z/k+557zO2dA97UHy7ERx3LbZbzEZzxscx3o4L3GWizusP/AO6yv7TXwAo5g9V8iL03vcRWnm8USeBHH/xFUb7uEE7HYAOMZeVmGm7iN61jVccBHjOMQxvAl870QoIDMZ87CfxR3E7QDTyroTjzOtf24k++R0w0BHMY9LEpDCeyXgRL4EyMBjEKcSs+o3r4uSbTQQ1r3CzVMBnCh2PimTQp9wgyJDZZV/g+Bz7E1c/AdezHdr7xp34UHvcIuye8XUZSy9A1nDT5UBSvPCL9oz9BeeY2GYR3msBIHsi834WlPTt9yrXQKIUdEIfoVhSG6Z3PTejdwGG+xDc9SPud7UZ6popjEyZaURMuOl8NhKvtzpKf4yGvMwk95l/5xwNkKeA0T5XCI96EcRbsLh5mWAtXARznyXtXA5tD4/YNYmuBzVTQN8Ctu5V/93tI1sbdjS463KxXwaFZ/NnP9h/kXPcNYElddRc0AAAAASUVORK5CYII=" style="margin-right: 10px;" />
                         <span>
-https:&#x2F;&#x2F;github.com&#x2F;javascript-2020&#x2F;code-projects&#x2F;tree&#x2F;main&#x2F;http-file-upload
+https:&#x2F;&#x2F;github.com&#x2F;javascript-2020&#x2F;code-projects&#x2F;tree&#x2F;main&#x2F;http-file-upload&#x2F;
                         </span>
                     </a>
                 </div>
