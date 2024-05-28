@@ -12,6 +12,7 @@ the complete guide, in html format, is available at
 https://javascript-2020.github.io/code-projects/http-file-upload/http-file-upload.html
 
 <br>
+<br>
 
 http-file-upload is a http server whose only function is to upload and download files ( of any size )
 
@@ -93,7 +94,7 @@ sets the port the server listens on
 
 -d dir
 
-sets a directory to put new uploads or where to find files for download, its relative to the serving directory, if the directory does not exist it is created
+sets a directory to put new uploads or where to find files for download, its relative to the serving directory, if the directory does not exist it is created, default not used
 <br>
 <br>
 
@@ -129,6 +130,12 @@ note: [generate https certificates](https://javascript-2020.github.io/generate-h
 <br>
 <br>
 
+-help
+
+bring up quick help on the command line
+<br>
+<br>
+<br>
 
 download a file using a http request at url
 
