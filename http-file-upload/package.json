@@ -5,7 +5,7 @@
         
         
               "name"            : "http-file-upload",
-              "version"         : "2.0.0",
+              "version"         : "2.0.1",
               "description"     : "upload/download large files over http",
               "author"          : "matt richards",
               "license"         : "ISC",
