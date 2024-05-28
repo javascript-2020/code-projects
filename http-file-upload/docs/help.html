@@ -67,7 +67,7 @@ window.download       = {};
         }//onload
         
         
-        download.file=function(){
+        download.file=async function(){
         
               var blob      = await fetch('https://raw.githubusercontent.com/user/javascript-2020/main/http-file-upload.js').then(res=>res.blob());
               var url       = window.createObjectURL(blob);
@@ -131,6 +131,10 @@ import jszip from 'https://cdn.jsdelivr.net/npm/jszip/+esm';
         </script>
     </head>
     <body>
+        <page-hdr>
+            <template shadowrootmode="open">
+            </template>
+        </page-hdr>
         <div id="center" style="margin: auto; max-width: 1000px;">
             <a href="https://www.npmjs.com/package/http-file-upload">
                 <img src="https://nodei.co/npm/http-file-upload.png" />
@@ -563,8 +567,8 @@ https:&#x2F;&#x2F;github.com&#x2F;javascript-2020&#x2F;code-projects&#x2F;tree&#
                     </a>
                 </div>
             </section>
-            <section id="ftr" style="text-align: center; background-color: whitesmoke;">
-            </section>
         </div>
+        <section id="ftr" style="text-align: center; background-color: rgb(238, 232, 170); height: 50px; margin-top: 70px;">
+        </section>
     </body>
 </html>
