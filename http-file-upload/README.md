@@ -28,6 +28,8 @@ files can be uploaded and downloaded
 
 ***
 
+<br>
+
 ### install
 
 npm global installation is the recommended way to install
@@ -70,6 +72,8 @@ after global npm installation
 <br>
 
 ***
+
+<br>
 
 ### operation
 
@@ -164,7 +168,11 @@ the server can be quit on the command line by pressing
 
     escape | q | ctrl-c
     
+<br>
+
 ***
+
+<br>
 
 ### example useage
 
@@ -305,6 +313,8 @@ node http-file-upload -cwd /work/tmp/
 
 ***
 
+<br>
+
 ### alternative installation methods
 
 <br>
@@ -361,6 +371,8 @@ i also have another utility for running node.js scripts [node-x](#)
 <br>
 
 ***
+
+<br>
 
 https://github.com/javascript-2020/http-file-upload
 
