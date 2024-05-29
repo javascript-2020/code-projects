@@ -329,11 +329,16 @@ https://raw.githubusercontent.com/javascript-2020/code-projects/main/http-file-u
 
 <br>
 
-i also have another utility for running node.js scripts [node-x](#)
+### system path environment variable
 
-<br>
+if you would then like http-file-upload to be accessible from anywhere on the file system, the directory
 
-if you would then like http-file-upload to be accessible from anywhere on the file system, the http-file-upload directory should be added to the system path,
+```
+http-file-upload/ext/
+```
+
+ should be added to the system path,
+ 
 http-file-upload comes with the following shell scripts to launch the process :
 
 windows ............ ` http-file-upload.bat `
@@ -341,6 +346,12 @@ windows ............ ` http-file-upload.bat `
 mac ................ ` http-file-upload.sh `
 
 linux .............. ` http-file-upload.sh `
+
+<br>
+
+### node-x
+
+i also have another utility for running node.js scripts [node-x](#)
 
 <br>
 <br>
