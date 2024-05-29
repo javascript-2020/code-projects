@@ -18,10 +18,6 @@ section {
       padding:20px 20px;
 }
 
-td {
-      vertical-align:top;
-}
-
 .inline-code {
   background:rgba(237,237,237,1);
 }
@@ -41,7 +37,13 @@ table {
   margin:20px;
 }
 
+tr {
+}
+
 td {
+  border:1px solid lightgray;
+  vertical-align:top;
+  padding:5px;
   padding-bottom:10px;
 }
 
@@ -170,7 +172,7 @@ import jszip from 'https://cdn.jsdelivr.net/npm/jszip/+esm';
     </head>
     <body>
         <page-hdr>
-            <section id="hdr" style="margin-top: 0px;">
+            <section id="hdr" style="margin-top: 0px; border-bottom: 1px solid lightblue; padding-bottom: 10px;">
                 <div id="home" onclick="window.location='https://javascript-2020.github.io/'" class="icon">
                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAABA5JREFUOE+lkVtsVEUYx//fnDnn7KW73XZ7peVSWtvSC5duGrXGkBLFUH1AfdD0DWNMn3zwwURJZA2++CKJvtCoSBMkaoLEBDEYpBQCldRSUnq11La4lF7YstfuntuM2cIjKLGTTDLJN//f9/1mCE+womdP+Ae+u1V/99Ls8IHZ49l/i9AT8JA+czx06du5nxam459t8fg/b78Yth+X+09gODyqdW3ua5mfSLQOXkrEa3Tt5PqA3yx3FmXvvMiFzRY8G/vDB0qPrkv542NLB+Pp1GEpBAV8viOH3ip9b13Aj75cOBhLxg8LIagoUHAk/HbZ/wNeGZNvKhyha8MxNRhQ3yUiWloxjz2zI3BXEmbanqKvHzXpYz/l6qT8ghG6LEcmGENh7qJty5imMo8ATrXVUucjgVJKdusW1EgEjs8HcrtBo6NwCqozrddGFrozhrMdkA+zBE1lU60NJV2puby+xkYomQxkMglZWQmlpgYWXR6XtZyjUzgYAUMeAUVk48K5y3cnLMJpAHsXlhfhOAIVZWUgQr8lsvv2P7+1WnLskcA9CKSYgibbxknqH5MtNomfpZRuAIyIDEHijd6+5d+hKaelkHvHpqYghIOG2joojPVnLHVfx25fiEn2vZRSByCIKMMle5l6zieCI5ORU5msuTvn5dKVyYYtJR2BAk9qas74wTDFbkA8VGY55cHKDZ79mWRCnZxd/iVrOXW5otul9TXVVb5O73TPewoc+0eAXsoVfB7FeHpn8Sd5bt5sOeLVmb9X1fISV04VkYUsqio9tsbpt9Ws82v/jXuHU6u250E3ee6+wl+j8ImonyznrBDiOSEEdE2Bx21mGZMKAFVKrMHWIgIgljvAEZLM1YzmNkwHjLHcviJVpYM+6IkEdaGdvxeN7lyJx1BfXY2Az4KSCxIgpIRh2CAiqJzl3nAN7gggnlQxPj2NwvwAioLBGwYzX6APu2fLdc17wTSNesu2EfDnobU5kFNHxrQw8ucSlu+n4XVpcOkcVRsLUFLoRTLtYOBmDLFECirn0DR9wjDTe+hQz8omJuxeIcRWKSU0jSPUmA+vm2E2ch9/jM5DVRn8XhdSqybKi33YUV8G0wIGR+MwzQfTM8b+Eoy3U/irpRri1Dtze64ylkhge/02tDYXQkoLt+djWFpJQ1EYvG4NGcOCW+fYUOKHz+vFwM0VDE+MI+D3o2rT5oi0ZTuFj841kO4+MzQyUhxLxvHsrhBam0ugKBZiySySaRMKI+g6X5uGc2UN6nZ5MTC8hP6hQQR8+djV1LQsjcwr9P6nEz5P0L9rcGKcx2NxtIVa0NJQilQ2jTuLMUSjaXDOkefVkU0b4C4FwXwXKipKcX14EVcHryM/kI9Q/TZ7NZoY+gdEZNOa/2ZSPwAAAABJRU5ErkJggg==" />
                     <div class="icon-label">
@@ -308,49 +310,57 @@ the parameters can be specified with or without the dash or with a double dash
                 </div>
                 <table style="">
                     <tbody>
-                        <tr>
-                            <td style="width: 250px;">
--p port
+                        <tr id="port">
+                            <td style="width: 120px;">
+-p | -port
+                            </td>
+                            <td style="width: 180px;">
+&lt;port&gt;
                             </td>
                             <td>
 sets the port the server listens on
                             </td>
                         </tr>
-                        <tr>
+                        <tr id="dir">
                             <td>
--d dir
+-d | -dir
+                            </td>
+                            <td>
+                                <div>
+&lt;dir&gt;
+                                </div>
                             </td>
                             <td>
 sets a directory to put new uploads or where to find files for download, its relative to the serving directory, if the directory does not exist it is created
                             </td>
                         </tr>
-                        <tr>
+                        <tr id="cwd">
                             <td>
--cwd &lt;directory&gt;
+-cwd
+                            </td>
+                            <td>
+&lt;directory&gt;
                             </td>
                             <td>
 sets the current working directory for the script
                             </td>
                         </tr>
-                        <tr>
+                        <tr id="https">
                             <td>
 -https | -http
+                            </td>
+                            <td>
                             </td>
                             <td>
 set whether the server uses https ( default ) or http
                             </td>
                         </tr>
-                        <tr>
+                        <tr id="cert">
                             <td>
--version
+-cert
                             </td>
                             <td>
-prints the current version of the program
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
--cert &lt;cert-file&gt; &lt;key-file&gt;
+&lt;cert-file&gt; &lt;key-file&gt;
                             </td>
                             <td>
 specify a public certificate to use, pem format, the current certificate and key will be replaced and written to the file
@@ -360,9 +370,21 @@ generate https certificates
                                 </a>
                             </td>
                         </tr>
-                        <tr>
+                        <tr id="version">
                             <td>
--help
+-v | -version
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+prints the current version of the program
+                            </td>
+                        </tr>
+                        <tr id="help">
+                            <td>
+-h | -help
+                            </td>
+                            <td>
                             </td>
                             <td>
 command line quick help
@@ -653,7 +675,7 @@ http-file-upload can then be run by
 node http-file-upload -version
                     </code>
                     <div>
-i also another utility for running node.js scripts :
+i also have another utility for running node.js scripts :
                         <a href="#" title="no yet implemented" style="color: blue;">
 node-x
                         </a>
