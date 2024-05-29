@@ -307,6 +307,8 @@ node http-file-upload -cwd /work/tmp/
 
 ### alternative installation methods
 
+<br>
+
 ### install locally :
 
     npm install http-file-upload
@@ -317,6 +319,8 @@ http-file-upload can then be run using the command, from the directory which you
 
     npx http-file-upload
     
+<br>
+
 ### install from github
 
 download the project as a zip file
