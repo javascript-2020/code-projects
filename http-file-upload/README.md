@@ -63,6 +63,8 @@ see also alternative installation methods below
 
 ***
 
+<br>
+
 ### uninstall
 
 after global npm installation
