@@ -69,10 +69,12 @@ after global npm installation
 
 ***
 
+### operation
+
 the server listens on all network interfaces, the default port is 3000
 <br>
 
-the built in user interface is accessible at ( on all network interfaces )
+the built in user interface is accessible, on all network interfaces, at
 
 https://127.0.0.1:3000/ or https://127.0.0.1:3000/hello
 
@@ -110,7 +112,7 @@ set whether the server uses https or http, default https
 <br>
 <br>
 
--v
+-version
 
 prints the current version of the program
 <br>
@@ -150,6 +152,16 @@ https://127.0.0.1:3000/upload?filename
 
 <br>
 
+the server public certificate is available to download at
+
+https://127.0.0.1:3000/cert
+
+<br>
+
+the server can be quit on the command line from
+
+    escape | q | ctrl-c
+    
 ***
 
 ### example useage
@@ -265,7 +277,7 @@ async function onchange(e){
 
 ```
 
-download with curl
+download a file with curl
 
 ```
 curl --insecure https://localhost:3000/download?my-file.txt
@@ -275,18 +287,16 @@ curl --insecure https://localhost:3000/download?my-file.txt
 
 serving files from an alternate directory
 
-if you installed http-file-upload locally at `/work/http-file-upload/`
-and wish to access files at ` /work/tmp/ `
+if you installed http-file-upload locally at `/work/http-file-upload/` and wish to access files at `/work/tmp/`
 
 ```
-npx http-file-upload.js -cwd /work/tmp/
+npx http-file-upload -cwd /work/tmp/
 ```
 
-if you downloaded the single file http-file-upload.js to `/work/http-file-upload/`
-and wish to access files at ` /work/tmp/ `
+if you downloaded the single file http-file-upload.js to `/work/http-file-upload/` and wish to access files at `/work/tmp/`
 
 ```
-node http-file-upload.js -cwd /work/tmp/
+node http-file-upload -cwd /work/tmp/
 ```
 
 <br>
@@ -301,7 +311,7 @@ node http-file-upload.js -cwd /work/tmp/
     
 this will download http-file-upload to ` ./node_modules/http-file-upload `
 
-http-file-upload can then be run using the command
+http-file-upload can then be run using the command, from the directory which you issued the npm install command
 
     npx http-file-upload
     
@@ -309,24 +319,27 @@ http-file-upload can then be run using the command
 
 download the project as a zip file
 
-[download a directory from a github repository](https://javascript-2020.github.io/utils/download-a-directory-from-a-github-repository/download-a-directory-from-a-github-repository.html?owner=javascript-2020&repo=code-projects&branch=main&path=http-file-upload&download)
+[download this project from github](https://javascript-2020.github.io/utils/download-a-directory-from-a-github-repository/download-a-directory-from-a-github-repository.html?owner=javascript-2020&repo=code-projects&branch=main&path=http-file-upload&download)
 
 download the single file `http-file-upload.js` from github, ( right click - save link as )
 
 https://raw.githubusercontent.com/javascript-2020/code-projects/main/http-file-upload/http-file-upload.js
 
+<br>
+
+i also have another utility for running node.js scripts [node-x](#)
 
 <br>
 
 if you would then like http-file-upload to be accessible from anywhere on the file system, the http-file-upload directory should be added to the system path,
 http-file-upload comes with the following shell scripts to launch the process :
 
-   windows ..... `http-file-upload.bat `
-   
-  mac ............... ` http-file-upload.sh `
-  
-  linux .............. ` http-file-upload.sh `
-  
+windows ............ ` http-file-upload.bat `
+
+mac ................ ` http-file-upload.sh `
+
+linux .............. ` http-file-upload.sh `
+
 <br>
 <br>
 
