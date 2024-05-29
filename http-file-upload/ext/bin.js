@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-require('./http-file-upload.js');
+require('../http-file-upload.js');
 
