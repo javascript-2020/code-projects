@@ -1,2 +1,2 @@
 #!/bin/bash
-node http-file-upload.js
+node ../http-file-upload.js
