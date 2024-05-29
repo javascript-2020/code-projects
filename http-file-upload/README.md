@@ -1,3 +1,5 @@
+[![home](https://javascript-2020.github.io/images/home.png)](https://github.com/javascript-2020?tab=repositories)
+
 <h3>http-file-upload</h3>
 
 [npm : http-file-upload](https://www.npmjs.com/package/http-file-upload)
@@ -112,17 +114,17 @@ set whether the server uses https or http, default https
 <br>
 <br>
 
--version
-
-prints the current version of the program
-<br>
-<br>
-
 -cert cert-file key-file
 
 specify a public certificate and private key to use, any order, pem format
 
 note: [generate https certificates](https://javascript-2020.github.io/generate-https-certificate.html)
+<br>
+<br>
+
+-version
+
+prints the current version of the program
 <br>
 <br>
 
@@ -158,7 +160,7 @@ https://127.0.0.1:3000/cert
 
 <br>
 
-the server can be quit on the command line from
+the server can be quit on the command line by pressing
 
     escape | q | ctrl-c
     
