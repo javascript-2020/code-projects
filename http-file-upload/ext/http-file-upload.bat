@@ -1,2 +1,2 @@
 @echo off
-node %~dp0http-file-upload.js %*
+node %~dp0../http-file-upload.js %*
