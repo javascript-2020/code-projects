@@ -44,6 +44,16 @@ html {
               white-space:pre;
               font-weight:bold;
               font-size:16px;
+              position:relative;
+        }
+        .code-copy {
+              position:absolute;
+              top:5px;
+              right:5px;
+              width:20px;
+              height:20px;
+              padding:2px;
+              cursor:pointer;
         }
         
         .code {
@@ -123,7 +133,17 @@ window.download       = {};
                                                             download.file();
                                                             
                                                       };
-                                                      
+              $.all('.code-copy').forEach(node=>{
+              
+                    node.onclick    = e=>{
+                    
+                                            var txt   = node.parentNode.textContent.trim();
+                                            navigator.clipboard.writeText(txt);
+                                            
+                                      };
+                                      
+              });
+              
         }//onload
         
         
@@ -149,6 +169,17 @@ window.download       = {};
               return node;
               
         }//$
+        
+        $.all=function(root,sel){
+        
+              if(!sel){
+                    sel     = root;
+                    root    = document;
+              }
+              var list    = [...root.querySelectorAll(sel)];
+              return list;
+              
+        }//all
         </script>
         <script style="display: none;" type="module">
 import jszip from 'https://cdn.jsdelivr.net/npm/jszip/+esm';
@@ -253,6 +284,7 @@ npm global installation is the recommended way to install
                     </div>
                     <code class="code">
 npm install http-file-upload -g
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                     <div>
 http-file-upload can then be run from anywhere on the file system by typing on the command line
@@ -262,6 +294,7 @@ the following test should succeed
                     </div>
                     <code class="code">
 http-file-upload -version
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                     <br />
                     <div>
@@ -284,6 +317,7 @@ file from the default npm script installation directory this is usually
                     </div>
                     <code class="code">
 c:&#x2F;users&#x2F;&lt;user&gt;&#x2F;AppData&#x2F;Roaming&#x2F;npm&#x2F;
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                     <div>
 see also
@@ -316,6 +350,7 @@ after global npm installation
                     </div>
                     <code class="code">
 npm uninstall http-file-upload -g
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                 </section>
                 <section id="operation">
@@ -434,6 +469,7 @@ download a file using a http request at url
                     </div>
                     <code class="code">
 https:&#x2F;&#x2F;127.0.0.1:3000&#x2F;download?filename
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                     <div>
                         <span>
@@ -442,6 +478,7 @@ a list of all files available to download is available from the following url, a
                     </div>
                     <code class="code">
 https:&#x2F;&#x2F;127.0.0.1:3000&#x2F;download-list
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                     <div>
                         <span>
@@ -450,12 +487,14 @@ upload a file to this url using a http request, the upload body must be a binary
                     </div>
                     <code class="code">
 https:&#x2F;&#x2F;127.0.0.1:3000&#x2F;upload?filename
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                     <div>
 the server can be quit from the command line by pressing
                     </div>
                     <code class="code">
 escape &#x2F; q &#x2F; ctrl-c
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                 </section>
                 <section id="useage">
@@ -470,6 +509,7 @@ requires global installation or the launch script on the system path
                     </div>
                     <code class="code">
 http-file-upload
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                     <div>
 upload&#x2F;download files in the current directory using port 4000
@@ -479,6 +519,7 @@ requires global installation or the launch script on the system path
                     </div>
                     <code class="code">
 http-file-upload -p 4000
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                     <div>
                         <div>
@@ -526,6 +567,7 @@ require(&#39;https&#39;).get(url,opts,async res=&gt;{
       console.log(body);   
   
 });
+                            <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                         </code>
                         <div>
 to download all files in a directory via nodejs
@@ -553,6 +595,7 @@ https.get(`${url}download-list`,opts,async res=&gt;{
       });
   
 });
+                            <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                         </code>
                         <div>
 to upload a file in nodejs
@@ -576,6 +619,7 @@ async function rec(res){
       console.log(body);
       
 }&#x2F;&#x2F;rec
+                            <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                         </code>
                         <div>
 to upload a file from the browser
@@ -595,12 +639,14 @@ async function onchange(e){
       console.log(txt);
       
 }&#x2F;&#x2F;onchange
+                            <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                         </code>
                         <div>
 download a file with curl
                         </div>
                         <code class="code">
 curl --insecure https:&#x2F;&#x2F;localhost:3000&#x2F;download?my-file.txt
+                            <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                         </code>
                     </div>
                     <div>
@@ -620,6 +666,7 @@ and wish to access files at
                     </div>
                     <code class="code">
 npx http-file-upload -cwd &#x2F;work&#x2F;tmp&#x2F;
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                     <div>
 if you downloaded the single file http-file-upload.js to
@@ -635,6 +682,7 @@ and wish to access files at
                     </div>
                     <code class="code">
 node http-file-upload -cwd &#x2F;work&#x2F;tmp&#x2F;
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                     <div id="update-cert">
                         <div>
@@ -651,6 +699,7 @@ the files can be given in either order and the key and cert must be pem encoded
                         </div>
                         <code class="code">
 http-file-upload -cert server-cert.pem private-key.pem
+                            <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                         </code>
                     </div>
                     <div id="http-server">
@@ -659,6 +708,7 @@ to run the server using http instead of the default https
                         </div>
                         <code class="code">
 http-file-upload -http
+                            <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                         </code>
                     </div>
                 </section>
@@ -673,6 +723,7 @@ install with npm locally :
                     </h3>
                     <code class="code">
 npm install http-file-upload
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                     <div>
 this will download http-file-upload to
@@ -685,6 +736,7 @@ http-file-upload can then be run using the command, from the directory which you
                     </div>
                     <code class="code">
 npx http-file-upload -version
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                     <h3>
 install from github
@@ -710,6 +762,7 @@ http-file-upload can then be run by
                         </div>
                         <code class="code">
 node http-file-upload -version
+                            <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                         </code>
                     </div>
                     <h3>
@@ -719,6 +772,7 @@ system path environment variable
 if you would like http-file-upload to be accessible from anywhere on the file system, the directory
                         <code class="code">
 http-file-upload&#x2F;ext&#x2F;
+                            <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                         </code>
 should be added to the system path, http-file-upload comes with the following shell scripts to launch the process :
                     </div>
@@ -726,6 +780,7 @@ should be added to the system path, http-file-upload comes with the following sh
 windows ............ http-file-upload&#x2F;ext&#x2F;http-file-upload.bat
 mac ................ http-file-upload&#x2F;ext&#x2F;http-file-upload.sh
 linux .............. http-file-upload&#x2F;ext&#x2F;http-file-upload.sh
+                        <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
                 </section>
                 <section id="links" style="margin-top: 50px;">
