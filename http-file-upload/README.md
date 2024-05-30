@@ -55,6 +55,12 @@ file from the default npm script installation directory, this is usually
 ` c:/users/<user_name>/AppData/Roaming/npm/ `
 
 <br>
+
+### node-x
+
+i also have another utility for running node.js scripts [node-x](#)
+
+<br>
 <br>
 
 see also alternative installation methods below
@@ -347,27 +353,21 @@ https://raw.githubusercontent.com/javascript-2020/code-projects/main/http-file-u
 
 ### system path environment variable
 
-if you would then like http-file-upload to be accessible from anywhere on the file system, the directory
+if you would then like http-file-upload to be accessible from anywhere on the file system, this directory should be added to the system path
+
 
 ```
 http-file-upload/ext/
 ```
 
- should be added to the system path,
- 
+
 http-file-upload comes with the following shell scripts to launch the process :
 
-windows ............ ` http-file-upload.bat `
+windows ............ ` http-file-upload/ext/http-file-upload.bat `
 
-mac ................ ` http-file-upload.sh `
+mac ................ ` http-file-upload/ext/http-file-upload.sh `
 
-linux .............. ` http-file-upload.sh `
-
-<br>
-
-### node-x
-
-i also have another utility for running node.js scripts [node-x](#)
+linux .............. ` http-file-upload/ext/http-file-upload.sh `
 
 <br>
 <br>
@@ -376,9 +376,26 @@ i also have another utility for running node.js scripts [node-x](#)
 
 <br>
 
+### feedback
+
+im usually available in the stackoverflow javascript chat room user matt, come and say hi, id love to hear from you
+
+or by email javascript.12.03.2024@gmail.com
+
+
 https://github.com/javascript-2020/http-file-upload
 
 https://www.npmjs.com/package/http-file-upload
+
+<br>
+
+***
+
+<br>
+
+### other interesting works
+
+![](/images/github.png) https://github.com/javascript-2020/code-projects/tree/main
 
 
 
