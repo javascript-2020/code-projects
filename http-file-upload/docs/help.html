@@ -15,10 +15,14 @@ body {
       flex-direction:column;
 }
 
-#center {
+#scroll {
       overflow:auto;
       flex:1;
-      margin:20px 0;
+}
+
+#center {
+      margin:20px auto;
+      max-width:1000px;
 }
 
 section {
@@ -212,303 +216,304 @@ http-file-upload
 28 May 2024
             </div>
         </div>
-        <div id="center" style="margin: auto; max-width: 1000px;">
-            <section id="description" style="margin-top: 0px;">
-                <h3 style="margin-top: 0px;">
+        <div id="scroll">
+            <div id="center" style="">
+                <section id="description" style="margin-top: 0px;">
+                    <h3 style="margin-top: 0px;">
 http-file-upload
-                </h3>
-                <div>
-http-file-upload is a http server whose only function is to upload and download files ( of any size )
-                </div>
-                <div style="margin-top: 10px;">
-the http server has been designed as a single, no dependency, file for ease of use and portability
-                </div>
-                <div style="margin-top: 10px;">
-                    <div>
-files can be uploaded and downloaded
-                    </div>
-                    <ul>
-                        <li>
-using the built browser interface
-                        </li>
-                        <li>
-by a http request, such as those made through node.js, php, curl, python, c++, c#, java
-                        </li>
-                    </ul>
-                </div>
-            </section>
-            <section id="install">
-                <h3 class="heading">
-install
-                </h3>
-                <div>
-npm global installation is the recommended way to install
-                </div>
-                <code class="code">
-npm install http-file-upload -g
-                </code>
-                <div>
-http-file-upload can then be run from anywhere on the file system by typing on the command line
-                </div>
-                <div>
-the following test should succeed
-                </div>
-                <code class="code">
-http-file-upload -version
-                </code>
-                <br />
-                <div>
-                    <div>
-note :
-                        <b>
-windows powershell users
-                        </b>
-                    </div>
-                    <div>
-running powershell scripts are disabled by default
-                    </div>
-                    <div>
-to get the script to run normally in powershell users will have to delete
-                        <span class="inline-code">
-http-file-upload.ps1
-                        </span>
-file from the default npm script installation directory this is usually
-                    </div>
-                </div>
-                <code class="code">
-c:&#x2F;users&#x2F;&lt;user&gt;&#x2F;AppData&#x2F;Roaming&#x2F;npm&#x2F;
-                </code>
-                <div>
-see also
-                    <a href="#alternate-install" style="color: blue;">
-alternative installation methods
-                    </a>
-below
-                </div>
-                <div id="node-x" style="margin-top: 20px;">
-                    <h3>
-node-x
                     </h3>
                     <div>
-i also have another utility for running node.js scripts :
-                        <a href="#" title="no yet implemented" style="color: blue;">
-node-x
-                        </a>
-                        <div title="coming soon" style="height: 50px; border: 1px solid lightgray; width: 150px; display: flex; justify-content: center; align-items: center; cursor: pointer; margin-top: 10px;">
-npm : node-x
+http-file-upload is a http server whose only function is to upload and download files ( of any size )
+                    </div>
+                    <div style="margin-top: 10px;">
+the http server has been designed as a single, no dependency, file for ease of use and portability
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <div>
+files can be uploaded and downloaded
                         </div>
+                        <ul>
+                            <li>
+using the built browser interface
+                            </li>
+                            <li>
+by a http request, such as those made through node.js, php, curl, python, c++, c#, java
+                            </li>
+                        </ul>
                     </div>
-                </div>
-            </section>
-            <section id="uninstall">
-                <h3 class="heading">
-uninstall
-                </h3>
-                <div>
-after global npm installation
-                </div>
-                <code class="code">
-npm uninstall http-file-upload -g
-                </code>
-            </section>
-            <section id="operation">
-                <h3 class="heading">
-operation
-                </h3>
-                <div>
-the server listens on all network interfaces, the default port is 3000
-                </div>
-                <div style="margin-top: 10px;">
-the built in user interface is accessible, on all network interfaces, at
-                </div>
-                <div>
-                    <a href="https://127.0.0.1:3000/" style="color: blue;">
-https:&#x2F;&#x2F;127.0.0.1:3000&#x2F;
-                    </a>
-                    <span>
-or
-                    </span>
-                    <a href="https://127.0.0.1:3000/hello" style="color: blue;">
-https:&#x2F;&#x2F;127.0.0.1:3000&#x2F;hello
-                    </a>
-                </div>
-                <div style="margin-top: 20px;">
-http-file-upload supports the following command line parameters
-                </div>
-                <div>
-the parameters can be specified with or without the dash or with a double dash
-                </div>
-                <table style="">
-                    <tbody>
-                        <tr id="port">
-                            <td style="width: 120px;">
--p | -port
-                            </td>
-                            <td style="width: 180px;">
-&lt;port&gt;
-                            </td>
-                            <td>
-sets the port the server listens on
-                            </td>
-                        </tr>
-                        <tr id="dir">
-                            <td>
--d | -dir
-                            </td>
-                            <td>
-                                <div>
-&lt;dir&gt;
-                                </div>
-                            </td>
-                            <td>
-sets a directory to put new uploads or where to find files for download, its relative to the serving directory, if the directory does not exist it is created
-                            </td>
-                        </tr>
-                        <tr id="cwd">
-                            <td>
--cwd
-                            </td>
-                            <td>
-&lt;directory&gt;
-                            </td>
-                            <td>
-sets the current working directory for the script
-                            </td>
-                        </tr>
-                        <tr id="https">
-                            <td>
--https | -http
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-set whether the server uses https ( default ) or http
-                            </td>
-                        </tr>
-                        <tr id="cert">
-                            <td>
--cert
-                            </td>
-                            <td>
-&lt;cert-file&gt; &lt;key-file&gt;
-                            </td>
-                            <td>
-specify a public certificate to use, pem format, the current certificate and key will be replaced and written to the file
-                                <br />
-                                <a href="https://javascript-2020.github.io/utils/generate-https-certificate/generate-https-certificate.html" style="color: blue;">
-generate https certificates
-                                </a>
-                            </td>
-                        </tr>
-                        <tr id="version">
-                            <td>
--v | -version
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-prints the current version of the program
-                            </td>
-                        </tr>
-                        <tr id="help">
-                            <td>
--h | -help
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-command line quick help
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div>
-download a file using a http request at url
-                </div>
-                <code class="code">
-https:&#x2F;&#x2F;127.0.0.1:3000&#x2F;download?filename
-                </code>
-                <div>
-                    <span>
-a list of all files available to download is available from the following url, an array in JSON format is returned
-                    </span>
-                </div>
-                <code class="code">
-https:&#x2F;&#x2F;127.0.0.1:3000&#x2F;download-list
-                </code>
-                <div>
-                    <span>
-upload a file to this url using a http request, the upload body must be a binary file
-                    </span>
-                </div>
-                <code class="code">
-https:&#x2F;&#x2F;127.0.0.1:3000&#x2F;upload?filename
-                </code>
-                <div>
-the server can be quit from the command line by pressing
-                </div>
-                <code class="code">
-escape &#x2F; q &#x2F; ctrl-c
-                </code>
-            </section>
-            <section id="useage">
-                <h3 class="heading">
-example useage
-                </h3>
-                <div>
-upload&#x2F;download files in the current directory
-                </div>
-                <div>
-requires global installation or the launch script on the system path
-                </div>
-                <code class="code">
-http-file-upload
-                </code>
-                <div>
-upload&#x2F;download files in the current directory using port 4000
-                </div>
-                <div>
-requires global installation or the launch script on the system path
-                </div>
-                <code class="code">
-http-file-upload -p 4000
-                </code>
-                <div>
+                </section>
+                <section id="install">
+                    <h3 class="heading">
+install
+                    </h3>
                     <div>
-if http-file-upload is accessible globally, and you have some files you want to access over http in a directory
-                        <span class="inline-code">
-&#x2F;work&#x2F;tmp&#x2F;
-                        </span>
-                    </div>
-                    <ol>
-                        <li>
-change to directory
-                            <span class="inline-code">
-&#x2F;work&#x2F;tmp&#x2F;
-                            </span>
-                        </li>
-                        <li>
-type
-                            <span class="inline-code">
-http-file-upload
-                            </span>
-press
-                            <kbd>
-enter
-                            </kbd>
-                        </li>
-                        <li>
-open a web browser at
-                            <a href="https://localhost:3000/" style="color: blue;">
-https:&#x2F;&#x2F;localhost:3000&#x2F;
-                            </a>
-or perform a http request
-                        </li>
-                    </ol>
-                    <div>
-perform a http request in node.js
+npm global installation is the recommended way to install
                     </div>
                     <code class="code">
+npm install http-file-upload -g
+                    </code>
+                    <div>
+http-file-upload can then be run from anywhere on the file system by typing on the command line
+                    </div>
+                    <div>
+the following test should succeed
+                    </div>
+                    <code class="code">
+http-file-upload -version
+                    </code>
+                    <br />
+                    <div>
+                        <div>
+note :
+                            <b>
+windows powershell users
+                            </b>
+                        </div>
+                        <div>
+running powershell scripts are disabled by default
+                        </div>
+                        <div>
+to get the script to run normally in powershell users will have to delete
+                            <span class="inline-code">
+http-file-upload.ps1
+                            </span>
+file from the default npm script installation directory this is usually
+                        </div>
+                    </div>
+                    <code class="code">
+c:&#x2F;users&#x2F;&lt;user&gt;&#x2F;AppData&#x2F;Roaming&#x2F;npm&#x2F;
+                    </code>
+                    <div>
+see also
+                        <a href="#alternate-install" style="color: blue;">
+alternative installation methods
+                        </a>
+below
+                    </div>
+                    <div id="node-x" style="margin-top: 20px;">
+                        <h3>
+node-x
+                        </h3>
+                        <div>
+i also have another utility for running node.js scripts :
+                            <a href="#" title="no yet implemented" style="color: blue;">
+node-x
+                            </a>
+                            <div title="coming soon" style="height: 50px; border: 1px solid lightgray; width: 150px; display: flex; justify-content: center; align-items: center; cursor: pointer; margin-top: 10px;">
+npm : node-x
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="uninstall">
+                    <h3 class="heading">
+uninstall
+                    </h3>
+                    <div>
+after global npm installation
+                    </div>
+                    <code class="code">
+npm uninstall http-file-upload -g
+                    </code>
+                </section>
+                <section id="operation">
+                    <h3 class="heading">
+operation
+                    </h3>
+                    <div>
+the server listens on all network interfaces, the default port is 3000
+                    </div>
+                    <div style="margin-top: 10px;">
+the built in user interface is accessible, on all network interfaces, at
+                    </div>
+                    <div>
+                        <a href="https://127.0.0.1:3000/" style="color: blue;">
+https:&#x2F;&#x2F;127.0.0.1:3000&#x2F;
+                        </a>
+                        <span>
+or
+                        </span>
+                        <a href="https://127.0.0.1:3000/hello" style="color: blue;">
+https:&#x2F;&#x2F;127.0.0.1:3000&#x2F;hello
+                        </a>
+                    </div>
+                    <div style="margin-top: 20px;">
+http-file-upload supports the following command line parameters
+                    </div>
+                    <div>
+the parameters can be specified with or without the dash or with a double dash
+                    </div>
+                    <table style="">
+                        <tbody>
+                            <tr id="port">
+                                <td style="width: 120px;">
+-p | -port
+                                </td>
+                                <td style="width: 180px;">
+&lt;port&gt;
+                                </td>
+                                <td>
+sets the port the server listens on
+                                </td>
+                            </tr>
+                            <tr id="dir">
+                                <td>
+-d | -dir
+                                </td>
+                                <td>
+                                    <div>
+&lt;dir&gt;
+                                    </div>
+                                </td>
+                                <td>
+sets a directory to put new uploads or where to find files for download, its relative to the serving directory, if the directory does not exist it is created
+                                </td>
+                            </tr>
+                            <tr id="cwd">
+                                <td>
+-cwd
+                                </td>
+                                <td>
+&lt;directory&gt;
+                                </td>
+                                <td>
+sets the current working directory for the script
+                                </td>
+                            </tr>
+                            <tr id="https">
+                                <td>
+-https | -http
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+set whether the server uses https ( default ) or http
+                                </td>
+                            </tr>
+                            <tr id="cert">
+                                <td>
+-cert
+                                </td>
+                                <td>
+&lt;cert-file&gt; &lt;key-file&gt;
+                                </td>
+                                <td>
+specify a public certificate to use, pem format, the current certificate and key will be replaced and written to the file
+                                    <br />
+                                    <a href="https://javascript-2020.github.io/utils/generate-https-certificate/generate-https-certificate.html" style="color: blue;">
+generate https certificates
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr id="version">
+                                <td>
+-v | -version
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+prints the current version of the program
+                                </td>
+                            </tr>
+                            <tr id="help">
+                                <td>
+-h | -help
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+command line quick help
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>
+download a file using a http request at url
+                    </div>
+                    <code class="code">
+https:&#x2F;&#x2F;127.0.0.1:3000&#x2F;download?filename
+                    </code>
+                    <div>
+                        <span>
+a list of all files available to download is available from the following url, an array in JSON format is returned
+                        </span>
+                    </div>
+                    <code class="code">
+https:&#x2F;&#x2F;127.0.0.1:3000&#x2F;download-list
+                    </code>
+                    <div>
+                        <span>
+upload a file to this url using a http request, the upload body must be a binary file
+                        </span>
+                    </div>
+                    <code class="code">
+https:&#x2F;&#x2F;127.0.0.1:3000&#x2F;upload?filename
+                    </code>
+                    <div>
+the server can be quit from the command line by pressing
+                    </div>
+                    <code class="code">
+escape &#x2F; q &#x2F; ctrl-c
+                    </code>
+                </section>
+                <section id="useage">
+                    <h3 class="heading">
+example useage
+                    </h3>
+                    <div>
+upload&#x2F;download files in the current directory
+                    </div>
+                    <div>
+requires global installation or the launch script on the system path
+                    </div>
+                    <code class="code">
+http-file-upload
+                    </code>
+                    <div>
+upload&#x2F;download files in the current directory using port 4000
+                    </div>
+                    <div>
+requires global installation or the launch script on the system path
+                    </div>
+                    <code class="code">
+http-file-upload -p 4000
+                    </code>
+                    <div>
+                        <div>
+if http-file-upload is accessible globally, and you have some files you want to access over http in a directory
+                            <span class="inline-code">
+&#x2F;work&#x2F;tmp&#x2F;
+                            </span>
+                        </div>
+                        <ol>
+                            <li>
+change to directory
+                                <span class="inline-code">
+&#x2F;work&#x2F;tmp&#x2F;
+                                </span>
+                            </li>
+                            <li>
+type
+                                <span class="inline-code">
+http-file-upload
+                                </span>
+press
+                                <kbd>
+enter
+                                </kbd>
+                            </li>
+                            <li>
+open a web browser at
+                                <a href="https://localhost:3000/" style="color: blue;">
+https:&#x2F;&#x2F;localhost:3000&#x2F;
+                                </a>
+or perform a http request
+                            </li>
+                        </ol>
+                        <div>
+perform a http request in node.js
+                        </div>
+                        <code class="code">
 var url     = &#39;https:&#x2F;&#x2F;localhost:3000&#x2F;download?myfile.js&#39;;
 var opts    = {rejectUnauthorized:false};
 
@@ -519,11 +524,11 @@ require(&#39;https&#39;).get(url,opts,async res=&gt;{
       console.log(body);   
   
 });
-                    </code>
-                    <div>
+                        </code>
+                        <div>
 to download all files in a directory via nodejs
-                    </div>
-                    <code class="code">
+                        </div>
+                        <code class="code">
 var url     = &#39;https:&#x2F;&#x2F;localhost:3000&#x2F;&#39;;
 var opts    = {rejectUnauthorized:false};
 var https   = require(&#39;https&#39;);
@@ -546,11 +551,11 @@ https.get(`${url}download-list`,opts,async res=&gt;{
       });
   
 });
-                    </code>
-                    <div>
+                        </code>
+                        <div>
 to upload a file in nodejs
-                    </div>
-                    <code class="code">
+                        </div>
+                        <code class="code">
 var url     = &#39;https:&#x2F;&#x2F;localhost:3000&#x2F;upload?my-file.txt&#39;;
 var body    = require(&#39;fs&#39;).readFileSync(&#39;my-file.txt&#39;);
 
@@ -569,11 +574,11 @@ async function rec(res){
       console.log(body);
       
 }&#x2F;&#x2F;rec
-                    </code>
-                    <div>
+                        </code>
+                        <div>
 to upload a file from the browser
-                    </div>
-                    <code class="code">
+                        </div>
+                        <code class="code">
 var input         = document.createElement(&#39;input&#39;);
 input.type        = &#39;file&#39;;
 input.onchange    = onchange;
@@ -588,185 +593,186 @@ async function onchange(e){
       console.log(txt);
       
 }&#x2F;&#x2F;onchange
-                    </code>
-                    <div>
+                        </code>
+                        <div>
 download a file with curl
-                    </div>
-                    <code class="code">
+                        </div>
+                        <code class="code">
 curl --insecure https:&#x2F;&#x2F;localhost:3000&#x2F;download?my-file.txt
-                    </code>
-                </div>
-                <div>
+                        </code>
+                    </div>
+                    <div>
 serving files from an alternate directory
-                </div>
-                <div>
+                    </div>
+                    <div>
 if you installed http-file-upload locally with npm at
-                    <span class="inline-code">
-&#x2F;work&#x2F;http-file-upload&#x2F;
-                    </span>
-                    <span>
-and wish to access files at
                         <span class="inline-code">
-&#x2F;work&#x2F;tmp&#x2F;
+&#x2F;work&#x2F;http-file-upload&#x2F;
                         </span>
-                    </span>
-                </div>
-                <code class="code">
+                        <span>
+and wish to access files at
+                            <span class="inline-code">
+&#x2F;work&#x2F;tmp&#x2F;
+                            </span>
+                        </span>
+                    </div>
+                    <code class="code">
 npx http-file-upload -cwd &#x2F;work&#x2F;tmp&#x2F;
-                </code>
-                <div>
+                    </code>
+                    <div>
 if you downloaded the single file http-file-upload.js to
-                    <span class="inline-code">
-&#x2F;work&#x2F;http-file-upload&#x2F;
-                    </span>
-                    <span>
-and wish to access files at
                         <span class="inline-code">
-&#x2F;work&#x2F;tmp&#x2F;
+&#x2F;work&#x2F;http-file-upload&#x2F;
                         </span>
-                    </span>
-                </div>
-                <code class="code">
+                        <span>
+and wish to access files at
+                            <span class="inline-code">
+&#x2F;work&#x2F;tmp&#x2F;
+                            </span>
+                        </span>
+                    </div>
+                    <code class="code">
 node http-file-upload -cwd &#x2F;work&#x2F;tmp&#x2F;
-                </code>
-                <div id="update-cert">
-                    <div>
+                    </code>
+                    <div id="update-cert">
+                        <div>
 to update the https certificate that the server uses
-                    </div>
-                    <div>
+                        </div>
+                        <div>
 you can download certificates from
-                        <a href="https://javascript-2020.github.io/utils/generate-https-certificate/generate-https-certificate.html" style="color: blue;">
+                            <a href="https://javascript-2020.github.io/utils/generate-https-certificate/generate-https-certificate.html" style="color: blue;">
 generate https certificates
-                        </a>
-                    </div>
-                    <div>
+                            </a>
+                        </div>
+                        <div>
 the files can be given in either order and the key and cert must be pem encoded
-                    </div>
-                    <code class="code">
+                        </div>
+                        <code class="code">
 http-file-upload -cert server-cert.pem private-key.pem
-                    </code>
-                </div>
-                <div id="http-server">
-                    <div>
+                        </code>
+                    </div>
+                    <div id="http-server">
+                        <div>
 to run the server using http instead of the default https
-                    </div>
-                    <code class="code">
+                        </div>
+                        <code class="code">
 http-file-upload -http
-                    </code>
-                </div>
-            </section>
-            <section id="alternate-install">
-                <h3 class="heading">
+                        </code>
+                    </div>
+                </section>
+                <section id="alternate-install">
+                    <h3 class="heading">
 alternative installation methods
-                </h3>
-                <div>
-                </div>
-                <h3>
+                    </h3>
+                    <div>
+                    </div>
+                    <h3>
 install with npm locally :
-                </h3>
-                <code class="code">
+                    </h3>
+                    <code class="code">
 npm install http-file-upload
-                </code>
-                <div>
+                    </code>
+                    <div>
 this will download http-file-upload to
-                    <span class="inline-code">
+                        <span class="inline-code">
 .&#x2F;node_modules&#x2F;http-file-upload
-                    </span>
-                </div>
-                <div>
+                        </span>
+                    </div>
+                    <div>
 http-file-upload can then be run using the command, from the directory which you issued the npm install command
-                </div>
-                <code class="code">
+                    </div>
+                    <code class="code">
 npx http-file-upload -version
-                </code>
-                <h3>
+                    </code>
+                    <h3>
 install from github
-                </h3>
-                <div id="zip-file">
+                    </h3>
+                    <div id="zip-file">
 download the project files as a zip file from github
-                    <a href="#" id="http-file-upload-zip" style="display: inline-flex; align-items: center; border: 1px solid lightgray; padding: 0px 5px; border-radius: 3px; cursor: pointer; color: blue;">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAcRJREFUOE/tkz9IQlEUxr+r0pRBROHg8J6LQUNBQxBYQ6S4VCC9iAh0sblaioZsiFrKOZeCiOiFUC3yjIYSBAchhyAJ9A0OUkSQTeF7t96zP768YUVL0N3Od8753fPdwyWUUoo6h4SIXkFDdUtBvgRcegEu/gMZb/8H33DrfAsWkwVCh4AGc4NuinzY8qPyCPFCRFktw9/lNxg3WD7LnaF/ux8mYkKPrQfJYJIJ7I30IlVMQaUqTidP0efoe4MagIqqoHujG5nrjF7g5tyIjkdhXbHqcWm+BN+uD3E5rsedbZ1IT6VhNpnZQE0t3hch7AtIFBLPXwPwODyQ8pLe4OE9kHISQACX3QVxVIStyfa55ddM9iaLkb0RXN5eMj9le0s7DsYO4Gx11uTJ1e0VXU4sY3N405CU72QEj4I4lo8N+iA3iMhQBFwzZ9ADhwEsuBaehw9pxgC+kUduNlcD9e543ybVJotNxGpgjjUH8g/5ygJfgZyVQ36mIlYfzf7cyZwurQ6sMm3y6zzkkvw1oFalUEUvNpP3bVZf+m0gczNVIhNoIRbYG+31epn5wkMBZVo2Wv4RidFEwskwnY5P/wov7A7jCRah4mR5BNdrAAAAAElFTkSuQmCC" style="border-radius: 3px; border: 1px solid lightgray; box-sizing: border-box; width: 12px; height: 12px; margin-right: 3px;" />
+                        <a href="#" id="http-file-upload-zip" style="display: inline-flex; align-items: center; border: 1px solid lightgray; padding: 0px 5px; border-radius: 3px; cursor: pointer; color: blue;">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAcRJREFUOE/tkz9IQlEUxr+r0pRBROHg8J6LQUNBQxBYQ6S4VCC9iAh0sblaioZsiFrKOZeCiOiFUC3yjIYSBAchhyAJ9A0OUkSQTeF7t96zP768YUVL0N3Od8753fPdwyWUUoo6h4SIXkFDdUtBvgRcegEu/gMZb/8H33DrfAsWkwVCh4AGc4NuinzY8qPyCPFCRFktw9/lNxg3WD7LnaF/ux8mYkKPrQfJYJIJ7I30IlVMQaUqTidP0efoe4MagIqqoHujG5nrjF7g5tyIjkdhXbHqcWm+BN+uD3E5rsedbZ1IT6VhNpnZQE0t3hch7AtIFBLPXwPwODyQ8pLe4OE9kHISQACX3QVxVIStyfa55ddM9iaLkb0RXN5eMj9le0s7DsYO4Gx11uTJ1e0VXU4sY3N405CU72QEj4I4lo8N+iA3iMhQBFwzZ9ADhwEsuBaehw9pxgC+kUduNlcD9e543ybVJotNxGpgjjUH8g/5ygJfgZyVQ36mIlYfzf7cyZwurQ6sMm3y6zzkkvw1oFalUEUvNpP3bVZf+m0gczNVIhNoIRbYG+31epn5wkMBZVo2Wv4RidFEwskwnY5P/wov7A7jCRah4mR5BNdrAAAAAElFTkSuQmCC" style="border-radius: 3px; border: 1px solid lightgray; box-sizing: border-box; width: 12px; height: 12px; margin-right: 3px;" />
 http-file-upload.zip
-                    </a>
-                    <div>
+                        </a>
+                        <div>
 unzip the file, then either run locally or add the launch script to the system path
+                        </div>
                     </div>
-                </div>
-                <div style="margin-top: 10px;" id="single-file">
+                    <div style="margin-top: 10px;" id="single-file">
 download the single file
-                    <a href="#" id="http-file-upload-js" style="display: inline-flex; align-items: center; border: 1px solid lightgray; padding: 0px 5px; border-radius: 3px; cursor: pointer; color: blue;">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAcRJREFUOE/tkz9IQlEUxr+r0pRBROHg8J6LQUNBQxBYQ6S4VCC9iAh0sblaioZsiFrKOZeCiOiFUC3yjIYSBAchhyAJ9A0OUkSQTeF7t96zP768YUVL0N3Od8753fPdwyWUUoo6h4SIXkFDdUtBvgRcegEu/gMZb/8H33DrfAsWkwVCh4AGc4NuinzY8qPyCPFCRFktw9/lNxg3WD7LnaF/ux8mYkKPrQfJYJIJ7I30IlVMQaUqTidP0efoe4MagIqqoHujG5nrjF7g5tyIjkdhXbHqcWm+BN+uD3E5rsedbZ1IT6VhNpnZQE0t3hch7AtIFBLPXwPwODyQ8pLe4OE9kHISQACX3QVxVIStyfa55ddM9iaLkb0RXN5eMj9le0s7DsYO4Gx11uTJ1e0VXU4sY3N405CU72QEj4I4lo8N+iA3iMhQBFwzZ9ADhwEsuBaehw9pxgC+kUduNlcD9e543ybVJotNxGpgjjUH8g/5ygJfgZyVQ36mIlYfzf7cyZwurQ6sMm3y6zzkkvw1oFalUEUvNpP3bVZf+m0gczNVIhNoIRbYG+31epn5wkMBZVo2Wv4RidFEwskwnY5P/wov7A7jCRah4mR5BNdrAAAAAElFTkSuQmCC" style="border-radius: 3px; border: 1px solid lightgray; box-sizing: border-box; width: 12px; height: 12px; margin-right: 3px;" />
+                        <a href="#" id="http-file-upload-js" style="display: inline-flex; align-items: center; border: 1px solid lightgray; padding: 0px 5px; border-radius: 3px; cursor: pointer; color: blue;">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAcRJREFUOE/tkz9IQlEUxr+r0pRBROHg8J6LQUNBQxBYQ6S4VCC9iAh0sblaioZsiFrKOZeCiOiFUC3yjIYSBAchhyAJ9A0OUkSQTeF7t96zP768YUVL0N3Od8753fPdwyWUUoo6h4SIXkFDdUtBvgRcegEu/gMZb/8H33DrfAsWkwVCh4AGc4NuinzY8qPyCPFCRFktw9/lNxg3WD7LnaF/ux8mYkKPrQfJYJIJ7I30IlVMQaUqTidP0efoe4MagIqqoHujG5nrjF7g5tyIjkdhXbHqcWm+BN+uD3E5rsedbZ1IT6VhNpnZQE0t3hch7AtIFBLPXwPwODyQ8pLe4OE9kHISQACX3QVxVIStyfa55ddM9iaLkb0RXN5eMj9le0s7DsYO4Gx11uTJ1e0VXU4sY3N405CU72QEj4I4lo8N+iA3iMhQBFwzZ9ADhwEsuBaehw9pxgC+kUduNlcD9e543ybVJotNxGpgjjUH8g/5ygJfgZyVQ36mIlYfzf7cyZwurQ6sMm3y6zzkkvw1oFalUEUvNpP3bVZf+m0gczNVIhNoIRbYG+31epn5wkMBZVo2Wv4RidFEwskwnY5P/wov7A7jCRah4mR5BNdrAAAAAElFTkSuQmCC" style="border-radius: 3px; border: 1px solid lightgray; box-sizing: border-box; width: 12px; height: 12px; margin-right: 3px;" />
 http-file-upload.js
-                    </a>
-                    <div>
+                        </a>
+                        <div>
 http-file-upload can then be run by
+                        </div>
+                        <code class="code">
+node http-file-upload -version
+                        </code>
+                    </div>
+                    <h3>
+system path environment variable
+                    </h3>
+                    <div style="margin-top: 20px;">
+if you would like http-file-upload to be accessible from anywhere on the file system, the directory
+                        <code class="code">
+http-file-upload&#x2F;ext&#x2F;
+                        </code>
+should be added to the system path, http-file-upload comes with the following shell scripts to launch the process :
                     </div>
                     <code class="code">
-node http-file-upload -version
-                    </code>
-                </div>
-                <h3>
-system path environment variable
-                </h3>
-                <div style="margin-top: 20px;">
-if you would like http-file-upload to be accessible from anywhere on the file system, the directory
-                    <code class="code">
-http-file-upload&#x2F;ext&#x2F;
-                    </code>
-should be added to the system path, http-file-upload comes with the following shell scripts to launch the process :
-                </div>
-                <code class="code">
 windows ............ http-file-upload&#x2F;ext&#x2F;http-file-upload.bat
 mac ................ http-file-upload&#x2F;ext&#x2F;http-file-upload.sh
 linux .............. http-file-upload&#x2F;ext&#x2F;http-file-upload.sh
-                </code>
-            </section>
-            <section id="links" style="margin-top: 50px;">
-                <h3 class="heading">
+                    </code>
+                </section>
+                <section id="links" style="margin-top: 50px;">
+                    <h3 class="heading">
 feedback
-                </h3>
-                <div>
+                    </h3>
+                    <div>
 im usually available in the
-                    <a href="https://chat.stackoverflow.com/rooms/17/javascript" style="color: blue;">
+                        <a href="https://chat.stackoverflow.com/rooms/17/javascript" style="color: blue;">
 stackoverflow javascript chat room
-                    </a>
+                        </a>
 user matt, come and say hi, id love to hear from you
-                </div>
-                <div>
+                    </div>
+                    <div>
 or by email
-                    <a href="mailto:javascript.12.03.2024@gmail.com">
+                        <a href="mailto:javascript.12.03.2024@gmail.com">
 javascript.12.03.2024@gmail.com
-                    </a>
-                </div>
-                <div id="github" style="margin-top: 40px;">
-                    <a href="https://github.com/javascript-2020/code-projects/tree/main/http-file-upload" style="border: 1px solid lightgray; padding: 7px; display: inline-flex; border-radius: 5px;">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAbFJREFUOE/l1E2IT2EUx/HPIFI2lJfGwmYsxFZKEUWjKWM3pZSpKcqeBcpLZsNeUeNlZWdBSVFmkAXbmRWbWRCRjYW8jv+pc/V4utff3q3bvfc5z/k+557zO2dA97UHy7ERx3LbZbzEZzxscx3o4L3GWizusP/AO6yv7TXwAo5g9V8iL03vcRWnm8USeBHH/xFUb7uEE7HYAOMZeVmGm7iN61jVccBHjOMQxvAl870QoIDMZ87CfxR3E7QDTyroTjzOtf24k++R0w0BHMY9LEpDCeyXgRL4EyMBjEKcSs+o3r4uSbTQQ1r3CzVMBnCh2PimTQp9wgyJDZZV/g+Bz7E1c/AdezHdr7xp34UHvcIuye8XUZSy9A1nDT5UBSvPCL9oz9BeeY2GYR3msBIHsi834WlPTt9yrXQKIUdEIfoVhSG6Z3PTejdwGG+xDc9SPud7UZ6popjEyZaURMuOl8NhKvtzpKf4yGvMwk95l/5xwNkKeA0T5XCI96EcRbsLh5mWAtXARznyXtXA5tD4/YNYmuBzVTQN8Ctu5V/93tI1sbdjS463KxXwaFZ/NnP9h/kXPcNYElddRc0AAAAASUVORK5CYII=" style="margin-right: 10px;" />
-                        <span style="color: blue;">
+                        </a>
+                    </div>
+                    <div id="github" style="margin-top: 40px;">
+                        <a href="https://github.com/javascript-2020/code-projects/tree/main/http-file-upload" style="border: 1px solid lightgray; padding: 7px; display: inline-flex; border-radius: 5px;">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAbFJREFUOE/l1E2IT2EUx/HPIFI2lJfGwmYsxFZKEUWjKWM3pZSpKcqeBcpLZsNeUeNlZWdBSVFmkAXbmRWbWRCRjYW8jv+pc/V4utff3q3bvfc5z/k+557zO2dA97UHy7ERx3LbZbzEZzxscx3o4L3GWizusP/AO6yv7TXwAo5g9V8iL03vcRWnm8USeBHH/xFUb7uEE7HYAOMZeVmGm7iN61jVccBHjOMQxvAl870QoIDMZ87CfxR3E7QDTyroTjzOtf24k++R0w0BHMY9LEpDCeyXgRL4EyMBjEKcSs+o3r4uSbTQQ1r3CzVMBnCh2PimTQp9wgyJDZZV/g+Bz7E1c/AdezHdr7xp34UHvcIuye8XUZSy9A1nDT5UBSvPCL9oz9BeeY2GYR3msBIHsi834WlPTt9yrXQKIUdEIfoVhSG6Z3PTejdwGG+xDc9SPud7UZ6popjEyZaURMuOl8NhKvtzpKf4yGvMwk95l/5xwNkKeA0T5XCI96EcRbsLh5mWAtXARznyXtXA5tD4/YNYmuBzVTQN8Ctu5V/93tI1sbdjS463KxXwaFZ/NnP9h/kXPcNYElddRc0AAAAASUVORK5CYII=" style="margin-right: 10px;" />
+                            <span style="color: blue;">
 https:&#x2F;&#x2F;github.com&#x2F;javascript-2020&#x2F;code-projects&#x2F;tree&#x2F;main&#x2F;http-file-upload&#x2F;
-                        </span>
-                    </a>
-                </div>
-                <div id="npm" style="margin-top: 20px;">
-                    <a href="https://www.npmjs.com/package/http-file-upload">
-                        <img src="https://nodei.co/npm/http-file-upload.png" />
-                    </a>
-                </div>
-            </section>
-            <section id="other" style="margin-top: 50px;">
-                <h3 class="heading">
+                            </span>
+                        </a>
+                    </div>
+                    <div id="npm" style="margin-top: 20px;">
+                        <a href="https://www.npmjs.com/package/http-file-upload">
+                            <img src="https://nodei.co/npm/http-file-upload.png" />
+                        </a>
+                    </div>
+                </section>
+                <section id="other" style="margin-top: 50px;">
+                    <h3 class="heading">
 other interesting works
-                </h3>
-                <div id="github" style="margin-top: 40px;">
-                    <a href="https://github.com/javascript-2020/code-projects/tree/main" style="border: 1px solid lightgray; padding: 7px; display: inline-flex; border-radius: 5px;">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAbFJREFUOE/l1E2IT2EUx/HPIFI2lJfGwmYsxFZKEUWjKWM3pZSpKcqeBcpLZsNeUeNlZWdBSVFmkAXbmRWbWRCRjYW8jv+pc/V4utff3q3bvfc5z/k+557zO2dA97UHy7ERx3LbZbzEZzxscx3o4L3GWizusP/AO6yv7TXwAo5g9V8iL03vcRWnm8USeBHH/xFUb7uEE7HYAOMZeVmGm7iN61jVccBHjOMQxvAl870QoIDMZ87CfxR3E7QDTyroTjzOtf24k++R0w0BHMY9LEpDCeyXgRL4EyMBjEKcSs+o3r4uSbTQQ1r3CzVMBnCh2PimTQp9wgyJDZZV/g+Bz7E1c/AdezHdr7xp34UHvcIuye8XUZSy9A1nDT5UBSvPCL9oz9BeeY2GYR3msBIHsi834WlPTt9yrXQKIUdEIfoVhSG6Z3PTejdwGG+xDc9SPud7UZ6popjEyZaURMuOl8NhKvtzpKf4yGvMwk95l/5xwNkKeA0T5XCI96EcRbsLh5mWAtXARznyXtXA5tD4/YNYmuBzVTQN8Ctu5V/93tI1sbdjS463KxXwaFZ/NnP9h/kXPcNYElddRc0AAAAASUVORK5CYII=" style="margin-right: 10px;" />
-                        <span style="color: blue;">
+                    </h3>
+                    <div id="github" style="margin-top: 40px;">
+                        <a href="https://github.com/javascript-2020/code-projects/tree/main" style="border: 1px solid lightgray; padding: 7px; display: inline-flex; border-radius: 5px;">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAbFJREFUOE/l1E2IT2EUx/HPIFI2lJfGwmYsxFZKEUWjKWM3pZSpKcqeBcpLZsNeUeNlZWdBSVFmkAXbmRWbWRCRjYW8jv+pc/V4utff3q3bvfc5z/k+557zO2dA97UHy7ERx3LbZbzEZzxscx3o4L3GWizusP/AO6yv7TXwAo5g9V8iL03vcRWnm8USeBHH/xFUb7uEE7HYAOMZeVmGm7iN61jVccBHjOMQxvAl870QoIDMZ87CfxR3E7QDTyroTjzOtf24k++R0w0BHMY9LEpDCeyXgRL4EyMBjEKcSs+o3r4uSbTQQ1r3CzVMBnCh2PimTQp9wgyJDZZV/g+Bz7E1c/AdezHdr7xp34UHvcIuye8XUZSy9A1nDT5UBSvPCL9oz9BeeY2GYR3msBIHsi834WlPTt9yrXQKIUdEIfoVhSG6Z3PTejdwGG+xDc9SPud7UZ6popjEyZaURMuOl8NhKvtzpKf4yGvMwk95l/5xwNkKeA0T5XCI96EcRbsLh5mWAtXARznyXtXA5tD4/YNYmuBzVTQN8Ctu5V/93tI1sbdjS463KxXwaFZ/NnP9h/kXPcNYElddRc0AAAAASUVORK5CYII=" style="margin-right: 10px;" />
+                            <span style="color: blue;">
 https:&#x2F;&#x2F;github.com&#x2F;javascript-2020&#x2F;code-projects&#x2F;tree&#x2F;main
-                        </span>
-                    </a>
-                </div>
-                <div>
-                </div>
-            </section>
+                            </span>
+                        </a>
+                    </div>
+                    <div>
+                    </div>
+                </section>
+            </div>
         </div>
         <div id="ftr" style="background-color: rgb(238, 232, 170); height: 50px; margin-top: 20px;">
         </div>
