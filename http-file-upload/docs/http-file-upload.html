@@ -58,7 +58,7 @@ html {
         
         .code {
               display:block;
-              margin:20px;
+              margin:20px 0;
               padding:0 20px;
         }
         
@@ -106,9 +106,9 @@ html {
               position:absolute;
               left:0;
               right:0;
-              top:5px;
+              top:-15px;
               z-index:0;
-              margin:0;
+              margin:0 auto;
         }
         </style>
         <script style="display: none;">
@@ -242,9 +242,7 @@ github
 npm
                 </div>
             </div>
-            <h3 style="color: blue; font-weight: bold;" id="title">
-http-file-upload
-            </h3>
+            <img id="title" src="http-file-upload.png" style="height: 80px;" />
             <div style="float: right; color: black; font-size: 16px; font-weight: normal;" id="date">
 28 May 2024
             </div>
@@ -252,7 +250,7 @@ http-file-upload
         <div id="scroll">
             <div id="center" style="">
                 <section id="description" style="margin-top: 0px;">
-                    <h3 style="margin-top: 0px;">
+                    <h3 style="margin-top: 0px;" class="heading">
 http-file-upload
                     </h3>
                     <div>
@@ -279,8 +277,11 @@ by a http request, such as those made through node.js, php, curl, python, c++, c
                     <h3 class="heading">
 install
                     </h3>
+                    <div style="font-weight: bold;">
+npm global installation
+                    </div>
                     <div>
-npm global installation is the recommended way to install
+is the recommended way to install
                     </div>
                     <code class="code">
 npm install http-file-upload -g
@@ -319,13 +320,6 @@ file from the default npm script installation directory this is usually
 c:&#x2F;users&#x2F;&lt;user&gt;&#x2F;AppData&#x2F;Roaming&#x2F;npm&#x2F;
                         <img class="code-copy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAAAXNSR0IArs4c6QAAAWVJREFUOE/tk79rk1EUhp/3xiEUGlFKO0inLt9f4CTiIIpDO3Tt0i3cuHSNdMjgklVJLh8duyo4qFA6lkIplIJERFzULbgpBCrmHL1iQpQ0OHXqWS7c8z6H81P8sXa7PV+r1d4Cy6O/Ke9ev99fa7Va37NPI0G3270m6VMIoTkcDnuToKTrwDPgG/AqxrgxhsuyXAAWzOwYeBBjPJyEU0o3gI9AhnaApzHGbaWUHkvacvecxRxw6zw4hFAAK2b2HGhm+Afw8FfUDzkl4O4UeNHd3wMvJX3JGqDIsLv7baCXa56Wdi6h0+msStqUdEVS1d3v/Tc82YOyLAsze3cJz+j2hTRsrVqtHs04DgaDQRFCOB2PqlKpvDGzvCRy97NZcF4U4OoYbjQaBymlO2a29C8oqQI8AV64+/7vi5K+ZngoaV3SX5c0GcDMAnACPIox7o58GX4N3Aey4FyT1Jd0s16vfx6JfgKLF/y0WaEatgAAAABJRU5ErkJggg==" />
                     </code>
-                    <div>
-see also
-                        <a href="#alternate-install" style="color: blue;">
-alternative installation methods
-                        </a>
-below
-                    </div>
                     <div id="node-x" style="margin-top: 20px;">
                         <h3>
 node-x
@@ -339,14 +333,39 @@ node-x
 npm : node-x
                             </div>
                         </div>
+                        <div style="margin-top: 10px;">
+npm local installation
+                        </div>
+                        <code class="code">
+npm install http-file-upload
+                        </code>
+                        <div>
+if the directory is not already accessible to node-x, add the current directory
+                        </div>
+                        <code class="code">
+node-x -add
+                        </code>
+                        <div>
+then run from anywhere on the command line with
+                        </div>
+                        <code class="code">
+node-x http-file-upload.js
+                        </code>
+                    </div>
+                    <div style="margin-top: 40px;">
+see also
+                        <a href="#alternate-install" style="color: blue;">
+alternative installation methods
+                        </a>
+below
                     </div>
                 </section>
                 <section id="uninstall">
                     <h3 class="heading">
 uninstall
                     </h3>
-                    <div>
-after global npm installation
+                    <div style="font-weight: bold;">
+npm global installation
                     </div>
                     <code class="code">
 npm uninstall http-file-upload -g
