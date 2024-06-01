@@ -28,9 +28,9 @@ files can be uploaded and downloaded
 
 ***
 
-<br>
-
 ### install
+
+<br>
 
 npm global installation is the recommended way to install
 
@@ -46,11 +46,17 @@ note : **windows powershell users**
 
 running powershell scripts are disabled by default
 
-to get the script to run normally in powershell users will have to delete
+to get the script to run normally in powershell users will either have to
+
+run the script via
+
+` httpfile-upload.cmd -version `
+
+or delete the powershell script
 
 ` http-file-upload.ps1 `
 
-file from the default npm script installation directory, this is usually
+from the default npm script installation directory, this is usually
 
 ` c:/users/<user_name>/AppData/Roaming/npm/ `
 
@@ -69,9 +75,9 @@ see also alternative installation methods below
 
 ***
 
-<br>
-
 ### uninstall
+
+<br>
 
 after global npm installation
 
@@ -81,9 +87,9 @@ after global npm installation
 
 ***
 
-<br>
-
 ### operation
+
+<br>
 
 the server listens on all network interfaces, the default port is 3000
 <br>
@@ -180,9 +186,9 @@ the server can be quit on the command line by pressing
 
 ***
 
-<br>
-
 ### example useage
+
+<br>
 
 upload/download files in the current directory
 
@@ -321,8 +327,6 @@ node http-file-upload -cwd /work/tmp/
 
 ***
 
-<br>
-
 ### alternative installation methods
 
 <br>
@@ -374,14 +378,19 @@ linux .............. ` http-file-upload/ext/http-file-upload.sh `
 
 ***
 
-<br>
-
 ### feedback
+
+<br>
 
 im usually available in the stackoverflow javascript chat room user matt, come and say hi, id love to hear from you
 
 or by email javascript.12.03.2024@gmail.com
 
+<br>
+
+***
+
+<br>
 
 https://github.com/javascript-2020/http-file-upload
 
