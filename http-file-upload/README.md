@@ -1,4 +1,4 @@
-[![home](https://javascript-2020.github.io/images/home.png)](https://github.com/javascript-2020?tab=repositories)
+[![github-repos](https://javascript-2020.github.io/images/icons/github-repos.png)](https://github.com/javascript-2020?tab=repositories)
 
 <h3>http-file-upload</h3>
 
