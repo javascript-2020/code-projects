@@ -113,7 +113,6 @@ html {
         </style>
         <script style="display: none;">
 var download    = {};
-        var img         = {};
         
         
         window.onload=function(){
@@ -124,7 +123,7 @@ var download    = {};
               $.all('code').forEach(node=>{
               
                     var img         = document.createElement('img');
-                    img.src         = img.copy;
+                    img.src         = copy;
                     img.className   = 'code-copy';
                     img.onclick     = e=>click(img);
                     node.append(img);
@@ -216,7 +215,7 @@ var download    = {};
         
         
         
-img.copy    =
+        var copy    =
 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAYAAACEYr13AAAAAXNSR0IArs4c6QAAAVZJREFUOE/tk7'+
 '1LA0EQxd/shhCild1Z2llZKvgHCAErK5vIETDega2NIMHOxsrskrR+F5bpbK1sBFGC2oitiKCgnGGfLBi5RJNoKy4sLDtvfrPz2B'+
 'GklrV2D8B8+u6b82Uul5sOw/DRxyQlEGvtCQAnIvXuROfciFJqk+QrgLNsNjtTKpWevgBIXsdxvNANMMaMicgVgBCAL3AQRVEoxp'+
