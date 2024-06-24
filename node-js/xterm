@@ -1,0 +1,53 @@
+
+
+var view=nodejs.iframe.list[0];
+var iframe=$(view.root,'iframe');
+var win=iframe.contentWindow;
+win.term.writeln('test');
+
+
+
+
+return;  
+  
+    
+var view=list[list.index];
+var tab=list.view.find(view,'new-2');
+console.log(tab);
+
+
+iframe.new(tab.session.getValue(),'attach',{onload});
+
+function onload(view){
+
+var frame=$(view.root,'iframe');
+var win=iframe.contentWindow;
+win.term.writeLn('test');
+  
+}//onload
+
+
+<head>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm/css/xterm.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@xterm/xterm/lib/xterm.min.js"></script>
+
+</head>
+
+<body>
+  <div id="terminal"></div>
+  <script>
+  
+    var term = new Terminal();
+    term.open(document.getElementById('terminal'));
+    term.writeln('\x1B[1;3;31mxterm.js\x1B[0m');
+    term.write(' $ ');
+    
+  </script>
+</body>
+
+
+/* node-js-tabs
+{"names":["new-1","new-2"],"info":[["new-1","new-2",443,443,"append"]]}
+*/
