@@ -1,4 +1,8 @@
 
+//https://github.com/mscdex/ssh2/blob/master/README.md
+//https://github.com/xtermjs/xterm.js/blob/master/typings/xterm.d.ts
+
+
 
 var view=nodejs.iframe.list[0];
 var iframe=$(view.root,'iframe');
@@ -27,10 +31,48 @@ win.term.writeLn('test');
 }//onload
 
 
+
+
+
+const { Client } = require('ssh2');
+
+const conn = new Client();
+conn.on('ready', () => {
+  console.log('Client :: ready');
+  conn.sftp((err, sftp) => {
+    if (err) throw err;
+    sftp.readdir('foo', (err, list) => {
+      if (err) throw err;
+      console.dir(list);
+      conn.end();
+    });
+  });
+}).connect({
+  host: '192.168.100.100',
+  port: 22,
+  username: 'frylock',
+  password: 'nodejsrules'
+});
+
+
+  conn.shell((err, stream) => {
+    if (err) throw err;
+    stream.on('close', () => {
+      console.log('Stream :: close');
+      conn.end();
+    }).on('data', (data) => {
+      console.log('OUTPUT: ' + data);
+    });
+    stream.end('ls -l\nexit\n');
+  });
+  
+  
+///////
+
+
 <head>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm/css/xterm.min.css">
-
 <script src="https://cdn.jsdelivr.net/npm/@xterm/xterm/lib/xterm.min.js"></script>
 
 </head>
@@ -47,7 +89,3 @@ win.term.writeLn('test');
   </script>
 </body>
 
-
-/* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",443,443,"append"]]}
-*/
