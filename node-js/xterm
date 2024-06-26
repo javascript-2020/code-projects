@@ -67,8 +67,8 @@ function onload(view){
 */                                      
               }//switch
 
-              term.write(key);
               child.stdin.write(key);
+              term.write(key);
               
           });
 
