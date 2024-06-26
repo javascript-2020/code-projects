@@ -7,8 +7,9 @@ iframe.new(tab.session.getValue(),'attach',{onload});
 function onload(view){
 
   console.log('onload');
-  
-  $(view.root,'iframe').contentDocument.body.focus();
+  var iframe=$(view.root,'iframe');
+  iframe.contentDocument.body.focus();
+  iframe.style.height='300px';
   
 }//onload
 
@@ -34,20 +35,21 @@ function onload(view){
           };
           
           term.writeln('This is a shell emulator.');
-          term.prompt();
           
           var curr_line = '';
           
-          term.onKey(function({key,domEvent:ev}){console.log(key,ev);
+          term.onKey(function({key,domEvent:ev}){console.log(key,ev,ev.keyCode,key.charCodeAt(0));
           
               const printable = !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
               
               if (ev.keyCode === 13) {
+                  key   = '\n';
+                  
                   term.prompt();
                   //console.log(curr_line);
                   curr_line = '';
               } else if (ev.keyCode === 8) {
-                  if (term.x > 2) {
+                  if(curr_line.length){
                       curr_line = curr_line.slice(0, -1);
                       term.write('\b \b');
                   }
@@ -57,7 +59,8 @@ function onload(view){
                   term.write(ev.key);
               }
 
-              console.log(key,key.charCodeAt(0));
+              //console.log(key,key.charCodeAt(0));
+              
               child.stdin.write(key);
               
               
@@ -71,8 +74,20 @@ function onload(view){
           var cp      = window.parent.cp;
           var child   = cp.spawn('cmd.exe');
           
-          child.stdout.on('data',data=>term.write(data));
-          child.stderr.on('data',data=>term.write(data));
+          child.stdout.on('data',data=>{
+          
+                data    = String(data).replace('\r','');
+                term.write(data)
+                
+          });
+          
+          child.stderr.on('data',data=>{
+          
+                data    = String(data).replace('\r','');
+                term.write(data);
+                
+          });
+          
           child.on('exit',()=>'exit');
           
           //var cmd   = 'dir\n';
@@ -82,5 +97,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",262,2000,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2343,"append"]]}
 */
