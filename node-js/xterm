@@ -38,38 +38,36 @@ function onload(view){
           
           var curr_line = '';
           
-          term.onKey(function({key,domEvent:ev}){console.log(key,ev,ev.keyCode,key.charCodeAt(0));
+          term.onKey(function({key,domEvent:e}){
+                                                                          console.log('key',key,key.charCodeAt(0));
+                                                                          console.log('e.key',e.key,e.key.charCodeAt(0),e.keyCode);
           
-              const printable = !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
+              var printable   = !e.altKey && !e.altGraphKey && !e.ctrlKey && !e.metaKey;
               
-              if (ev.keyCode === 13) {
-                  key   = '\n';
-                  
-                  term.prompt();
-                  //console.log(curr_line);
-                  curr_line = '';
-              } else if (ev.keyCode === 8) {
-                  if(curr_line.length){
-                      curr_line = curr_line.slice(0, -1);
-                      term.write('\b \b');
-                  }
-              } else if (printable) {
-                  curr_line += ev.key;
-                  //console.log(curr_line, ev.key)
-                  term.write(ev.key);
-              }
+              switch(e.key){
+              
+                case 'Escape'   : child.exit();
+                                  window.parent.iframe.list[0].root.remove();
+                                  break;
+                                  
+                case 'Enter'    : key   = '\n';       break;                
+                                  
+                case '8'        : if(curr_line.length){
+                                        curr_line = curr_line.slice(0, -1);
+                                        term.write('\b \b');
+                                  }
+                                  break;
+                                  
+                default         : if(printable){
+                                        curr_line += e.key;
+                                        term.write(e.key);
+                                  }
+              }//switch
 
-              //console.log(key,key.charCodeAt(0));
-              
               child.stdin.write(key);
               
-              
           });
-          
-          //term.on('paste', function(data) {
-//              term.write(data);
-//          });
-          
+
           
           var cp      = window.parent.cp;
           var child   = cp.spawn('cmd.exe');
@@ -97,5 +95,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2343,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2638,"append"]]}
 */
