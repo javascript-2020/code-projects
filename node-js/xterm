@@ -56,7 +56,7 @@ function onload(view){
                 case 'Backspace'    : if(curr_line.length){
                                             curr_line = curr_line.slice(0, -1);
                                             term.write('\b \b');
-                                            key=String.fromCharCode(8);
+                                            key=String.fromCharCode(127);
                                       }
                                       break;
                                   
@@ -99,5 +99,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2943,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2945,"append"]]}
 */
