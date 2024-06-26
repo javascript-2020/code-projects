@@ -81,13 +81,14 @@ if(0){
           
               var printable   = !e.altKey && !e.altGraphKey && !e.ctrlKey && !e.metaKey;
 
-/*              
               switch(e.key){
               
                 case 'Escape'       : //child.kill();
-                                      conn.close();
+                                      conn.end();
                                       window.parent.nodejs.iframe.remove(window);
                                       return;
+
+/*              
                                   
                 //case 'Enter'        : key   = '\n';       
                                       //break;                
@@ -103,9 +104,9 @@ if(0){
                 default             : if(printable){
                                             curr_line += e.key;
                                       }
+*/              
                                       
               }//switch
-*/              
 
               stream.write(key);
               term.write(key);
