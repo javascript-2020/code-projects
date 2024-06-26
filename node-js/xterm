@@ -75,7 +75,7 @@ function onload(view){
           child.stdout.on('data',data=>{
                 
                 console.log('stdout',data);
-                data    = String(data).replace('\r','');
+                data    = String(data).replace('\r\n','\n');
                 term.write(data)
                 
           });
@@ -83,7 +83,7 @@ function onload(view){
           child.stderr.on('data',data=>{
           
                 console.log('stderr',data);
-                data    = String(data).replace('\r','');
+                data    = String(data).replace('\r\n','\n');
                 term.write(data);
                 
           });
@@ -97,5 +97,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2786,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2794,"append"]]}
 */
