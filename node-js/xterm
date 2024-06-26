@@ -108,9 +108,12 @@ function onload(view){
               
           });
 */
-          
+
+
+if(0){
+                    
           var cp      = window.parent.cp;
-          var child   = cp.spawn('cmd.exe');
+          var child   = cp.spawn('/bin/sh');
           
           child.stdout.on('data',data=>{
                 
@@ -132,10 +135,66 @@ function onload(view){
           
           //var cmd   = 'dir\n';
           //[...cmd].forEach(c=>child.stdin.write(c));
-          
+
+}
+
+
+
+
+
+
+
+
+
+
+        
+        var stream;
+        const { Client } = require('ssh2');
+        
+        const conn = new Client();
+        
+        conn.on('ready', () => {
+        
+              console.log('Client :: ready');
+              
+              conn.shell((err, stream2) => {
+              
+                    if (err) throw err;
+                    
+                    stream    = stream2;
+                    stream.on('close', () => {
+                    
+                          console.log('Stream :: close');
+                          conn.end();
+                          
+                    })
+                    stream.on('data', (data) => {
+                    
+                          term.write(data);
+                          
+                    });
+                
+                
+              });
+        });
+        
+        conn.connect({
+              host: '192.168.100.100',
+              port: 2222,
+              username: 'root',
+              password:'node'
+        });
+        
+        
+
+
+
+
+
+
 
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",312,3863,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",312,4973,"append"]]}
 */
