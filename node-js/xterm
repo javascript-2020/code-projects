@@ -47,7 +47,7 @@ function onload(view){
               switch(e.key){
               
                 case 'Escape'       : child.kill();
-                                      window.parent.iframe.remove(window);
+                                      window.parent.nodejs.iframe.remove(window);
                                       return;
                                       break;
                                   
@@ -99,5 +99,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2936,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2943,"append"]]}
 */
