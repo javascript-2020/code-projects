@@ -67,7 +67,7 @@ function onload(view){
 */                                      
               }//switch
 
-              term.write(e.key);
+              term.write(key);
               child.stdin.write(key);
               
           });
@@ -101,5 +101,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2995,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2993,"append"]]}
 */
