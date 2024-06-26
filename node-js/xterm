@@ -51,7 +51,8 @@ function onload(view){
                                       console.log(result);
                                       return;
                                   
-                case 'Enter'        : key   = '\n';       break;                
+                case 'Enter'        : key   = '\n';       
+                                      break;                
                                   
                 case 'Backspace'    : if(curr_line.length){
                                             curr_line = curr_line.slice(0, -1);
@@ -99,5 +100,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2970,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",312,3010,"append"]]}
 */
