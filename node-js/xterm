@@ -47,9 +47,7 @@ function onload(view){
               switch(e.key){
               
                 case 'Escape'       : child.kill();
-                                      debugger;
-                                      var result=window.parent.nodejs.iframe.remove(window);
-                                      console.log(result);
+                                      window.parent.nodejs.iframe.remove(window);
                                       return;
                                   
                 case 'Enter'        : key   = '\n';       
@@ -58,7 +56,7 @@ function onload(view){
                 case 'Backspace'    : if(curr_line.length){
                                             curr_line = curr_line.slice(0, -1);
                                             term.write('\b \b');
-                                            key=String.fromCharCode(127);
+                                            key=String.fromCharCode(7);
                                       }
                                       break;
                                   
@@ -101,5 +99,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",312,3067,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2945,"append"]]}
 */
