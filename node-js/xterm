@@ -75,17 +75,17 @@ function onload(view){
           
           child.stdout.on('data',data=>{
                 
-                data    = String(data).replace('\r\n','\n');
-                console.log('stderr',data.toString().replaceAll(' ','.'));
+                var str   = data.toString();
+                [...str].forEach(c=>console.log(c,' - ',c.charCodeAt(0)));
                 term.write(data)
                 
           });
           
           child.stderr.on('data',data=>{
           
-                data    = String(data).replace('\r\n','\r');
-                console.log('stderr',data.toString().replaceAll(' ','.'));
-                term.write(data);
+                var str   = data.toString();
+                [...str].forEach(c=>console.log(c,' - ',c.charCodeAt(0)));
+                term.write(data)
                 
           });
           
@@ -98,5 +98,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2896,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2863,"append"]]}
 */
