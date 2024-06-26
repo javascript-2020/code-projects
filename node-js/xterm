@@ -80,15 +80,17 @@ if(0){
                                                                           console.log('e.key',e.key,e.key.charCodeAt(0),e.keyCode);
           
               var printable   = !e.altKey && !e.altGraphKey && !e.ctrlKey && !e.metaKey;
-              
+
+/*              
               switch(e.key){
               
-                case 'Escape'       : child.kill();
+                case 'Escape'       : //child.kill();
+                                      conn.close();
                                       window.parent.nodejs.iframe.remove(window);
                                       return;
                                   
-                case 'Enter'        : key   = '\n';       
-                                      break;                
+                //case 'Enter'        : key   = '\n';       
+                                      //break;                
                                   
                                   
                 case 'Backspace'    : 
@@ -103,8 +105,9 @@ if(0){
                                       }
                                       
               }//switch
+*/              
 
-              child.stdin.write(key);
+              stream.write(key);
               term.write(key);
               
           });
@@ -151,7 +154,7 @@ if(0){
 
         
         var stream;
-        const { Client } = require('ssh2');
+        const { Client } = window.parent.require('ssh2');
         
         const conn = new Client();
         
@@ -198,5 +201,5 @@ if(0){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",312,4949,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",312,5039,"append"]]}
 */
