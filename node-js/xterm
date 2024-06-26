@@ -9,7 +9,7 @@ function onload(view){
   console.log('onload');
   var iframe=$(view.root,'iframe');
   iframe.contentDocument.body.focus();
-  iframe.style.height='300px';
+  iframe.style.height='500px';
   
 }//onload
 
@@ -46,22 +46,22 @@ function onload(view){
               
               switch(e.key){
               
-                case 'Escape'   : child.exit();
-                                  window.parent.iframe.list[0].root.remove();
-                                  break;
+                case 'Escape'       : child.exit();
+                                      window.parent.iframe.list[0].root.remove();
+                                      break;
                                   
-                case 'Enter'    : key   = '\n';       break;                
+                case 'Enter'        : key   = '\n';       break;                
                                   
-                case '8'        : if(curr_line.length){
-                                        curr_line = curr_line.slice(0, -1);
-                                        term.write('\b \b');
-                                  }
-                                  break;
+                case 'Backspace'    : if(curr_line.length){
+                                            curr_line = curr_line.slice(0, -1);
+                                            term.write('\b \b');
+                                      }
+                                      break;
                                   
-                default         : if(printable){
-                                        curr_line += e.key;
-                                        term.write(e.key);
-                                  }
+                default             : if(printable){
+                                            curr_line += e.key;
+                                            term.write(e.key);
+                                      }
               }//switch
 
               child.stdin.write(key);
@@ -95,5 +95,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2638,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2690,"append"]]}
 */
