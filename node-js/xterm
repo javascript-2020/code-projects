@@ -53,6 +53,7 @@ function onload(view){
                 case 'Enter'        : key   = '\n';       
                                       break;                
                                   
+/*                                  
                 case 'Backspace'    : if(curr_line.length){
                                             curr_line = curr_line.slice(0, -1);
                                             term.write('\b \b');
@@ -62,10 +63,11 @@ function onload(view){
                                   
                 default             : if(printable){
                                             curr_line += e.key;
-                                            term.write(e.key);
                                       }
+*/                                      
               }//switch
 
+              term.write(e.key);
               child.stdin.write(key);
               
           });
@@ -99,5 +101,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2945,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2995,"append"]]}
 */
