@@ -1,3 +1,4 @@
+
 var view=list[list.index];
 var tab=list.view.find(view,'new-2');
 
@@ -109,7 +110,7 @@ if(0){
               }//switch
 
               stream.write(key);
-              term.write(key);
+              //term.write(key);
               
           });
 
@@ -202,5 +203,5 @@ if(0){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",312,5039,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",314,5041,"append"]]}
 */
