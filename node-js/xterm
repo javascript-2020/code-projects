@@ -46,7 +46,7 @@ function onload(view){
               
               switch(e.key){
               
-                case 'Escape'       : child.exit();
+                case 'Escape'       : child.kill();
                                       window.parent.iframe.list[0].root.remove();
                                       break;
                                   
