@@ -1,73 +1,18 @@
-
-//https://github.com/mscdex/ssh2/blob/master/README.md
-//https://github.com/xtermjs/xterm.js/blob/master/typings/xterm.d.ts
-
-
-
-var view=nodejs.iframe.list[0];
-var iframe=$(view.root,'iframe');
-var win=iframe.contentWindow;
-win.term.writeln('test');
-
-
-
-
-return;  
-  
-    
 var view=list[list.index];
 var tab=list.view.find(view,'new-2');
-console.log(tab);
 
 
 iframe.new(tab.session.getValue(),'attach',{onload});
 
 function onload(view){
 
-var frame=$(view.root,'iframe');
-var win=iframe.contentWindow;
-win.term.writeLn('test');
+  console.log('onload');
+  
+  $(view.root,'iframe').contentDocument.body.focus();
   
 }//onload
 
 
-
-
-
-const { Client } = require('ssh2');
-
-const conn = new Client();
-conn.on('ready', () => {
-  console.log('Client :: ready');
-  conn.sftp((err, sftp) => {
-    if (err) throw err;
-    sftp.readdir('foo', (err, list) => {
-      if (err) throw err;
-      console.dir(list);
-      conn.end();
-    });
-  });
-}).connect({
-  host: '192.168.100.100',
-  port: 22,
-  username: 'frylock',
-  password: 'nodejsrules'
-});
-
-
-  conn.shell((err, stream) => {
-    if (err) throw err;
-    stream.on('close', () => {
-      console.log('Stream :: close');
-      conn.end();
-    }).on('data', (data) => {
-      console.log('OUTPUT: ' + data);
-    });
-    stream.end('ls -l\nexit\n');
-  });
-  
-  
-///////
 
 
 <head>
@@ -81,11 +26,61 @@ conn.on('ready', () => {
   <div id="terminal"></div>
   <script>
   
-    var term = new Terminal();
-    term.open(document.getElementById('terminal'));
-    term.writeln('\x1B[1;3;31mxterm.js\x1B[0m');
-    term.write(' $ ');
-    
+          var term = new Terminal();
+          term.open(document.getElementById('terminal'));
+          
+          term.prompt = () => {
+              term.write('\n$ ');
+          };
+          
+          term.writeln('This is a shell emulator.');
+          term.prompt();
+          
+          var curr_line = '';
+          
+          term.onKey(function({key,domEvent:ev}){console.log(key,ev);
+          
+              const printable = !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
+              
+              if (ev.keyCode === 13) {
+                  term.prompt();
+                  //console.log(curr_line);
+                  curr_line = '';
+              } else if (ev.keyCode === 8) {
+                  if (term.x > 2) {
+                      curr_line = curr_line.slice(0, -1);
+                      term.write('\b \b');
+                  }
+              } else if (printable) {
+                  curr_line += ev.key;
+                  //console.log(curr_line, ev.key)
+                  term.write(ev.key);
+              }
+
+              console.log(key,key.charCodeAt(0));
+              child.stdin.write(key);
+              
+              
+          });
+          
+          //term.on('paste', function(data) {
+//              term.write(data);
+//          });
+          
+          
+          var cp      = window.parent.cp;
+          var child   = cp.spawn('cmd.exe');
+          
+          child.stdout.on('data',data=>term.write(data));
+          child.stderr.on('data',data=>term.write(data));
+          child.on('exit',()=>'exit');
+          
+          //var cmd   = 'dir\n';
+          //[...cmd].forEach(c=>child.stdin.write(c));
+          
+
   </script>
 </body>
-
+/* node-js-tabs
+{"names":["new-1","new-2"],"info":[["new-1","new-2",262,2000,"append"]]}
+*/
