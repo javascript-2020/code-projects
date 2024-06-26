@@ -38,6 +38,42 @@ function onload(view){
           
           var curr_line = '';
           
+          var esc     = String.fromCharCode(27);
+          var left    = esc+'[D';
+          var del     = esc+'[3~';
+          //<esc>[3~ 
+          
+          
+    term.onData(e => {console.log(e,e.charCodeAt(0));
+    
+      switch (e) {
+        case '\u0003': // Ctrl+C
+          term.write('^C');
+          child.stdin.write('^C');
+          break;
+        case '\r': // Enter
+          term.write('\n');
+          child.stdin.write('\n');
+          break;
+        case '\u007F': // Backspace (DEL)
+          console.log('del');
+          term.write(left+del);
+          child.stdin.write(left+del);
+          break;
+        default: // Print all other characters for demo
+          if (e >= String.fromCharCode(0x20) && e <= String.fromCharCode(0x7E) || e >= '\u00a0') {
+            term.write(e);
+            child.stdin.write(e);
+          }
+      }
+      
+    });
+
+
+
+
+/*
+          
           term.onKey(function({key,domEvent:e}){
                                                                           console.log('key',key,key.charCodeAt(0));
                                                                           console.log('e.key',e.key,e.key.charCodeAt(0),e.keyCode);
@@ -53,25 +89,25 @@ function onload(view){
                 case 'Enter'        : key   = '\n';       
                                       break;                
                                   
-/*                                  
-                case 'Backspace'    : if(curr_line.length){
-                                            curr_line = curr_line.slice(0, -1);
-                                            term.write('\b \b');
-                                            key=String.fromCharCode(7);
-                                      }
+                                  
+                case 'Backspace'    : 
+                      key='\\x1b[D\\x1b[P';
+                                            //term.write('\b \b');
+                                            //key=String.fromCharCode(7);
+                                      
                                       break;
                                   
                 default             : if(printable){
                                             curr_line += e.key;
                                       }
-*/                                      
+                                      
               }//switch
 
               child.stdin.write(key);
               term.write(key);
               
           });
-
+*/
           
           var cp      = window.parent.cp;
           var child   = cp.spawn('cmd.exe');
@@ -101,5 +137,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",312,2993,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",312,3863,"append"]]}
 */
