@@ -45,6 +45,7 @@
           import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm'
           import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm'        
 
+          var con;
           var term;
           var fitAddon;
           
@@ -76,7 +77,7 @@
 
               var stream;
               var {Client}    = window.parent.require('ssh2');
-              var con         = new Client();
+              con         = new Client();
               
               con.on('ready', () => {
               
@@ -134,5 +135,5 @@
 
 
 /* node-js-tabs
-{"names":["main","term"],"info":[["main","term",380,3158,"append"]]}
+{"names":["main","term"],"info":[["main","term",380,3174,"append"]]}
 */
