@@ -74,7 +74,8 @@
               });
 
 
-
+  //nodejs
+  
               var stream;
               var {Client}    = window.parent.require('ssh2');
               con         = new Client();
@@ -135,5 +136,5 @@
 
 
 /* node-js-tabs
-{"names":["main","term"],"info":[["main","term",380,3174,"append"]]}
+{"names":["main","term"],"info":[["main","term",380,3188,"append"]]}
 */
