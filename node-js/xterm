@@ -21,14 +21,17 @@ function onload(view){
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm/css/xterm.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@xterm/xterm/lib/xterm.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@xterm/addon-fit/lib/addon-fit.min.js"></script>
 </head>
 
 <body>
   <div id="terminal"></div>
   <script>
   
-          var term = new Terminal();
+          var term        = new Terminal();
+          var fitAddon    = new FitAddon();
+          term.loadAddon(fitAddon);
+
           term.open(document.getElementById('terminal'));
           
           term.prompt = () => {
@@ -187,9 +190,11 @@ if(0){
         
         conn.connect({
               host: '127.0.0.1',
-              port: 2222,
-              username: 'root',
-              password:'node'
+              port: 22,
+              username: 'DESKTOP-1\matt-',
+              password:'matt-pc-1-2023',
+              privateKey:window.parent.fs.readFileSync('priv-key'),
+              debug:console.log
         });
         
         
@@ -203,5 +208,5 @@ if(0){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",314,5041,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",314,5344,"append"]]}
 */
