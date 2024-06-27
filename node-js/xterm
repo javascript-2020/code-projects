@@ -38,7 +38,7 @@
 
 <body>
 
-  <div id="terminal"></div>
+  <div id=terminal></div>
   
   <script type=module>
   
@@ -50,14 +50,11 @@
           
           window.onload=()=>{
           
-              //var width=terminal.offsetWidth,height=500;//terminal.offsetHeight;
-              //console.log(width,height);
-              
-              term        = new xterm.Terminal();//{width,height});
+              term        = new xterm.Terminal();
               fitAddon    = new addonFit.FitAddon();
               term.loadAddon(fitAddon);
       
-              term.open(document.getElementById('terminal'));
+              term.open(terminal);
               
               
               term.onResize((size) =>{fitAddon.fit()});
@@ -137,5 +134,5 @@
 
 
 /* node-js-tabs
-{"names":["main","term"],"info":[["main","term",381,3349,"append"]]}
+{"names":["main","term"],"info":[["main","term",381,3158,"append"]]}
 */
