@@ -45,17 +45,21 @@ function onload(view){
           
           window.onload=()=>{
           
-              term        = new xterm.Terminal({width:terminal.clientWidth,terminal.clientHeight});
+              var width=terminal.offsetWidth,height=500;//terminal.offsetHeight;
+              console.log(width,height);
+              
+              term        = new xterm.Terminal({width,height});
               fitAddon    = new addonFit.FitAddon();
               term.loadAddon(fitAddon);
       
               term.open(document.getElementById('terminal'));
+              
               fitAddon.fit();          
               
               
               term.writeln('This is a shell emulator.');
           
-              //term.onResize((size) => {fitAddon.fit();});
+              term.onResize((size) =>{fitAddon.fit()});
 
 
 
@@ -85,11 +89,14 @@ function onload(view){
           
           conn.on('ready', () => {
           
+              fitAddon.fit();          
                 console.log('Client :: ready');
                 
                 conn.shell((err, stream2) => {
                 
                       if (err) throw err;
+                      
+                      fitAddon.fit();
                       
                       stream    = stream2;
                       stream.on('close', () => {
@@ -110,10 +117,9 @@ function onload(view){
           
           conn.connect({
                 host: '127.0.0.1',
-                port: 22,
-                username: 'DESKTOP-1\matt-',
-                password:'matt-pc-1-2023',
-                privateKey:window.parent.fs.readFileSync('priv-key'),
+                port: 2222,
+                username: 'root',
+                password:'node',
                 debug:console.log
           });
         
@@ -128,5 +134,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",314,3100,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",314,3230,"append"]]}
 */
