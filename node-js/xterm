@@ -37,6 +37,7 @@ function onload(view){
   <div id="terminal"></div>
   
   <script type=module>
+  
           import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm'
           import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm'        
 
@@ -63,70 +64,69 @@ function onload(view){
 
 
 
-          term.onKey(function({key,domEvent:e}){
-          
-              var printable   = !e.altKey && !e.altGraphKey && !e.ctrlKey && !e.metaKey;
-
-              switch(e.key){
+              term.onKey(function({key,domEvent:e}){
               
-                case 'Escape'       : conn.end();
-                                      window.parent.nodejs.iframe.remove(window);
-                                      return;
-                                      
-              }//switch
+                  var printable   = !e.altKey && !e.altGraphKey && !e.ctrlKey && !e.metaKey;
+    
+                  switch(e.key){
+                  
+                    case 'Escape'       : conn.end();
+                                          window.parent.nodejs.iframe.remove(window);
+                                          return;
+                                          
+                  }//switch
+    
+                  stream.write(key);
+                  //term.write(key);
+                  
+              });
 
-              stream.write(key);
-              //term.write(key);
+
+
+              var stream;
+              var {Client}    = window.parent.require('ssh2');
+              var con         = new Client();
               
-          });
-
-
-
-          var stream;
-          const { Client } = window.parent.require('ssh2');
-          
-          const conn = new Client();
-          
-          conn.on('ready', () => {
-          
-              fitAddon.fit();          
-                console.log('Client :: ready');
-                
-                conn.shell((err, stream2) => {
-                
-                      if (err) throw err;
+              con.on('ready', () => {
+              
+                    fitAddon.fit();
+                                                                            console.log('Client :: ready');
+                    conn.shell((err, stream2) => {
+                    
+                          if(err)throw err;
+                          
+                          fitAddon.fit();
+                          
+                          stream    = stream2;
+                          
+                          stream.on('close', () => {
+                          
+                                console.log('Stream :: close');
+                                conn.end();
+                                
+                          });
+                          
+                          stream.on('data', (data) => {
+                          
+                                term.write(data);
+                                
+                          });
                       
-                      fitAddon.fit();
-                      
-                      stream    = stream2;
-                      stream.on('close', () => {
-                      
-                            console.log('Stream :: close');
-                            conn.end();
-                            
-                      })
-                      stream.on('data', (data) => {
-                      
-                            term.write(data);
-                            
-                      });
-                  
-                  
-                });
-          });
+                    });
+              });
           
-          conn.connect({
-                host: '127.0.0.1',
-                port: 2222,
-                username: 'root',
-                password:'node',
-                debug:console.log
-          });
+              con.connect({
+                    host: '127.0.0.1',
+                    port: 2222,
+                    username: 'root',
+                    password:'node',
+                    debug:console.log
+              });
         
         
 
 
-          }//onload
+        }//onload
 
 
 
@@ -134,5 +134,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",314,3230,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",314,3495,"append"]]}
 */
