@@ -38,15 +38,21 @@ function onload(view){
           import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm'
           import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm'        
 
-          var term        = new xterm.Terminal();
-          var fitAddon    = new addonFit.FitAddon();
-          term.loadAddon(fitAddon);
-  
-          term.open(document.getElementById('terminal'));
-          fitAddon.fit();          
+          var term;
+          var fitAddon;
           
+          window.onload=()=>{
           
-          term.writeln('This is a shell emulator.');
+              term        = new xterm.Terminal();
+              fitAddon    = new addonFit.FitAddon();
+              term.loadAddon(fitAddon);
+      
+              term.open(document.getElementById('terminal'));
+              fitAddon.fit();          
+              
+              
+              term.writeln('This is a shell emulator.');
+          }
           
           var curr_line = '';
           
@@ -223,5 +229,5 @@ if(0){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",314,5721,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",314,5863,"append"]]}
 */
