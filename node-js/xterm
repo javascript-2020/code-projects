@@ -33,7 +33,9 @@ function onload(view){
 </head>
 
 <body>
+
   <div id="terminal"></div>
+  
   <script type=module>
           import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm'
           import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm'        
@@ -52,79 +54,20 @@ function onload(view){
               
               
               term.writeln('This is a shell emulator.');
-          }
           
-          var curr_line = '';
-          
-          var esc     = String.fromCharCode(27);
-          var left    = esc+'[D';
-          var del     = esc+'[3~';
-          //<esc>[3~ 
-          
-//term.onResize((size) => {fitAddon.fit();});
+              //term.onResize((size) => {fitAddon.fit();});
 
-
-
-if(0){
-
-    term.onData(e => {console.log(e,e.charCodeAt(0));
-    
-      switch (e) {
-        case '\u0003': // Ctrl+C
-          term.write('^C');
-          stream.write('^C');
-          break;
-        case '\r': // Enter
-          term.write('\n');
-          child.stdin.write('\n');
-          break;
-        case '\u007F': // Backspace (DEL)
-          console.log('del');
-          term.write(left+del);
-          child.stdin.write(left+del);
-          break;
-        default: // Print all other characters for demo
-          if (e >= String.fromCharCode(0x20) && e <= String.fromCharCode(0x7E) || e >= '\u00a0') {
-            term.write(e);
-            child.stdin.write(e);
-          }
-      }
-      
-    });
-
-}
 
 
           term.onKey(function({key,domEvent:e}){
-                                                                          console.log('key',key,key.charCodeAt(0));
-                                                                          console.log('e.key',e.key,e.key.charCodeAt(0),e.keyCode);
           
               var printable   = !e.altKey && !e.altGraphKey && !e.ctrlKey && !e.metaKey;
 
               switch(e.key){
               
-                case 'Escape'       : //child.kill();
-                                      conn.end();
+                case 'Escape'       : conn.end();
                                       window.parent.nodejs.iframe.remove(window);
                                       return;
-
-/*              
-                                  
-                //case 'Enter'        : key   = '\n';       
-                                      //break;                
-                                  
-                                  
-                case 'Backspace'    : 
-                      key='\\x1b[D\\x1b[P';
-                                            //term.write('\b \b');
-                                            //key=String.fromCharCode(7);
-                                      
-                                      break;
-                                  
-                default             : if(printable){
-                                            curr_line += e.key;
-                                      }
-*/              
                                       
               }//switch
 
@@ -135,93 +78,49 @@ if(0){
 
 
 
-
-if(0){
-                    
-          var cp      = window.parent.cp;
-          var child   = cp.spawn('/bin/sh');
+          var stream;
+          const { Client } = window.parent.require('ssh2');
           
-          child.stdout.on('data',data=>{
+          const conn = new Client();
+          
+          conn.on('ready', () => {
+          
+                console.log('Client :: ready');
                 
-                //var str   = data.toString();
-                //[...str].forEach(c=>console.log(c,' - ',c.charCodeAt(0)));
-                term.write(data)
+                conn.shell((err, stream2) => {
                 
+                      if (err) throw err;
+                      
+                      stream    = stream2;
+                      stream.on('close', () => {
+                      
+                            console.log('Stream :: close');
+                            conn.end();
+                            
+                      })
+                      stream.on('data', (data) => {
+                      
+                            term.write(data);
+                            
+                      });
+                  
+                  
+                });
           });
           
-          child.stderr.on('data',data=>{
-          
-                //var str   = data.toString();
-                //[...str].forEach(c=>console.log(c,' - ',c.charCodeAt(0)));
-                term.write(data)
-                
+          conn.connect({
+                host: '127.0.0.1',
+                port: 22,
+                username: 'DESKTOP-1\matt-',
+                password:'matt-pc-1-2023',
+                privateKey:window.parent.fs.readFileSync('priv-key'),
+                debug:console.log
           });
-          
-          child.on('exit',()=>'exit');
-          
-          //var cmd   = 'dir\n';
-          //[...cmd].forEach(c=>child.stdin.write(c));
-
-
-          //fitAddon.fit();          
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-        
-        var stream;
-        const { Client } = window.parent.require('ssh2');
-        
-        const conn = new Client();
-        
-        conn.on('ready', () => {
-        
-              console.log('Client :: ready');
-              
-              conn.shell((err, stream2) => {
-              
-                    if (err) throw err;
-                    
-                    stream    = stream2;
-                    stream.on('close', () => {
-                    
-                          console.log('Stream :: close');
-                          conn.end();
-                          
-                    })
-                    stream.on('data', (data) => {
-                    
-                          term.write(data);
-                          
-                    });
-                
-                
-              });
-        });
-        
-        conn.connect({
-              host: '127.0.0.1',
-              port: 22,
-              username: 'DESKTOP-1\matt-',
-              password:'matt-pc-1-2023',
-              privateKey:window.parent.fs.readFileSync('priv-key'),
-              debug:console.log
-        });
         
         
 
 
-
+          }//onload
 
 
 
@@ -229,5 +128,5 @@ if(0){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",314,5863,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",314,3050,"append"]]}
 */
