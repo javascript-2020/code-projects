@@ -59,29 +59,19 @@
       
               term.open(document.getElementById('terminal'));
               
-              //term.focus();
               
-              
-              term.writeln('This is a shell emulator.');
-          
               term.onResize((size) =>{fitAddon.fit()});
-
-
 
               term.onKey(function({key,domEvent:e}){
               
-                  var printable   = !e.altKey && !e.altGraphKey && !e.ctrlKey && !e.metaKey;
-    
                   switch(e.key){
                   
-                    case 'Escape'       : con.end();
-                                          window.parent.nodejs.iframe.remove(window);
+                    case 'Escape'       : close();
                                           return;
                                           
                   }//switch
     
                   stream.write(key);
-                  //term.write(key);
                   
               });
 
@@ -100,14 +90,12 @@
                     
                           if(err)throw err;
                           
-                          //fitAddon.fit();
-                          
                           stream    = stream2;
                           
                           stream.on('close', () => {
                           
-                                console.log('Stream :: close');
-                                conn.end();
+                                                                            console.log('Stream :: close');
+                                con.end();
                                 
                           });
                           
@@ -132,6 +120,15 @@
         }//onload
 
 
+        function close(){
+        
+              con.end();
+              window.parent.nodejs.iframe.remove(window);
+              
+        }//close
+
+
+
   </script>
 </body>
 
@@ -140,5 +137,5 @@
 
 
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",381,3565,"append"]]}
+{"names":["main","term"],"info":[["main","term",381,3349,"append"]]}
 */
