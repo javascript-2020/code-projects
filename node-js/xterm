@@ -116,23 +116,24 @@ function onload(view){
               });
           
               con.connect({
-                    host: '127.0.0.1',
-                    port: 2222,
-                    username: 'root',
-                    password:'node',
-                    debug:console.log
+                    host        : '127.0.0.1',
+                    port        : 2222,
+                    username    : 'root',
+                    password    : 'node',
+                    debug       : console.log
               });
         
         
-
-
         }//onload
-
-
 
 
   </script>
 </body>
+
+
+
+
+
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",314,3495,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",314,3530,"append"]]}
 */
