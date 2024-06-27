@@ -3,7 +3,7 @@
 
         
         var view      = list[list.index];
-        var tab       = list.view.find(view,'new-2');
+        var tab       = list.view.find(view,'term');
         var srcdoc    = tab.session.getValue();
         
         iframe.new(srcdoc,'attach',{onload});
@@ -134,5 +134,5 @@
 
 
 /* node-js-tabs
-{"names":["main","term"],"info":[["main","term",381,3158,"append"]]}
+{"names":["main","term"],"info":[["main","term",380,3158,"append"]]}
 */
