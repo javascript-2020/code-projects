@@ -1,18 +1,21 @@
 
-var view=list[list.index];
-var tab=list.view.find(view,'new-2');
 
 
-iframe.new(tab.session.getValue(),'attach',{onload});
+        
+        var view      = list[list.index];
+        var tab       = list.view.find(view,'new-2');
+        var srcdoc    = tab.session.getValue();
+        
+        iframe.new(srcdoc,'attach',{onload});
+        
+        function onload(view){
+        
+              $(view.root,'iframe').style.height    = '750px';
+          
+        }//onload
 
-function onload(view){
 
-  console.log('onload');
-  var iframe=$(view.root,'iframe');
-  iframe.contentDocument.body.focus();
-  iframe.style.height='500px';
-  
-}//onload
+
 
 
 
@@ -23,10 +26,11 @@ function onload(view){
   body { height:calc(100% - 16px) }
   #terminal { height:100% }
 </style>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm/css/xterm.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@xterm/xterm/lib/xterm.min.js"></script>
 
 <!--
+<script src="https://cdn.jsdelivr.net/npm/@xterm/xterm/lib/xterm.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@xterm/addon-fit/lib/addon-fit.min.js"></script>
 -->
 
@@ -46,16 +50,16 @@ function onload(view){
           
           window.onload=()=>{
           
-              var width=terminal.offsetWidth,height=500;//terminal.offsetHeight;
-              console.log(width,height);
+              //var width=terminal.offsetWidth,height=500;//terminal.offsetHeight;
+              //console.log(width,height);
               
-              term        = new xterm.Terminal({width,height});
+              term        = new xterm.Terminal();//{width,height});
               fitAddon    = new addonFit.FitAddon();
               term.loadAddon(fitAddon);
       
               term.open(document.getElementById('terminal'));
               
-              fitAddon.fit();          
+              //term.focus();
               
               
               term.writeln('This is a shell emulator.');
@@ -70,7 +74,7 @@ function onload(view){
     
                   switch(e.key){
                   
-                    case 'Escape'       : conn.end();
+                    case 'Escape'       : con.end();
                                           window.parent.nodejs.iframe.remove(window);
                                           return;
                                           
@@ -90,12 +94,13 @@ function onload(view){
               con.on('ready', () => {
               
                     fitAddon.fit();
+                    term.focus();
                                                                             console.log('Client :: ready');
-                    conn.shell((err, stream2) => {
+                    con.shell((err, stream2) => {
                     
                           if(err)throw err;
                           
-                          fitAddon.fit();
+                          //fitAddon.fit();
                           
                           stream    = stream2;
                           
@@ -135,5 +140,5 @@ function onload(view){
 
 
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",314,3530,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",381,3565,"append"]]}
 */
