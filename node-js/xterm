@@ -18,7 +18,11 @@ function onload(view){
 
 
 <head>
-
+<style>
+  html { height:100% }
+  body { height:calc(100% - 16px) }
+  #terminal { height:100% }
+</style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm/css/xterm.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@xterm/xterm/lib/xterm.min.js"></script>
 
@@ -39,7 +43,7 @@ function onload(view){
           term.loadAddon(fitAddon);
   
           term.open(document.getElementById('terminal'));
-          fitAddon.fit();          
+          //fitAddon.fit();          
           
           
           term.writeln('This is a shell emulator.');
@@ -51,6 +55,8 @@ function onload(view){
           var del     = esc+'[3~';
           //<esc>[3~ 
           
+//term.onResize((size) => {fitAddon.fit();});
+
 
 
 if(0){
@@ -150,6 +156,11 @@ if(0){
           //var cmd   = 'dir\n';
           //[...cmd].forEach(c=>child.stdin.write(c));
 
+
+          //fitAddon.fit();          
+
+
+
 }
 
 
@@ -212,5 +223,5 @@ if(0){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",314,5518,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",314,5723,"append"]]}
 */
