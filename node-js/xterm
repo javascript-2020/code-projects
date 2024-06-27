@@ -45,7 +45,7 @@ function onload(view){
           
           window.onload=()=>{
           
-              term        = new xterm.Terminal();
+              term        = new xterm.Terminal({width:terminal.clientWidth,terminal.clientHeight});
               fitAddon    = new addonFit.FitAddon();
               term.loadAddon(fitAddon);
       
@@ -128,5 +128,5 @@ function onload(view){
   </script>
 </body>
 /* node-js-tabs
-{"names":["new-1","new-2"],"info":[["new-1","new-2",314,3050,"append"]]}
+{"names":["new-1","new-2"],"info":[["new-1","new-2",314,3100,"append"]]}
 */
