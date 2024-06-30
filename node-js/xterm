@@ -141,7 +141,7 @@ function terminal(name,port){
                                 html { height:100% }
                                 body { height:calc(100% - 16px);display:flex;flex-direction:column;font-family:arial; }
                                 #hdr { display:flex };
-                                #terminal { height:100% }
+                                #terminal { flex:1 }
                           </style>
                           
                           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm/css/xterm.min.css">
@@ -266,5 +266,5 @@ function terminal(name,port){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",4239,5495,"append"],["launch","remove",9734,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",4239,5490,"append"],["launch","remove",9729,311,"append"]]}
 */
