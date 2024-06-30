@@ -87,7 +87,7 @@
         }//getport
         
         function exec(user){
-                                                                                  console.log('exec',user);
+                                                                                  //console.log('exec',user);
               var resolve,promise=new Promise(res=>resolve=res);
               
               var cmd   = 'powershell.exe';
@@ -264,5 +264,5 @@ function terminal(name,port,exec){
 
 
 /* node-js-tabs
-{"names":["launch","term"],"info":[["launch","term",4469,5898,"append"]]}
+{"names":["launch","term"],"info":[["launch","term",4471,5898,"append"]]}
 */
