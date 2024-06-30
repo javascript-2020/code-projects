@@ -36,7 +36,6 @@
 })();
 
 
-
         async function getname(){
           
               while(1){
@@ -76,6 +75,7 @@
               }//chk
                     
         }//getname
+
         
         async function getport(name){
           
@@ -86,30 +86,7 @@
               return port;
               
         }//getport
-        
-        function exec(user){
-                                                                                  //console.log('exec',user);
-              var resolve,promise=new Promise(res=>resolve=res);
-              
-              /*
-              var cmd   = 'powershell.exe';
-              var args    = user.split(' ');
-              */
-              
-              var args    = user.split(' ');
-              var cmd     = args.splice(0,1)[0];
-                                                                                  //console.log(cmd,args);
-              var child   = cp.spawn(cmd,args,{shell:true});
-                                                                                  //console.log(child);
-              var stdout='',stderr='';
-              child.stdout.on('data',data=>{stdout+=data;console.log(data.toString())});
-              child.stderr.on('data',data=>{stderr+=data;console.log(data.toString())});
-              child.on('exit',code=>{console.log('code:',code);resolve({code,stdout,stderr})});
-              child.on('error',err=>{console.log('error',err),resolve({code:'error'})});
-              return promise;
-              
-        }//exec
-        
+
         
         async function remove_container(name){
         
@@ -122,7 +99,7 @@
         
         
 
-function terminal(name,port,exec,debug){
+function terminal(name,port,debug){
   
         srcdoc      = srcdoc();
         
@@ -131,7 +108,6 @@ function terminal(name,port,exec,debug){
         
         function onload(view){
         
-              view.win.exec     = exec;
               view.win.debug    = debug;
               
               $(view.root,'iframe').style.height    = '750px';
@@ -245,7 +221,7 @@ function terminal(name,port,exec,debug){
                             window.remove=async function(){
                             
                                   close();
-                                  var {code,stdout,stderr}   = await window.exec(\`docker rm -f ${name}\`);
+                                  var {code,stdout,stderr}   = await window.parent.exec(\`docker rm -f ${name}\`);
                                   if(code)return console.log('error');
                                   
                             }//remove
@@ -267,6 +243,13 @@ function terminal(name,port,exec,debug){
 
 
 
+        var name    = '';
+        var port    = '';
+
+        var terminal    = define(list.view.find.cur('term','txt'));
+        var debug       = false;
+        terminal(name,port,debug);
+
 /* node-js-tabs
-{"names":["launch","term"],"info":[["launch","term",4582,6133,"append"]]}
+{"names":["launch","term","terminal"],"info":[["launch","term",3356,6094,"append"],["launch","terminal",9450,197,"append"]]}
 */
