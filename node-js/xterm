@@ -229,9 +229,9 @@ function terminal(name,port){
                             
                             window.remove=async function(){
                             console.clear();
-                                  close();
                                   var {code,stdout,stderr}   = await exec(\`docker rm -f ${name}\`);
                                   if(code)return console.log('error');
+                                  close();
                                   
                             }//remove
                             
