@@ -147,7 +147,9 @@ function terminal(name,port,exec){
                           <style>
                                 html { height:100% }
                                 body { height:calc(100% - 16px);display:flex;flex-direction:column;font-family:arial; }
-                                #hdr { display:flex }
+                                #hdr { display:flex;margin-bottom:10px }
+                                #hdr-name { flex:1 }
+                                #hdr-btn { padding:5px 10px;font-size:16px;cursor:pointer; }
                                 #terminal { flex:1 }
                           </style>
                           
@@ -157,8 +159,8 @@ function terminal(name,port,exec){
                     <body>
                       
                       <div id=hdr>
-                            <div style=flex:1>${name}</div>
-                            <input type=button value=remove onclick=remove()>
+                            <div id=hdr-name>${name}</div>
+                            <input id=hdr-btn type=button value=remove onclick=remove()>
                       </div>
                       
                       <div id=terminal></div>
@@ -260,5 +262,5 @@ function terminal(name,port,exec){
 
 
 /* node-js-tabs
-{"names":["launch","term"],"info":[["launch","term",4469,5541,"append"]]}
+{"names":["launch","term"],"info":[["launch","term",4469,5718,"append"]]}
 */
