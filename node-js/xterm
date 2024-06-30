@@ -27,8 +27,7 @@
 
 
         eval(list.view.find.cur('term','txt'))(name,port);
-        
-        
+                
         
 })();
 
@@ -253,5 +252,5 @@ function terminal(name,port){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",3600,5477,"append"],["launch","remove",9077,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",3598,5477,"append"],["launch","remove",9075,311,"append"]]}
 */
