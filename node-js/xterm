@@ -99,7 +99,7 @@
         
         
 
-function terminal(name,port,debug){
+function terminal(port,name,debug){
   
         name    = name|| 'terminal';
         
