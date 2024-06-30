@@ -140,7 +140,7 @@ function terminal(name,port,exec){
                           <style>
                                 html { height:100% }
                                 body { height:calc(100% - 16px);display:flex;flex-direction:column;font-family:arial; }
-                                #hdr { display:flex };
+                                #hdr { display:flex }
                                 #terminal { flex:1 }
                           </style>
                           
@@ -266,5 +266,5 @@ function terminal(name,port,exec){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",4244,5495,"append"],["launch","remove",9739,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",4244,5494,"append"],["launch","remove",9738,311,"append"]]}
 */
