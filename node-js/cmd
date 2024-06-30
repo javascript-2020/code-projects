@@ -1,0 +1,34 @@
+
+
+
+      var ssh   = require('ssh2');
+      console.log(ssh);
+      
+      
+      
+      
+      
+
+
+      
+      var cmd     = 'npm ls';
+      
+      var cp      = require('child_process');
+      var parts   = cmd.split(' ');
+      var cmd     = parts[0];
+      var args    = parts.slice(1);
+      var child   = cp.spawn(cmd,args,{shell:true});
+      child.stdout.on('data',data=>console.log(data.toString()));
+      child.stderr.on('data',data=>console.log(data.toString()));
+      child.on('error',err=>(console.log('error'),console.log(err)));
+      child.on('exit',code=>console.log('exit',code));
+      
+      
+      
+      
+      
+      
+      
+/* node-js-tabs
+{"names":["new-1","new-2"],"info":[["new-1","new-2",96,553,"append"]]}
+*/
