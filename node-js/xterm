@@ -117,8 +117,9 @@
         
         
         
-        var port    = 51207;
-        
+
+function terminal(name,port){
+  
         srcdoc      = srcdoc();
         
         iframe.new(srcdoc,'attach',{onload});
@@ -138,23 +139,23 @@
               return `
               
                     <head>
-                    <style>
-                          html { height:100% }
-                          body { height:calc(100% - 16px) }
-                          #terminal { height:100% }
-                    </style>
-                    
-                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm/css/xterm.min.css">
-                    
-                    <!--
-                    <script src="https://cdn.jsdelivr.net/npm/@xterm/xterm/lib/xterm.min.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/@xterm/addon-fit/lib/addon-fit.min.js"></script>
-                    -->
-                    
+                          <style>
+                                html { height:100% }
+                                body { height:calc(100% - 16px);display:flex;flex-direction:column;font-family:arial; }
+                                #hdr { display:flex };
+                                #terminal { height:100% }
+                          </style>
+                          
+                          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm/css/xterm.min.css">
                     </head>
                     
                     <body>
-                    
+                      
+                      <div id=hdr>
+                            <div>${name}</div>
+                            <input type=button value=remove onclick=remove()>
+                      </div>
+                      
                       <div id=terminal></div>
                       
                       <script type=module>
@@ -219,14 +220,23 @@
                             }//onload
 
 
-                            function close(){
+                            window.close=function(){
                             
                                   con.end();
                                   window.parent.nodejs.iframe.remove(window);
                                   
                             }//close
                             
-                    
+                            
+                            window.remove=async function(){
+                            
+                                  close();
+                                  var {code,stdout,stderr}   = await exec(`docker rm -f ${name}`);
+                                  if(code)return console.log('error');
+                                  
+                            }//remove
+                            
+                            
                       </script>
                     </body>
                     
@@ -236,7 +246,12 @@
         }//srcdoc
         
         
-        
+}//terminal
+
+
+
+
+
 
 
         var name    = 'nodejs-min---pink-ivy';
@@ -252,5 +267,5 @@
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",4035,4950,"append"],["launch","remove",8985,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",4035,5477,"append"],["launch","remove",9512,311,"append"]]}
 */
