@@ -127,18 +127,15 @@
 
         var name    = await getname();
         if(!name)return;
+
         
         var {code}    = await exec(`docker run -di -p :22 --name ${name} ${image_name}`);
         if(code)return console.log('error');
+
         
         var port    = await getport(name);
         console.log(`*** launch : ${name}:${port}`);
 
-        
-        if(remove){
-              remove_container(name);
-        }
-        
         
 })();
 
@@ -226,5 +223,5 @@
         }//remove
 
 /* node-js-tabs
-{"names":["main","term","launch","remove"],"info":[["main","term",380,2487,"append"],["main","launch",2867,3636,"append"],["main","remove",6503,311,"append"]]}
+{"names":["main","term","launch","remove"],"info":[["main","term",380,2487,"append"],["main","launch",2867,3549,"append"],["main","remove",6416,311,"append"]]}
 */
