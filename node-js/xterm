@@ -113,6 +113,12 @@
         }//exec
         
         
+        async function remove_container(name){
+        
+              var {code,stdout,stderr}   = await exec(`docker rm -f ${name}`);
+              if(code)return console.log('error');
+              
+        }//remove
         
         
         
@@ -229,10 +235,10 @@ function terminal(name,port,exec){
                             
                             
                             window.remove=async function(){
-                            console.clear();
+                            
+                                  close();
                                   var {code,stdout,stderr}   = await window.exec(\`docker rm -f ${name}\`);
                                   if(code)return console.log('error');
-                                  close();
                                   
                             }//remove
                             
@@ -253,19 +259,6 @@ function terminal(name,port,exec){
 
 
 
-
-        var name    = 'nodejs-min---pink-ivy';
-        
-        remove_container(name);
-
-
-        async function remove_container(name){
-        
-              var {code,stdout,stderr}   = await exec(`docker rm -f ${name}`);
-              if(code)return console.log('error');
-              
-        }//remove
-
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",4244,5557,"append"],["launch","remove",9801,311,"append"]]}
+{"names":["launch","term"],"info":[["launch","term",4469,5541,"append"]]}
 */
