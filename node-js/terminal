@@ -29,8 +29,7 @@
         console.log(`*** launch : ${name}:${port}`);
 
         var terminal    = define(list.view.find.cur('terminal','txt'));
-        var debug       = false;
-        terminal(port,name,debug);
+        terminal(port,{name,debug:false});
                 
         
 })();
@@ -102,16 +101,16 @@
         var name    = '';
 
         var terminal    = define(list.view.find.cur('terminal','txt'));
-        var debug       = false;
-        terminal(port,name,debug);
+        terminal(port,{name,debug:false});
 
 
 
 
 
-function terminal(port,name,debug){
+function terminal(port,{name,debug,height}){
   
-        name    = name|| 'terminal';
+        name    ||= 'terminal';
+        height  ||= '600px';
         
         iframe.new(srcdoc(),'attach',{onload});
 
@@ -254,5 +253,5 @@ function terminal(port,name,debug){
 
 
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",3355,212,"append"],["docker","terminal",3567,6101,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",3329,186,"append"],["docker","terminal",3515,6135,"append"]]}
 */
