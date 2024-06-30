@@ -182,7 +182,9 @@
                                                               
                                       }//switch
                         
+                                      fitAddon.fit();
                                       stream.write(key);
+                                      fitAddon.fit();
                                       
                                   });
                     
@@ -202,7 +204,7 @@
                                               
                                               stream    = stream2;
                                               stream.on('close',()=>close);
-                                              stream.on('data',data=>term.write(data));
+                                              stream.on('data',data=>{fitAddon.fit();term.write(data)});
                                           
                                         });
                                         
@@ -245,5 +247,5 @@
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",4035,4729,"append"],["launch","remove",8764,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",4035,4856,"append"],["launch","remove",8891,311,"append"]]}
 */
