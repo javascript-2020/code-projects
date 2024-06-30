@@ -6,7 +6,7 @@
     
 (async()=>{
 
-        console.log('docler image : ',image_name);
+        console.log('docker image : ',image_name);
         
         var {code,stdout,stderr}    = await exec(`docker images ${image_name} --no-trunc`);
         if(code)return console.log('error');
@@ -38,14 +38,14 @@
 
         async function getname(){
           
-              do{
+              while(1){
+                
                     var name      = get();
                     var result    = await chk(name);
-                    if(result===false){
-                          return false;
-                    }
+                    if(result===false)return false;
+                    if(result===true)return true;
                     
-              }while(result!==true);
+              }//while
               
               return name;
                     
@@ -255,5 +255,5 @@ function terminal(name,port){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",3703,5477,"append"],["launch","remove",9180,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",3712,5477,"append"],["launch","remove",9189,311,"append"]]}
 */
