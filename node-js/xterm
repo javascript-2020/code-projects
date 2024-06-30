@@ -127,8 +127,6 @@ function terminal(name,port){
         
         function onload(view){
         
-              var view    = list[list.index];
-              
               $(view.root,'iframe').style.height    = '750px';
           
         }//onload
@@ -267,5 +265,5 @@ function terminal(name,port){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",4239,5479,"append"],["launch","remove",9718,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",4239,5416,"append"],["launch","remove",9655,311,"append"]]}
 */
