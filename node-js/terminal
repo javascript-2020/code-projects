@@ -231,10 +231,10 @@ function terminal(port,{name,debug,height}){
                             
                             window.remove=async function(){
                             
-                                  close();
                                   console.log('docker remove');
                                   var {code,stdout,stderr}   = await window.parent.exec(\`docker rm -f ${name}\`);
                                   if(code)return console.log('error');
+                                  close();
                                   
                             }//remove
                             
