@@ -86,11 +86,19 @@
               
         }//getport
         
-        function exec(cmd){
+        function exec(user){
                                                                                   console.log('exec',cmd);
               var resolve,promise=new Promise(res=>resolve=res);
+              
+              var cmd   = 'powershell.exe';
+              var args    = user.split(' ');
+              /*
               var args    = cmd.split(' ');
               var cmd     = args.splice(0,1)[0];console.log(cmd,args);
+              */
+              
+              
+              
               var child   = cp.spawn(cmd,args,{shell:true});
               console.log(child);
               var stdout='',stderr='';
@@ -257,5 +265,5 @@ function terminal(name,port){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",3955,5477,"append"],["launch","remove",9432,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",4147,5477,"append"],["launch","remove",9624,311,"append"]]}
 */
