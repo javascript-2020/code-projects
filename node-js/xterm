@@ -89,7 +89,6 @@
               var resolve,promise=new Promise(res=>resolve=res);
               var args    = cmd.split(' ');
               var cmd     = args.splice(0,1)[0];
-              //var cmd     = 'powershell.exe';
               var child   = cp.spawn(cmd,args,{shell:true});
               var stdout='',stderr='';
               child.stdout.on('data',data=>(stdout+=data,console.log(data.toString())));
@@ -98,20 +97,6 @@
               return promise;
               
         }//exec
-        
-        
-        function write(tab_name,value){
-          
-              var view    = list[list.index];
-              var tab     = list.view.find(view,tab_name);
-              var txt     = tab.session.getValue();
-              var i1      = txt.indexOf('=');
-              var i2      = txt.indexOf('\n',i1);
-              
-              
-        }//writevar
-        
-        
         
         
         
@@ -268,5 +253,5 @@ function terminal(name,port){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",4053,5477,"append"],["launch","remove",9530,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",3600,5477,"append"],["launch","remove",9077,311,"append"]]}
 */
