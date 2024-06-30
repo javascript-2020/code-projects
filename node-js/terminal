@@ -152,9 +152,9 @@ function terminal(port,{name,debug,height}){
                       
                       <script type=module>
                       
-                              console.log('terminal',\`\${username}@\${host}:${port} ${name}\`);
-                              
                               var host='127.0.0.1',port=${port},username='root',password='node';
+                              
+                              console.log('terminal',\`\${username}@\${host}:${port} ${name}\`);
                               document.getElementById('hdr-name').textContent  = \`\${username}@\${host}:${port} ${name}\`;
                               
                               import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm';
