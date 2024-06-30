@@ -26,7 +26,8 @@
         console.log(`*** launch : ${name}:${port}`);
 
 
-        await navigator.clipboard.writeText(port);
+        eval(list.view.find.cur('term','txt'))(name,port);
+        
         
         
 })();
@@ -267,5 +268,5 @@ function terminal(name,port){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",4035,5477,"append"],["launch","remove",9512,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",4053,5477,"append"],["launch","remove",9530,311,"append"]]}
 */
