@@ -144,7 +144,7 @@ function terminal(name,port,debug){
                       <script type=module>
                       
                               var host='127.0.0.1',port=${port},username='root',password='node';
-                              document.getElementById('hdr-name').textContent  = \`\${username}@\${host}:${port}\ ${name}`;
+                              document.getElementById('hdr-name').textContent  = \`\${username}@\${host}:${port} ${name}\`;
                               
                               import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm';
                               import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm';
@@ -243,7 +243,7 @@ function terminal(name,port,debug){
 
 
 
-        var port    = '';
+        var port    = '62255';
         var name    = '';
 
         var terminal    = define(list.view.find.cur('term','txt'));
@@ -254,5 +254,5 @@ function terminal(name,port,debug){
 
 
 /* node-js-tabs
-{"names":["launch","term","terminal"],"info":[["launch","term",3351,6101,"append"],["launch","terminal",9452,203,"append"]]}
+{"names":["launch","term","terminal"],"info":[["launch","term",3351,6101,"append"],["launch","terminal",9452,208,"append"]]}
 */
