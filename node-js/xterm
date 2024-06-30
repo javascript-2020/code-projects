@@ -6,6 +6,8 @@
     
 (async()=>{
 
+        console.log('docler image : ',image_name);
+        
         var {code,stdout,stderr}    = await exec(`docker images ${image_name} --no-trunc`);
         if(code)return console.log('error');
         if(stdout.indexOf(image_name)==-1){
@@ -17,6 +19,7 @@
         var name    = await getname();
         if(!name)return;
 
+        console.log('container : ',name);
         
         var {code}    = await exec(`docker run -di -p :22 --name ${name} ${image_name}`);
         if(code)return console.log('error');
@@ -252,5 +255,5 @@ function terminal(name,port){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",3598,5477,"append"],["launch","remove",9075,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",3703,5477,"append"],["launch","remove",9180,311,"append"]]}
 */
