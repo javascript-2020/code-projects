@@ -119,7 +119,7 @@ function terminal(port,{name,debug,height}){
         
               view.win.debug    = debug;
               
-              $(view.root,'iframe').style.height    = '750px';
+              $(view.root,'iframe').style.height    = height;
               
         }//onload
 
@@ -253,5 +253,5 @@ function terminal(port,{name,debug,height}){
 
 
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",3329,186,"append"],["docker","terminal",3515,6135,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",3329,186,"append"],["docker","terminal",3515,6134,"append"]]}
 */
