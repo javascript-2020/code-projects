@@ -231,7 +231,7 @@ function terminal(name,port){
                             window.remove=async function(){
                             
                                   close();
-                                  var {code,stdout,stderr}   = await exec(`docker rm -f ${name}`);
+                                  var {code,stdout,stderr}   = await exec(\`docker rm -f ${name}\`);
                                   if(code)return console.log('error');
                                   
                             }//remove
@@ -267,5 +267,5 @@ function terminal(name,port){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",4202,5477,"append"],["launch","remove",9679,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",4202,5479,"append"],["launch","remove",9681,311,"append"]]}
 */
