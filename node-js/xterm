@@ -204,6 +204,7 @@ function terminal(name,port){
                                         
                                               if(err)throw err;
                                               
+                                              fitAddon.fit();
                                               stream    = stream2;
                                               stream.on('close',()=>close);
                                               stream.on('data',data=>{fitAddon.fit();term.write(data)});
@@ -265,5 +266,5 @@ function terminal(name,port){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",4239,5416,"append"],["launch","remove",9655,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",4239,5479,"append"],["launch","remove",9718,311,"append"]]}
 */
