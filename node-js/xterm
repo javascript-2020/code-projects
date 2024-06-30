@@ -42,25 +42,21 @@
   
   <script type=module>
   
-          import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm'
-          import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm'        
+          import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm';
+          import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm';
 
-          var con;
-          var term;
-          var fitAddon;
+          var host='127.0.0.1',port=2222,username='root',password='node';
           
           window.onload=()=>{
           
-              term        = new xterm.Terminal();
-              fitAddon    = new addonFit.FitAddon();
+              var term        = new xterm.Terminal();
+              var fitAddon    = new addonFit.FitAddon();
               term.loadAddon(fitAddon);
       
               term.open(terminal);
               
-              
-              term.onResize((size) =>{fitAddon.fit()});
-
-              term.onKey(function({key,domEvent:e}){
+              term.onResize(size=>fitAddon.fit());
+              term.onKey(({key,domEvent:e})=>{
               
                   switch(e.key){
                   
@@ -74,59 +70,38 @@
               });
 
 
-  //nodejs
-  
-              var stream;
               var {Client}    = window.parent.require('ssh2');
-              con         = new Client();
+              var con         = new Client();
+              var stream;
               
-              con.on('ready', () => {
+              con.on('ready',()=>{
               
                     fitAddon.fit();
                     term.focus();
-                                                                            console.log('Client :: ready');
-                    con.shell((err, stream2) => {
+
+                    con.shell((err,stream2)=>{
                     
                           if(err)throw err;
                           
                           stream    = stream2;
-                          
-                          stream.on('close', () => {
-                          
-                                                                            console.log('Stream :: close');
-                                con.end();
-                                
-                          });
-                          
-                          stream.on('data', (data) => {
-                          
-                                term.write(data);
-                                
-                          });
+                          stream.on('close',()=>close);
+                          stream.on('data',data=>term.write(data));
                       
                     });
+                    
               });
           
-              con.connect({
-                    host        : '127.0.0.1',
-                    port        : 2222,
-                    username    : 'root',
-                    password    : 'node',
-                    debug       : console.log
-              });
+              con.connect({host,port,username,password,debug:console.log});
         
         
-        }//onload
-
-
-        function close(){
-        
-              con.end();
-              window.parent.nodejs.iframe.remove(window);
+              function close(){
               
-        }//close
-
-
+                    con.end();
+                    window.parent.nodejs.iframe.remove(window);
+                    
+              }//close
+              
+        }//onload
 
   </script>
 </body>
@@ -136,5 +111,5 @@
 
 
 /* node-js-tabs
-{"names":["main","term"],"info":[["main","term",380,3188,"append"]]}
+{"names":["main","term"],"info":[["main","term",380,2487,"append"]]}
 */
