@@ -98,6 +98,16 @@
         
         
         
+        var port    = '62255';
+        var name    = '';
+
+        var terminal    = define(list.view.find.cur('term','txt'));
+        var debug       = false;
+        terminal(port,name,debug);
+
+
+
+
 
 function terminal(port,name,debug){
   
@@ -243,16 +253,6 @@ function terminal(port,name,debug){
 
 
 
-        var port    = '62255';
-        var name    = '';
-
-        var terminal    = define(list.view.find.cur('term','txt'));
-        var debug       = false;
-        terminal(port,name,debug);
-
-
-
-
 /* node-js-tabs
-{"names":["launch","term","terminal"],"info":[["launch","term",3351,6101,"append"],["launch","terminal",9452,208,"append"]]}
+{"names":["launch","terminal","term"],"info":[["launch","terminal",3351,208,"append"],["launch","term",3559,6101,"append"]]}
 */
