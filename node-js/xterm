@@ -25,6 +25,9 @@
         var port    = await getport(name);
         console.log(`*** launch : ${name}:${port}`);
 
+
+        await navigator.clipboard.writeText(port);
+        
         
 })();
 
@@ -96,9 +99,26 @@
         }//exec
         
         
+        function write(tab_name,value){
           
+              var view    = list[list.index];
+              var tab     = list.view.find(view,tab_name);
+              var txt     = tab.session.getValue();
+              var i1      = txt.indexOf('=');
+              var i2      = txt.indexOf('\n',i1);
+              
+              
+        }//writevar
         
-        var port    = 2222;
+        
+        
+        
+        
+        
+        
+        
+        var port    = 51207;
+        
         srcdoc      = srcdoc();
         
         iframe.new(srcdoc,'attach',{onload});
@@ -142,7 +162,7 @@
                               import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm';
                               import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm';
                     
-                              var host='127.0.0.1',port=2222,username='root',password='node';
+                              var host='127.0.0.1',port=${port},username='root',password='node';
                               
                               window.onload=()=>{
                               
@@ -206,7 +226,10 @@
               
               `;
 
-
+        }//srcdoc
+        
+        
+        
 
 
         var name    = 'nodejs-min---pink-ivy';
@@ -222,5 +245,5 @@
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",3549,4668,"append"],["launch","remove",8217,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",4035,4729,"append"],["launch","remove",8764,311,"append"]]}
 */
