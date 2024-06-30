@@ -99,8 +99,7 @@
               var cmd     = args.splice(0,1)[0];
                                                                                   //console.log(cmd,args);
               var child   = cp.spawn(cmd,args,{shell:true});
-              
-              console.log(child);
+                                                                                  //console.log(child);
               var stdout='',stderr='';
               child.stdout.on('data',data=>{stdout+=data;console.log(data.toString())});
               child.stderr.on('data',data=>{stderr+=data;console.log(data.toString())});
@@ -262,5 +261,5 @@ function terminal(name,port,exec){
 
 
 /* node-js-tabs
-{"names":["launch","term"],"info":[["launch","term",4487,5898,"append"]]}
+{"names":["launch","term"],"info":[["launch","term",4541,5898,"append"]]}
 */
