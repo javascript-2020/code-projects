@@ -43,7 +43,7 @@
                     var name      = get();
                     var result    = await chk(name);
                     if(result===false)return false;
-                    if(result===true)return true;
+                    if(result===true)return name;
                     
               }//while
               
