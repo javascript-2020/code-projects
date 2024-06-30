@@ -96,6 +96,7 @@
               child.stdout.on('data',data=>(stdout+=data,console.log(data.toString())));
               child.stderr.on('data',data=>(stderr+=data,console.log(data.toString())));
               child.on('exit',code=>(console.log('code:',code),resolve({code,stdout,stderr})));
+              child.on('error',err=>{console.log('error',err),resolve({code:'error'})});
               return promise;
               
         }//exec
@@ -255,5 +256,5 @@ function terminal(name,port){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",3808,5477,"append"],["launch","remove",9285,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",3898,5477,"append"],["launch","remove",9375,311,"append"]]}
 */
