@@ -1,10 +1,7 @@
 
-
-
-        
-        var view      = list[list.index];
-        var tab       = list.view.find(view,'term');
-        var srcdoc    = tab.session.getValue();
+        var view    = list[list.index];
+        var tab     = list.view.find(view,'term');
+        srcdoc      = srcdoc();
         
         iframe.new(srcdoc,'attach',{onload});
         
@@ -14,99 +11,98 @@
           
         }//onload
 
-
-
-
-
-
-
-<head>
-<style>
-  html { height:100% }
-  body { height:calc(100% - 16px) }
-  #terminal { height:100% }
-</style>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm/css/xterm.min.css">
-
-<!--
-<script src="https://cdn.jsdelivr.net/npm/@xterm/xterm/lib/xterm.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@xterm/addon-fit/lib/addon-fit.min.js"></script>
--->
-
-</head>
-
-<body>
-
-  <div id=terminal></div>
-  
-  <script type=module>
-  
-          import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm';
-          import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm';
-
-          var host='127.0.0.1',port=2222,username='root',password='node';
+        function srcdoc(){
           
-          window.onload=()=>{
-          
-              var term        = new xterm.Terminal();
-              var fitAddon    = new addonFit.FitAddon();
-              term.loadAddon(fitAddon);
-      
-              term.open(terminal);
+              return `
               
-              term.onResize(size=>fitAddon.fit());
-              term.onKey(({key,domEvent:e})=>{
-              
-                  switch(e.key){
-                  
-                    case 'Escape'       : close();
-                                          return;
-                                          
-                  }//switch
-    
-                  stream.write(key);
-                  
-              });
-
-
-              var {Client}    = window.parent.require('ssh2');
-              var con         = new Client();
-              var stream;
-              
-              con.on('ready',()=>{
-              
-                    fitAddon.fit();
-                    term.focus();
-
-                    con.shell((err,stream2)=>{
+                    <head>
+                    <style>
+                          html { height:100% }
+                          body { height:calc(100% - 16px) }
+                          #terminal { height:100% }
+                    </style>
                     
-                          if(err)throw err;
-                          
-                          stream    = stream2;
-                          stream.on('close',()=>close);
-                          stream.on('data',data=>term.write(data));
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm/css/xterm.min.css">
+                    
+                    <!--
+                    <script src="https://cdn.jsdelivr.net/npm/@xterm/xterm/lib/xterm.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/@xterm/addon-fit/lib/addon-fit.min.js"></script>
+                    -->
+                    
+                    </head>
+                    
+                    <body>
+                    
+                      <div id=terminal></div>
                       
-                    });
+                      <script type=module>
+                      
+                              import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm';
+                              import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm';
                     
-              });
-          
-              con.connect({host,port,username,password,debug:console.log});
-        
-        
-              function close(){
-              
-                    con.end();
-                    window.parent.nodejs.iframe.remove(window);
+                              var host='127.0.0.1',port=2222,username='root',password='node';
+                              
+                              window.onload=()=>{
+                              
+                                  var term        = new xterm.Terminal();
+                                  var fitAddon    = new addonFit.FitAddon();
+                                  term.loadAddon(fitAddon);
+                          
+                                  term.open(terminal);
+                                  
+                                  term.onResize(size=>fitAddon.fit());
+                                  term.onKey(({key,domEvent:e})=>{
+                                  
+                                      switch(e.key){
+                                      
+                                        case 'Escape'       : close();
+                                                              return;
+                                                              
+                                      }//switch
+                        
+                                      stream.write(key);
+                                      
+                                  });
                     
-              }//close
+                    
+                                  var {Client}    = window.parent.require('ssh2');
+                                  var con         = new Client();
+                                  var stream;
+                                  
+                                  con.on('ready',()=>{
+                                  
+                                        fitAddon.fit();
+                                        term.focus();
+                    
+                                        con.shell((err,stream2)=>{
+                                        
+                                              if(err)throw err;
+                                              
+                                              stream    = stream2;
+                                              stream.on('close',()=>close);
+                                              stream.on('data',data=>term.write(data));
+                                          
+                                        });
+                                        
+                                  });
+                              
+                                  con.connect({host,port,username,password,debug:console.log});
+                            
+                            
+                                  function close(){
+                                  
+                                        con.end();
+                                        window.parent.nodejs.iframe.remove(window);
+                                        
+                                  }//close
+                                  
+                            }//onload
+                    
+                      </script>
+                    </body>
+                    
               
-        }//onload
-
-  </script>
-</body>
-
-
+              `;
 
 
 
@@ -223,5 +219,5 @@
         }//remove
 
 /* node-js-tabs
-{"names":["main","term","launch","remove"],"info":[["main","term",380,2487,"append"],["main","launch",2867,3549,"append"],["main","remove",6416,311,"append"]]}
+{"names":["term","launch","remove"],"info":[["term","launch",4665,3549,"append"],["term","remove",8214,311,"append"]]}
 */
