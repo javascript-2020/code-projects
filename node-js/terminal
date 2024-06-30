@@ -143,105 +143,104 @@ function terminal(port,{name,debug,height}){
                     
                     <body>
                       
-                      <div id=hdr>
-                            <div id=hdr-name>${name}</div>
-                            <input id=hdr-btn type=button value=remove onclick=remove()>
-                      </div>
-                      
-                      <div id=terminal></div>
-                      
-                      <script type=module>
-                      
-                              var host='127.0.0.1',port=${port},username='root',password='node';
-                              
-                              console.log('terminal',\`\${username}@\${host}:${port} ${name}\`);
-                              document.getElementById('hdr-name').textContent  = \`\${username}@\${host}:${port} ${name}\`;
-                              
-                              import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm';
-                              import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm';
-                    
-                              var con;
-                              
-                              window.onbeforeunload=close;
-                              
-                              window.onload=()=>{
-                              
-                                  var term        = new xterm.Terminal();
-                                  var fitAddon    = new addonFit.FitAddon();
-                                  term.loadAddon(fitAddon);
+                          <div id=hdr>
+                                <div id=hdr-name>${name}</div>
+                                <input id=hdr-btn type=button value=remove onclick=remove()>
+                          </div>
                           
-                                  term.open(terminal);
+                          <div id=terminal></div>
+                          
+                          <script type=module>
+                          
+                                  var host='127.0.0.1',port=${port},username='root',password='node';
                                   
-                                  term.onResize(size=>fitAddon.fit());
-                                  term.onKey(({key,domEvent:e})=>{
+                                  console.log('terminal',\`\${username}@\${host}:${port} ${name}\`);
+                                  document.getElementById('hdr-name').textContent  = \`\${username}@\${host}:${port} ${name}\`;
                                   
-                                      switch(e.key){
-                                      
-                                        case 'Escape'       : close();
-                                                              return;
-                                                              
-                                      }//switch
+                                  import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm';
+                                  import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm';
                         
-                                      fitAddon.fit();
-                                      stream.write(key);
-                                      fitAddon.fit();
-                                      
-                                  });
-                    
-                    
-                                  var {Client}    = window.parent.require('ssh2');
-                                  con             = new Client();
-                                  var stream;
+                                  var con;
                                   
-                                  con.on('ready',()=>{
+                                  window.onbeforeunload=close;
                                   
-                                        fitAddon.fit();
-                                        term.focus();
-                    
-                                        con.shell((err,stream2)=>{
-                                        
-                                              if(err)throw err;
-                                              
-                                              fitAddon.fit();
-                                              stream    = stream2;
-                                              stream.on('close',()=>close);
-                                              stream.on('data',data=>{fitAddon.fit();term.write(data)});
-                                          
-                                        });
-                                        
-                                  });
-
+                                  window.onload=()=>{
+                                  
+                                      var term        = new xterm.Terminal();
+                                      var fitAddon    = new addonFit.FitAddon();
+                                      term.loadAddon(fitAddon);
                               
-                                  var opts    = {host,port,username,password};
-                                  if(window.debug)opts.debug   = console.log;
+                                      term.open(terminal);
+                                      
+                                      term.onResize(size=>fitAddon.fit());
+                                      term.onKey(({key,domEvent:e})=>{
+                                      
+                                          switch(e.key){
+                                          
+                                            case 'Escape'       : close();
+                                                                  return;
+                                                                  
+                                          }//switch
+                            
+                                          fitAddon.fit();
+                                          stream.write(key);
+                                          fitAddon.fit();
+                                          
+                                      });
+                        
+                        
+                                      var {Client}    = window.parent.require('ssh2');
+                                      con             = new Client();
+                                      var stream;
+                                      
+                                      con.on('ready',()=>{
+                                      
+                                            fitAddon.fit();
+                                            term.focus();
+                        
+                                            con.shell((err,stream2)=>{
+                                            
+                                                  if(err)throw err;
+                                                  
+                                                  fitAddon.fit();
+                                                  stream    = stream2;
+                                                  stream.on('close',()=>close);
+                                                  stream.on('data',data=>{fitAddon.fit();term.write(data)});
+                                              
+                                            });
+                                            
+                                      });
+    
                                   
-                                  con.connect(opts);
-                            
-                            
-                            }//onload
-
-
-                            window.close=function(){
-                            
-                                  con.end();
-                                  window.parent.nodejs.iframe.remove(window);
-                                  
-                            }//close
-                            
-                            
-                            window.remove=async function(){
-                            
-                                  var {code,stdout,stderr}   = await window.parent.exec(\`docker rm -f ${name}\`);
-                                  if(code)return console.log('error');
-                                  close();
-                                  
-                            }//remove
-                            
-                            
-                      </script>
+                                      var opts    = {host,port,username,password};
+                                      if(window.debug)opts.debug   = console.log;
+                                      
+                                      con.connect(opts);
+                                
+                                
+                                }//onload
+    
+    
+                                window.close=function(){
+                                
+                                      con.end();
+                                      window.parent.nodejs.iframe.remove(window);
+                                      
+                                }//close
+                                
+                                
+                                window.remove=async function(){
+                                
+                                      var {code,stdout,stderr}   = await window.parent.exec(\`docker rm -f ${name}\`);
+                                      if(code)return console.log('error');
+                                      close();
+                                      
+                                }//remove
+                                
+                          </script>
+                          
                     </body>
                     
-              
               `;
 
         }//srcdoc
@@ -255,5 +254,5 @@ function terminal(port,{name,debug,height}){
 
 
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",3329,186,"append"],["docker","terminal",3515,6264,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",3329,186,"append"],["docker","terminal",3515,6626,"append"]]}
 */
