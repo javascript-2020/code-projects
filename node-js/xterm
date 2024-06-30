@@ -30,7 +30,7 @@
 
         var terminal    = define(list.view.find.cur('term','txt'));
         var debug       = false;
-        terminal(name,port,exec,debug);
+        terminal(port,name,debug);
                 
         
 })();
@@ -101,9 +101,9 @@
 
 function terminal(name,port,debug){
   
-        srcdoc      = srcdoc();
+        name    = name|| 'terminal';
         
-        iframe.new(srcdoc,'attach',{onload});
+        iframe.new(srcdoc(),'attach',{onload});
 
         
         function onload(view){
@@ -144,7 +144,7 @@ function terminal(name,port,debug){
                       <script type=module>
                       
                               var host='127.0.0.1',port=${port},username='root',password='node';
-                              document.getElementById('hdr-name').textContent  = \`${name} \${username}@\${host}:${port}\`;
+                              document.getElementById('hdr-name').textContent  = \`\${username}@\${host}:${port}\ ${name}`;
                               
                               import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm';
                               import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm';
@@ -243,13 +243,16 @@ function terminal(name,port,debug){
 
 
 
-        var name    = '';
         var port    = '';
+        var name    = '';
 
         var terminal    = define(list.view.find.cur('term','txt'));
         var debug       = false;
-        terminal(name,port,debug);
+        terminal(port,name,debug);
+
+
+
 
 /* node-js-tabs
-{"names":["launch","term","terminal"],"info":[["launch","term",3356,6094,"append"],["launch","terminal",9450,197,"append"]]}
+{"names":["launch","term","terminal"],"info":[["launch","term",3351,6101,"append"],["launch","terminal",9452,203,"append"]]}
 */
