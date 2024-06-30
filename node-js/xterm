@@ -151,7 +151,7 @@ function terminal(name,port,exec){
                     <body>
                       
                       <div id=hdr>
-                            <div>${name}</div>
+                            <div style=flex:1>${name}</div>
                             <input type=button value=remove onclick=remove()>
                       </div>
                       
@@ -267,5 +267,5 @@ function terminal(name,port,exec){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",4244,5553,"append"],["launch","remove",9797,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",4244,5566,"append"],["launch","remove",9810,311,"append"]]}
 */
