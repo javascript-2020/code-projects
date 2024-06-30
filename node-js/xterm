@@ -87,7 +87,7 @@
         }//getport
         
         function exec(cmd){
-          
+                                                                                  console.log('exec',cmd);
               var resolve,promise=new Promise(res=>resolve=res);
               var args    = cmd.split(' ');
               var cmd     = args.splice(0,1)[0];
@@ -255,5 +255,5 @@ function terminal(name,port){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",3712,5477,"append"],["launch","remove",9189,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",3808,5477,"append"],["launch","remove",9285,311,"append"]]}
 */
