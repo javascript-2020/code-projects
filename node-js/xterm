@@ -29,7 +29,8 @@
         console.log(`*** launch : ${name}:${port}`);
 
         var terminal    = define(list.view.find.cur('term','txt'));
-        terminal(name,port,exec);
+        var debug       = false;
+        terminal(name,port,exec,debug);
                 
         
 })();
@@ -267,5 +268,5 @@ function terminal(name,port,exec,debug){
 
 
 /* node-js-tabs
-{"names":["launch","term"],"info":[["launch","term",4541,6118,"append"]]}
+{"names":["launch","term"],"info":[["launch","term",4581,6118,"append"]]}
 */
