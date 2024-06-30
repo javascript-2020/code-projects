@@ -96,7 +96,7 @@
               var args    = user.split(' ');
               */
               
-              var args    = cmd.split(' ');
+              var args    = user.split(' ');
               var cmd     = args.splice(0,1)[0];
                                                                                   //console.log(cmd,args);
               var child   = cp.spawn(cmd,args,{shell:true});
@@ -268,5 +268,5 @@ function terminal(name,port,exec,debug){
 
 
 /* node-js-tabs
-{"names":["launch","term"],"info":[["launch","term",4581,6118,"append"]]}
+{"names":["launch","term"],"info":[["launch","term",4582,6118,"append"]]}
 */
