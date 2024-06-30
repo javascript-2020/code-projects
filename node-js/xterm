@@ -28,7 +28,7 @@
         var port    = await getport(name);
         console.log(`*** launch : ${name}:${port}`);
 
-        var terminal    = define(list.view.find.cur('term','txt'));
+        var terminal    = define(list.view.find.cur('terminal','txt'));
         var debug       = false;
         terminal(port,name,debug);
                 
@@ -101,7 +101,7 @@
         var port    = '62255';
         var name    = '';
 
-        var terminal    = define(list.view.find.cur('term','txt'));
+        var terminal    = define(list.view.find.cur('terminal','txt'));
         var debug       = false;
         terminal(port,name,debug);
 
@@ -254,5 +254,5 @@ function terminal(port,name,debug){
 
 
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",3351,208,"append"],["docker","terminal",3559,6101,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",3355,212,"append"],["docker","terminal",3567,6101,"append"]]}
 */
