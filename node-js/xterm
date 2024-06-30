@@ -121,7 +121,7 @@
         
         
 
-function terminal(name,port,exec){
+function terminal(name,port,exec,debug){
   
         srcdoc      = srcdoc();
         
@@ -130,7 +130,9 @@ function terminal(name,port,exec){
         
         function onload(view){
         
-              view.win.exec   = exec;
+              view.win.exec     = exec;
+              view.win.debug    = debug;
+              
               $(view.root,'iframe').style.height    = '750px';
               
         }//onload
@@ -220,8 +222,12 @@ function terminal(name,port,exec){
                                         });
                                         
                                   });
+
                               
-                                  con.connect({host,port,username,password,debug:console.log});
+                                  var opts    = {host,port,username,password};
+                                  if(window.debug)opts.debug   = console.log;
+                                  
+                                  con.connect(opts);
                             
                             
                             }//onload
@@ -261,5 +267,5 @@ function terminal(name,port,exec){
 
 
 /* node-js-tabs
-{"names":["launch","term"],"info":[["launch","term",4541,5898,"append"]]}
+{"names":["launch","term"],"info":[["launch","term",4541,6118,"append"]]}
 */
