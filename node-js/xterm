@@ -148,7 +148,7 @@ function terminal(name,port,exec){
                                 html { height:100% }
                                 body { height:calc(100% - 16px);display:flex;flex-direction:column;font-family:arial; }
                                 #hdr { display:flex;margin-bottom:10px }
-                                #hdr-name { flex:1 }
+                                #hdr-name { flex:1;font-family:monospace; }
                                 #hdr-btn { padding:5px 10px;font-size:16px;cursor:pointer; }
                                 #terminal { flex:1 }
                           </style>
@@ -168,7 +168,7 @@ function terminal(name,port,exec){
                       <script type=module>
                       
                               var host='127.0.0.1',port=${port},username='root',password='node';
-                              document.getElementById('hdr-name').textContent  = \`{$name} \${username}@\${host}:${port}\`;
+                              document.getElementById('hdr-name').textContent  = \`${name} \${username}@\${host}:${port}\`;
                               
                               import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm';
                               import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm';
@@ -264,5 +264,5 @@ function terminal(name,port,exec){
 
 
 /* node-js-tabs
-{"names":["launch","term"],"info":[["launch","term",4469,5875,"append"]]}
+{"names":["launch","term"],"info":[["launch","term",4469,5898,"append"]]}
 */
