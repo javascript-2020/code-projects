@@ -128,6 +128,7 @@ function terminal(name,port,exec){
         function onload(view){
         
               $(view.root,'iframe').style.height    = '750px';
+              debugger;
               view.win.exec   = exec;
               
         }//onload
@@ -230,7 +231,7 @@ function terminal(name,port,exec){
                             
                             window.remove=async function(){
                             console.clear();
-                                  var {code,stdout,stderr}   = await exec(\`docker rm -f ${name}\`);
+                                  var {code,stdout,stderr}   = await window.exec(\`docker rm -f ${name}\`);
                                   if(code)return console.log('error');
                                   close();
                                   
@@ -267,5 +268,5 @@ function terminal(name,port,exec){
         }//remove
 
 /* node-js-tabs
-{"names":["launch","term","remove"],"info":[["launch","term",4244,5537,"append"],["launch","remove",9781,311,"append"]]}
+{"names":["launch","term","remove"],"info":[["launch","term",4244,5569,"append"],["launch","remove",9813,311,"append"]]}
 */
