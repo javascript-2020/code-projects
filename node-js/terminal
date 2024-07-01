@@ -80,7 +80,8 @@
                     console.error('error');
                     return {err:true};
               }              
-              port    = await getport(name);
+              var {err,port}    = await getport(name);
+              if(err)return err;
               
                                                                                     console.log(`*** container : ${name}:${port}`);
               return {name,port};
@@ -125,10 +126,14 @@
         async function getport(name){
           
               var {code,stdout,stderr}    = await exec(`docker port ${name}`);
-              if(code)return console.log('error');
+              if(code){
+                    console.error('error');
+                    return {err:true};
+              }
+              
               var i       = stdout.indexOf(':');
               var port    = stdout.slice(i+1,-1);
-              return port;
+              return {port};
               
         }//getport
 
@@ -300,5 +305,5 @@ function terminal(port,{name,debug,height}){
 
 
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",4582,186,"append"],["docker","terminal",4768,6626,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",4719,186,"append"],["docker","terminal",4905,6626,"append"]]}
 */
