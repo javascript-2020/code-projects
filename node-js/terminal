@@ -39,7 +39,7 @@
           
               var {code,stdout,stderr}    = await exec(`docker images ${image_name} --no-trunc`);
               if(code){
-                    console.log('error');
+                    console.error('error');
                     return {err:true};
               }
               
@@ -57,7 +57,7 @@
               
               var {code,stdout,stderr}    = await exec(`docker build -t ${image_name} ${dockerfile} `);
               if(code){
-                    console.log('error');
+                    console.error('error');
                     return {err:true};
               }
               
@@ -309,5 +309,5 @@ function terminal(port,{name,debug,height}){
 
 
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",4881,186,"append"],["docker","terminal",5067,6626,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",4885,186,"append"],["docker","terminal",5071,6626,"append"]]}
 */
