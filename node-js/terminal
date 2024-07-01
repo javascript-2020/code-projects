@@ -16,7 +16,7 @@
         }
 
 
-        var name    = await getname();
+        var name    = await getname(image_name);
         if(!name)return;
 
         console.log('container : ',name);
@@ -35,7 +35,7 @@
 })();
 
 
-        async function getname(){
+        async function getname(image_name){
           
               while(1){
                 
@@ -254,5 +254,5 @@ function terminal(port,{name,debug,height}){
 
 
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",3329,186,"append"],["docker","terminal",3515,6626,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",3349,186,"append"],["docker","terminal",3535,6626,"append"]]}
 */
