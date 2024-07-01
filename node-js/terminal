@@ -67,12 +67,10 @@
 
 
         async function run(image_name,name,port){
-          
-              name    ||= await getname(image_name);
+                        
               if(!name){
-                    console.error('error');
-                    console.log('!! all names taken !!');
-                    return {err:true};
+                    var {err,name}    = await getname(image_name);
+                    if(err)return err;
               }
                                                                                     //console.log('container : ',name);
 
@@ -92,42 +90,35 @@
         
         async function getname(image_name){
           
-              while(1){
+              var {code,stdout,stderr}    = await exec('docker ps -f name=terminal');
+              if(code){
+                    console.error('error');
+                    return {err:true};
+              }
+              
+              var col       = ['red','blue','pink','aqua','gold','gray','lime','navy'];
+              var flower    = ['rose','lily','iris','fern','dahlia','tulip','pansy','basil','sage','mint'];
+              var rnd       = arr=>arr[Math.floor(Math.random()*arr.length)];
+              var get       = ()=>`${image_name}---${rnd(col)}-${rnd(flower)}`;
+              var c         = 0;
+              var t         = 2*col.length*flower.length;
+              
+              while(c!=t){
                 
                     var name      = get();
-                    var result    = await chk(name);
-                    if(result===false)return false;
-                    if(result===true)return name;
+                    
+                    if(stdout.indexOf(name)==-1){
+                          return {name};
+                    }
+                    
+                    c++;
                     
               }//while
               
-              return name;
-                    
-                    
-              function get(){
-                
-                    var col       = ['red','blue','pink','aqua','gold','gray','lime','navy'];
-                    var flower    = ['rose','lily','iris','fern','dahlia','tulip','pansy','basil','sage','mint'];
-                    var rnd       = arr=>arr[Math.floor(Math.random()*arr.length)];
-                    var name      = `${image_name}---${rnd(col)}-${rnd(flower)}`;
-                    return name;
-                    
-              }//get
-        
-              async function chk(name){
-                
-                    var {code,stdout,stderr}    = await exec('docker ps -f name=terminal');
-                    if(code){
-                          console.log('error');
-                          return false;
-                    }
-                    if(stdout.indexOf(name)!=-1){
-                          return 'found';
-                    }
-                    return true;
-                    
-              }//chk
-                    
+              console.error('error');
+              console.log('!! failed to get name !!');
+              return {err:true};
+              
         }//getname
 
         
@@ -309,5 +300,5 @@ function terminal(port,{name,debug,height}){
 
 
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",4885,186,"append"],["docker","terminal",5071,6626,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",4582,186,"append"],["docker","terminal",4768,6626,"append"]]}
 */
