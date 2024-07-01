@@ -3,38 +3,76 @@
     
     var dockerfile    = `https://raw.githubusercontent.com/javascript-2020/docker/main/dockerfile/${image_name}.dockerfile`;
     var cp            = require('child_process');
-    
+
+
+;    
 (async()=>{
 
+
         console.log('docker image : ',image_name);
-        
-        var {code,stdout,stderr}    = await exec(`docker images ${image_name} --no-trunc`);
-        if(code)return console.log('error');
-        if(stdout.indexOf(image_name)==-1){
-              var {code,stdout,stderr}    = await exec(`docker build -t ${image_name} ${dockerfile} `);
-              if(code)return console.log('error');
-        }
 
 
-        var name    = await getname(image_name);
-        if(!name)return;
+        var {err}             = await build(image_name);
+        if(err)return;
 
-        console.log('container : ',name);
-        
-        var {code}    = await exec(`docker run -di -p :22 --name ${name} ${image_name}`);
-        if(code)return console.log('error');
 
-        
-        var port    = await getport(name);
-        console.log(`*** launch : ${name}:${port}`);
+        var {err,name,port}   = await run(image_name,name,port);
+        if(err)return;
 
-        var terminal    = define(list.view.find.cur('terminal','txt'));
+
+        var terminal          = define(list.cur.view.find('terminal','txt'));
         terminal(port,{name,debug:false});
                 
         
-})();
+})()
+;
 
 
+        async function build(image_name){
+          
+              var {code,stdout,stderr}    = await exec(`docker images ${image_name} --no-trunc`);
+              if(code){
+                    console.log('error');
+                    return {err:true};
+              }
+              
+              if(stdout.indexOf(image_name)==-1){
+                    var {code,stdout,stderr}    = await exec(`docker build -t ${image_name} ${dockerfile} `);
+                    if(code){
+                          console.log('error');
+                          return {err:true};
+                    }
+              }
+              
+              return {err:false};
+              
+        }//create
+
+
+        async function run(image_name,name,port){
+          
+              name    ||= await getname(image_name);
+              if(!name){
+                    console.error('error');
+                    console.log('!! all names taken !!');
+                    return {err:true};
+              }
+              console.log('container : ',name);
+
+              port    ||= '';
+              var {code}    = await exec(`docker run -di -p ${port}:22 --name ${name} ${image_name}`);
+              if(code){
+                    console.error('error');
+                    return {err:true};
+              }
+              
+              port    = await getport(name);
+              console.log(`*** container : ${name}:${port}`);
+              
+              return {name,port};
+          
+        }//run
+        
         async function getname(image_name){
           
               while(1){
@@ -254,5 +292,5 @@ function terminal(port,{name,debug,height}){
 
 
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",3349,186,"append"],["docker","terminal",3535,6626,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",4346,186,"append"],["docker","terminal",4532,6626,"append"]]}
 */
