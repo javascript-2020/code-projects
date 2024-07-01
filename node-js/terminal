@@ -6,6 +6,9 @@
         var image_name    = ['nodejs-min','debian-min','debian'][0];    
     
         var dockerfile    = `https://raw.githubusercontent.com/javascript-2020/docker/main/dockerfile/${image_name}.dockerfile`;
+        
+        
+        var fs            = require('fs');
         var cp            = require('child_process');
 
 
@@ -40,17 +43,27 @@
                     return {err:true};
               }
               
-              if(stdout.indexOf(image_name)==-1){
-                    var {code,stdout,stderr}    = await exec(`docker build -t ${image_name} ${dockerfile} `);
-                    if(code){
-                          console.log('error');
-                          return {err:true};
-                    }
+              if(stdout.indexOf(image_name)!=-1){
+                    return {err:false};
+              }
+
+              
+              var cmd   = `docker build -t ${image_name} `;
+              if(fs.existsSync(`${image_name}.dockerfile`)){
+                    cmd  += `-f ${image_name}.dockerfile .`;
+              }else{
+                    cmd  += dockerfile;
+              }
+              
+              var {code,stdout,stderr}    = await exec(`docker build -t ${image_name} ${dockerfile} `);
+              if(code){
+                    console.log('error');
+                    return {err:true};
               }
               
               return {err:false};
               
-        }//create
+        }//build
 
 
         async function run(image_name,name,port){
@@ -61,18 +74,17 @@
                     console.log('!! all names taken !!');
                     return {err:true};
               }
-              console.log('container : ',name);
+                                                                                    //console.log('container : ',name);
 
               port    ||= '';
               var {code}    = await exec(`docker run -di -p ${port}:22 --name ${name} ${image_name}`);
               if(code){
                     console.error('error');
                     return {err:true};
-              }
-              
+              }              
               port    = await getport(name);
-              console.log(`*** container : ${name}:${port}`);
               
+                                                                                    console.log(`*** container : ${name}:${port}`);
               return {name,port};
           
         }//run
@@ -297,5 +309,5 @@ function terminal(port,{name,debug,height}){
 
 
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",4368,186,"append"],["docker","terminal",4554,6626,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",4881,186,"append"],["docker","terminal",5067,6626,"append"]]}
 */
