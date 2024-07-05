@@ -47,7 +47,7 @@
               }
 
               
-              var cmd   = `docker build -t ${image_name} `;
+              var cmd     = `docker build -t ${image_name} `;
               if(fs.existsSync(`${image_name}.dockerfile`)){
                     cmd  += `-f ${image_name}.dockerfile .`;
               }else{
@@ -305,5 +305,5 @@ function terminal(port,{name,debug,height}){
 
              
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",4865,182,"append"],["docker","terminal",5047,6622,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",4867,182,"append"],["docker","terminal",5049,6622,"append"]]}
 */
