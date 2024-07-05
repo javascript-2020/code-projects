@@ -147,7 +147,24 @@
         
         
         
+                        
+                    </body>
+                    
+              `;
+
+        }//srcdoc
         
+        
+}//terminal
+
+
+
+
+
+
+/* node-js-tabs
+{"names":["docker","create","terminal"],"info":[["docker","create",4870,186,"append"],["docker","terminal",5056,6626,"append"]]}
+*/
 /* node-js-tabs
 {"names":["docker","create","terminal"],"info":[["docker","create",4719,186,"append"],["docker","terminal",4905,6626,"append"]]}
 */
@@ -292,21 +309,7 @@ function terminal(port,{name,debug,height}){
                                 }//remove
                                 
                           </script>
-                          
-                    </body>
-                    
-              `;
-
-        }//srcdoc
-        
-        
-}//terminal
-
-
-
-
-
-
+          
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",4870,186,"append"],["docker","terminal",5056,6626,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",5021,186,"append"],["docker","terminal",5207,6626,"append"]]}
 */
