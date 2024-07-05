@@ -1,0 +1,14 @@
+
+
+
+      var view    = viewport.canvas('test');
+      
+      view.ctx.moveTo(50,50);
+      view.ctx.lineTo(100,100);
+      view.ctx.stroke();
+      
+      
+      
+      
+      
+      
