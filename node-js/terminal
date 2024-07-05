@@ -25,8 +25,7 @@
 
         var {err,name,port}   = await run(image_name,name,port);
         if(err)return;
-
-
+        
         var terminal          = define(page.tabs.get('terminal','txt'));
         terminal(port,{name,debug:false});
                 
@@ -308,5 +307,5 @@ function terminal(port,{name,debug,height}){
 
              
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",4873,182,"append"],["docker","terminal",5055,6622,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",4879,182,"append"],["docker","terminal",5061,6622,"append"]]}
 */
