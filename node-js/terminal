@@ -148,9 +148,6 @@
         
 
 
-/* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",4714,182,"append"],["docker","terminal",4896,6622,"append"]]}
-*/
         var port    = '62255';
         var name    = '';
 
@@ -293,7 +290,8 @@ function terminal(port,{name,debug,height}){
                                 }//remove
                                 
                           </script>
-                        
+
+             
                     </body>
                     
               `;
@@ -303,7 +301,7 @@ function terminal(port,{name,debug,height}){
         
 }//terminal
 
-             
+           
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",4867,182,"append"],["docker","terminal",5049,6622,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",4714,186,"append"],["docker","terminal",4900,6609,"append"]]}
 */
