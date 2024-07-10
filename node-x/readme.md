@@ -55,5 +55,21 @@ node-x supports multiple configurations that can be switched in and out
 
 a configuration consists of a list of directories and aliases
 
+<br>
 
+### installation
+
+npm global installation is recommended
+
+```
+npm install -g node-x
+```
+
+<br>
+
+### uninstallation
+
+```
+npm uninstall -g node-x
+```
 
