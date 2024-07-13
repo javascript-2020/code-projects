@@ -3,39 +3,39 @@
 
 
 
-        var image_name    = ['nodejs-min','debian-min','debian'][0];    
-    
+        var image_name    = ['nodejs-min','debian-min','debian'][0];
+        
         var dockerfile    = `https://raw.githubusercontent.com/javascript-2020/docker/main/dockerfile/${image_name}.dockerfile`;
         
         
         var fs            = require('fs');
         var cp            = require('child_process');
-
-
-;    
+        
+        
+;
 (async()=>{
 
 
         console.log('docker image : ',image_name);
-
-
+        
+        
         var {err}             = await build(image_name);
         if(err)return;
-
-
+        
+        
         var {err,name,port}   = await run(image_name,name,port);
         if(err)return;
         
         var terminal          = define(page.tabs.get('terminal','txt'));
         terminal(port,{name,debug:false});
-                
+        
         
 })()
 ;
 
 
         async function build(image_name){
-          
+        
               var {code,stdout,stderr}    = await exec(`docker images ${image_name} --no-trunc`);
               if(code){
                     console.error('error');
@@ -45,7 +45,7 @@
               if(stdout.indexOf(image_name)!=-1){
                     return {err:false};
               }
-
+              
               
               var cmd     = `docker build -t ${image_name} `;
               if(fs.existsSync(`${image_name}.dockerfile`)){
@@ -63,33 +63,33 @@
               return {err:false};
               
         }//build
-
-
+        
+        
         async function run(image_name,name,port){
-                        
+        
               if(!name){
                     var {err,name}    = await getname(image_name);
                     if(err)return err;
               }
                                                                                     //console.log('container : ',name);
-
+                                                                                    
               port    ||= '';
               var {code}    = await exec(`docker run -di -p ${port}:22 --name ${name} ${image_name}`);
               if(code){
                     console.error('error');
                     return {err:true};
-              }              
+              }
               var {err,port}    = await getport(name);
               if(err)return err;
               
                                                                                     console.log(`*** container : ${name}:${port}`);
               return {name,port};
-          
+              
         }//run
-
+        
         
         async function getname(image_name){
-          
+        
               var {code,stdout,stderr}    = await exec('docker ps -f name=terminal');
               if(code){
                     console.error('error');
@@ -104,7 +104,7 @@
               var t         = 2*col.length*flower.length;
               
               while(c!=t){
-                
+              
                     var name      = get();
                     
                     if(stdout.indexOf(name)==-1){
@@ -120,10 +120,10 @@
               return {err:true};
               
         }//getname
-
+        
         
         async function getport(name){
-          
+        
               var {code,stdout,stderr}    = await exec(`docker port ${name}`);
               if(code){
                     console.error('error');
@@ -135,7 +135,7 @@
               return {port};
               
         }//getport
-
+        
         
         async function remove_container(name){
         
@@ -146,25 +146,25 @@
         
         
         
-
+        
 
         var port    = '62255';
         var name    = '';
-
+        
         var terminal    = define(list.view.find.cur('terminal','txt'));
         terminal(port,{name,debug:false});
-
-
-
+        
+        
+        
 
 
 function terminal(port,{name,debug,height}){
-  
+
         name    ||= 'terminal';
         height  ||= '600px';
         
         iframe.new(srcdoc(),'attach',{onload});
-
+        
         
         function onload(view){
         
@@ -173,10 +173,10 @@ function terminal(port,{name,debug,height}){
               $(view.root,'iframe').style.height    = height;
               
         }//onload
-
-
+        
+        
         function srcdoc(){
-          
+        
               return `
               
                     <head>
@@ -193,7 +193,7 @@ function terminal(port,{name,debug,height}){
                     </head>
                     
                     <body>
-                      
+                    
                           <div id=hdr>
                                 <div id=hdr-name>${name}</div>
                                 <input id=hdr-btn type=button value=remove onclick=remove()>
@@ -210,7 +210,7 @@ function terminal(port,{name,debug,height}){
                                   
                                   import xterm from 'https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/+esm';
                                   import addonFit from 'https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm';
-                        
+                                  
                                   var con;
                                   
                                   window.onbeforeunload=close;
@@ -220,7 +220,7 @@ function terminal(port,{name,debug,height}){
                                       var term        = new xterm.Terminal();
                                       var fitAddon    = new addonFit.FitAddon();
                                       term.loadAddon(fitAddon);
-                              
+                                      
                                       term.open(terminal);
                                       
                                       term.onResize(size=>fitAddon.fit());
@@ -232,14 +232,14 @@ function terminal(port,{name,debug,height}){
                                                                   return;
                                                                   
                                           }//switch
-                            
+                                          
                                           fitAddon.fit();
                                           stream.write(key);
                                           fitAddon.fit();
                                           
                                       });
-                        
-                        
+                                      
+                                      
                                       var {Client}    = window.parent.require('ssh2');
                                       con             = new Client();
                                       var stream;
@@ -248,7 +248,7 @@ function terminal(port,{name,debug,height}){
                                       
                                             fitAddon.fit();
                                             term.focus();
-                        
+                                            
                                             con.shell((err,stream2)=>{
                                             
                                                   if(err)throw err;
@@ -257,21 +257,21 @@ function terminal(port,{name,debug,height}){
                                                   stream    = stream2;
                                                   stream.on('close',()=>close);
                                                   stream.on('data',data=>{fitAddon.fit();term.write(data)});
-                                              
+                                                  
                                             });
                                             
                                       });
-    
-                                  
+                                      
+                                      
                                       var opts    = {host,port,username,password};
                                       if(window.debug)opts.debug   = console.log;
                                       
                                       con.connect(opts);
-                                
-                                
+                                      
+                                      
                                 }//onload
-    
-    
+                                
+                                
                                 window.close=function(){
                                 
                                       con.end();
@@ -285,23 +285,23 @@ function terminal(port,{name,debug,height}){
                                       var {code,stdout,stderr}   = await window.parent.exec(\`docker rm -f ${name}\`);
                                       if(code)return console.log('error');
                                       close();
-
-                         
+                                      
+                                      
                                 }//remove
                                 
                           </script>
-
-             
+                          
+                          
                     </body>
                     
               `;
-
+              
         }//srcdoc
         
         
 }//terminal
 
-           
+
 /* node-js-tabs
-{"names":["docker","create","terminal"],"info":[["docker","create",4714,186,"append"],["docker","terminal",4900,6609,"append"]]}
+{"names":["docker","create","terminal"],"info":[["docker","create",4714,209,"append"],["docker","terminal",4923,6764,"append"]]}
 */
